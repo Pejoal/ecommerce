@@ -19,17 +19,18 @@ const props = defineProps({
   },
 });
 
-const query = ref("");
+const brandQuery = ref(""); // Separate query for brands
+const categoryQuery = ref(""); // Separate query for categories
 const isBrandsDropdownOpen = ref(false);
 const isCategoriesDropdownOpen = ref(false);
 const selectedBrands = ref([]);
 const selectedCategories = ref([]);
-const filteredProducts = ref([]); 
+const filteredProducts = ref(props.products);
 
 const filteredBrands = computed(() => {
   return props.brands
     .filter((brand) =>
-      brand.name.toLowerCase().includes(query.value.toLowerCase())
+      brand.name.toLowerCase().includes(brandQuery.value.toLowerCase())
     )
     .filter(
       (brand) =>
@@ -40,7 +41,7 @@ const filteredBrands = computed(() => {
 const filteredCategories = computed(() => {
   return props.categories
     .filter((category) =>
-      category.name.toLowerCase().includes(query.value.toLowerCase())
+      category.name.toLowerCase().includes(categoryQuery.value.toLowerCase())
     )
     .filter(
       (category) =>
@@ -69,8 +70,8 @@ const toggleBrandSelection = (brand) => {
     removeBrand(brand);
   } else {
     selectedBrands.value.push(brand);
-    query.value = "";
-    closeDropdown();
+    brandQuery.value = "";
+    closeBrandsDropdown();
   }
 };
 
@@ -85,8 +86,8 @@ const toggleCategorySelection = (category) => {
     removeCategory(category);
   } else {
     selectedCategories.value.push(category);
-    query.value = "";
-    closeDropdown();
+    categoryQuery.value = "";
+    closeCategoriesDropdown();
   }
 };
 
@@ -127,7 +128,7 @@ const closeCategoriesDropdown = () => {
 };
 
 const onBrandInput = () => {
-  if (query.value.length > 0) {
+  if (brandQuery.value.length > 0) {
     openBrandsDropdown();
   } else {
     closeBrandsDropdown();
@@ -135,7 +136,7 @@ const onBrandInput = () => {
 };
 
 const onCategoryInput = () => {
-  if (query.value.length > 0) {
+  if (categoryQuery.value.length > 0) {
     openCategoriesDropdown();
   } else {
     closeCategoriesDropdown();
@@ -175,7 +176,7 @@ const onCategoryInput = () => {
                 </span>
               </template>
               <input
-                v-model="query"
+                v-model="brandQuery"
                 @input="onBrandInput"
                 @blur="closeBrandsDropdown"
                 type="text"
@@ -233,7 +234,7 @@ const onCategoryInput = () => {
                 </span>
               </template>
               <input
-                v-model="query"
+                v-model="categoryQuery"
                 @input="onCategoryInput"
                 @blur="closeCategoriesDropdown"
                 type="text"
@@ -273,8 +274,28 @@ const onCategoryInput = () => {
           :key="index"
           class="p-4 border-b"
         >
-          <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+          <h3 class="text-lg font-semibold">{{ product.title }}</h3>
           <p class="text-gray-600">{{ product.description }}</p>
+          <div class="mt-2 flex items-center">
+            <span class="font-medium text-gray-800">Price:</span>
+            <span class="ml-1 text-green-600">${{ product.price }}</span>
+          </div>
+          <div class="mt-1 flex items-center">
+            <span class="font-medium text-gray-800">In Stock:</span>
+            <span class="ml-1">{{ product.inStock ? "Yes" : "No" }}</span>
+          </div>
+          <div class="mt-1 flex items-center">
+            <span class="font-medium text-gray-800">Quantity:</span>
+            <span class="ml-1">{{ product.quantity }}</span>
+          </div>
+          <div class="mt-1 flex items-center">
+            <span class="font-medium text-gray-800">Brand:</span>
+            <span class="ml-1">{{ product.brand }}</span>
+          </div>
+          <div class="mt-1 flex items-center">
+            <span class="font-medium text-gray-800">Category:</span>
+            <span class="ml-1">{{ product.category }}</span>
+          </div>
         </div>
       </section>
     </main>
