@@ -57,17 +57,6 @@ const store = () => {
           {{ trans("words.lobbies") }}
         </h2>
 
-        <section class="flex gap-2" v-for="lobby in lobbies" :key="lobby.id">
-          <p class="font-semibold">
-            {{ lobby.name }}
-          </p>
-          <Link
-            :href="route('lobby.join', lobby.id)"
-            class="underline hover:font-bold"
-          >
-            {{ trans("words.join") }}
-          </Link>
-        </section>
         <button class="btn btn-primary" @click="showModal = true">
           {{ trans("words.create_lobby") }}
         </button>

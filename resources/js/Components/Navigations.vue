@@ -36,16 +36,6 @@ const props = defineProps({
       >
         {{ trans("words.dashboard") }}
       </Link>
-      <Link
-        :href="route('admin.story')"
-        class="hover:font-bold"
-        :class="{
-          'text-zinc-700 hover:text-zinc-800': props.dark,
-          'underline  font-bold': route().current('admin.story'),
-        }"
-      >
-        {{ trans("words.story") }}
-      </Link>
     </template>
     <template v-if="$page.props.auth?.user?.type === 'client'">
       <Link
@@ -57,16 +47,6 @@ const props = defineProps({
         }"
       >
         {{ trans("words.home") }}
-      </Link>
-      <Link
-        :href="route('user.profile.me')"
-        class="hover:font-bold"
-        :class="{
-          'text-zinc-700 hover:text-zinc-800': props.dark,
-          'underline  font-bold': route().current('user.profile.me'),
-        }"
-      >
-        {{ trans("words.my_data") }}
       </Link>
     </template>
     <Link
