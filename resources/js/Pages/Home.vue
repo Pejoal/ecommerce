@@ -54,11 +54,11 @@ const store = () => {
     <main class="grid grid-cols-1 md:grid-cols-3">
       <section class="bg-amber-50 p-2">
         <h2 class="text-xl font-bold">
-          {{ trans("words.lobbies") }}
+          Filters & Other Settings
         </h2>
 
         <button class="btn btn-primary" @click="showModal = true">
-          {{ trans("words.create_lobby") }}
+          Search
         </button>
         <Teleport to="#modal">
           <ResuableModal
@@ -123,7 +123,7 @@ const store = () => {
           </ResuableModal>
         </Teleport>
       </section>
-      <section class="col-span-2 p-2">Hello Everyone!</section>
+      <section class="col-span-2 p-2">Products</section>
     </main>
   </AuthLayout>
 </template>

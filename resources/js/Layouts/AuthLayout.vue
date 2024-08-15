@@ -12,9 +12,9 @@ const toggleNav = () => {
 };
 </script>
 <template>
-  <div class="min-h-screen bg-slate-200">
+  <div class="min-h-screen bg-white">
     <header
-      class="bg-zinc-400 flex items-center justify-between h-20 py-2 px-4 sm:px-6 lg:px-8"
+      class="bg-zinc-200 flex items-center justify-between h-20 py-2 px-4 sm:px-6 lg:px-8"
     >
       <section class="flex items-center gap-2">
         <img
@@ -37,7 +37,7 @@ const toggleNav = () => {
       <transition name="slide">
         <div
           v-if="showNav"
-          class="md:hidden bg-slate-200 fixed inset-y-0 left-0 z-40 w-full h-screen shadow-lg px-8 py-4 overflow-y-auto"
+          class="md:hidden bg-white fixed inset-y-0 left-0 z-40 w-full h-screen shadow-lg px-8 py-4 overflow-y-auto"
         >
           <h2 class="text-xl font-bold mb-2">
             {{ trans("words.navigation") }}

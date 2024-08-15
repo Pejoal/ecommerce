@@ -14,9 +14,9 @@ const toggleNav = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-100">
+  <div class="min-h-screen bg-white">
     <header
-      class="flex items-center justify-between h-20 bg-zinc-400 py-2 px-4 sm:px-6 lg:px-8"
+      class="flex items-center justify-between h-20 bg-zinc-200 py-2 px-4 sm:px-6 lg:px-8"
     >
       <section class="flex items-center gap-2">
         <img
