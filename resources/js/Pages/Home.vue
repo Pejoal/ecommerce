@@ -26,6 +26,7 @@ const isCategoriesDropdownOpen = ref(false);
 const selectedBrands = ref([]);
 const selectedCategories = ref([]);
 const filteredProducts = ref(props.products);
+const isPremiumDeliveryChecked = ref(false);
 
 const filteredBrands = computed(() => {
   return props.brands
@@ -197,9 +198,9 @@ const onCategoryInput = () => {
                   class="px-4 py-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-100"
                 >
                   <input
-                    type="checkbox"
-                    :checked="isBrandSelected(brand)"
-                    class="form-checkbox h-4 w-4 text-blue-600"
+                    type="button"
+                    @click="isBrandSelected(brand)"
+                    class="h-4 w-4 text-blue-600"
                   />
                   <span class="ml-2">{{ brand.name }}</span>
                 </li>
@@ -255,9 +256,9 @@ const onCategoryInput = () => {
                   class="px-4 py-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-100"
                 >
                   <input
-                    type="checkbox"
-                    :checked="isCategorySelected(category)"
-                    class="form-checkbox h-4 w-4 text-blue-600"
+                    type="button"
+                    @click="isCategorySelected(category)"
+                    class="h-4 w-4 text-blue-600"
                   />
                   <span class="ml-2">{{ category.name }}</span>
                 </li>
@@ -265,7 +266,22 @@ const onCategoryInput = () => {
             </div>
           </div>
         </div>
+
+        <div class="flex items-center space-x-2 mt-2">
+          <input
+            id="premiumDelivery"
+            type="checkbox"
+            v-model="isPremiumDeliveryChecked"
+            class="h-5 w-5 text-blue-600 transition duration-150 ease-in-out rounded-full"
+          />
+          <label for="premiumDelivery" class="text-gray-700">
+            Premium Delivery
+          </label>
+        </div>
       </section>
+
+      <!-- End of first section (Filters) -->
+
       <section class="col-span-2 p-2">
         <h2 class="text-xl font-bold">Products</h2>
         <!-- Display filtered products here -->
