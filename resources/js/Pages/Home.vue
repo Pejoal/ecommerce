@@ -42,7 +42,7 @@ const closeDropdown = () => {
 };
 
 const toggleSelection = (item) => {
-  if (isSelected(item)) {
+  if (selectedItems.value.includes(item)) {
     removeItem(item);
   } else {
     selectedItems.value.push(item);
@@ -78,17 +78,17 @@ const props = defineProps({
   <AuthLayout>
     <main class="grid grid-cols-1 md:grid-cols-3">
       <section class="bg-blue-50 p-2">
-        <h2 class="text-xl font-bold underline">Settings</h2>
-        
+        <h2 class="text-xl font-bold underline">Filters</h2>
+
         <div class="relative">
-          <h3 class="text-lg font-bold">Brands</h3>
           <!-- Input Field -->
           <div
             class="flex flex-wrap items-center gap-2 p-2 border rounded-lg bg-white focus-within:ring-2 focus-within:ring-blue-500"
             @click="openDropdown"
           >
-            <template v-for="(item, index) in selectedItems" :key="index">
+            <template v-for="(item, index) in selectedItems">
               <span
+                :key="index"
                 class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full flex items-center"
               >
                 {{ item }}
@@ -120,15 +120,13 @@ const props = defineProps({
               <li
                 v-for="(item, index) in filteredSuggestions"
                 :key="index"
-                class="px-4 py-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-100"
                 @mousedown.prevent="toggleSelection(item)"
+                class="px-4 py-2 cursor-pointer hover:bg-gray-100"
               >
-                <input
-                  type="checkbox"
-                  :checked="isSelected(item)"
-                  class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <span class="ml-2">{{ item }}</span>
+                <span v-if="isSelected(item)" class="font-semibold">{{
+                  item
+                }}</span>
+                <span v-else>{{ item }}</span>
               </li>
             </ul>
           </div>
