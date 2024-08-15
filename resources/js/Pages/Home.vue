@@ -86,9 +86,9 @@ const props = defineProps({
             class="flex flex-wrap items-center gap-2 p-2 border rounded-lg bg-white focus-within:ring-2 focus-within:ring-blue-500"
             @click="openDropdown"
           >
-            <template v-for="(item, index) in selectedItems">
+            <template v-for="(item, index) in selectedItems" :key="index">
               <span
-                :key="index"
+                
                 class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full flex items-center"
               >
                 {{ item }}
