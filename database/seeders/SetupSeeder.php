@@ -70,6 +70,8 @@ class SetupSeeder extends Seeder {
       'category_id' => 1,
       'brand_id' => 1,
       'description' => 'Product 1 Description',
+      'created_by' => 1,
+      'updated_by' => 1,
     ]);
     Product::create([
       'title' => 'Product 2',
@@ -78,6 +80,9 @@ class SetupSeeder extends Seeder {
       'category_id' => 2,
       'brand_id' => 2,
       'description' => 'Product 2 Description',
+      'created_by' => 1,
+      'updated_by' => 1,
+
     ]);
 
   }

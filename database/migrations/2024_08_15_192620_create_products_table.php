@@ -25,10 +25,11 @@ return new class extends Migration {
       $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
       $table->foreignId('updated_by')->constrained('users')->onDelete('cascade');
 
-      $table->foreignIdFor(Brand::class, 'brand_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete()->nullable();
-      $table->foreignIdFor(Category::class, 'category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete()->nullable();
+      $table->foreignIdFor(Brand::class, 'brand_id')->nullable();
+
+      $table->foreignIdFor(Category::class, 'category_id')->nullable();
       $table->softDeletes();
-      $table->foreignIdFor(User::class, 'deleted_by')->constrained()->cascadeOnUpdate()->cascadeOnDelete()->nullable();
+      $table->foreignIdFor(User::class, 'deleted_by')->nullable();
       $table->timestamps();
     });
   }
