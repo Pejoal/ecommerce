@@ -254,6 +254,24 @@ const fetchPage = (url) => {
     preserveScroll: true,
   });
 };
+
+const clearFilters = () => {
+  pageForm.minPrice = 0;
+  pageForm.maxPrice = 0;
+  pageForm.search = "";
+  pageForm.selectedBrands = [];
+  pageForm.selectedCategories = [];
+  pageForm.isPremiumDeliveryChecked = false;
+
+  selectedBrands.value = [];
+  selectedCategories.value = [];
+  isPremiumDeliveryChecked.value = false;
+
+  pageForm.get(route("admin.dashboard"), {
+    preserveState: true,
+    preserveScroll: true,
+  });
+};
 </script>
 
 <template>
@@ -417,7 +435,7 @@ const fetchPage = (url) => {
             </div>
           </div>
 
-          <div class="flex items-center space-x-2 pt-2 border-t border-black">
+          <div class="flex items-center space-x-2 py-2 border-t border-black">
             <input
               id="premiumDelivery"
               type="checkbox"
@@ -427,6 +445,12 @@ const fetchPage = (url) => {
             <label for="premiumDelivery" class="text-gray-700">
               Premium Delivery
             </label>
+          </div>
+
+          <div class="flex items-center space-x-2 py-2">
+            <button class="btn btn-danger" @click="clearFilters">
+              Clear Filters
+            </button>
           </div>
         </section>
       </transition>
@@ -441,7 +465,7 @@ const fetchPage = (url) => {
       >
         Delete Selected
       </button>
-      
+
       <div class="flex items-center space-x-2 ml-auto">
         <label for="perPage" class="text-gray-700 font-bold"> Per Page </label>
 

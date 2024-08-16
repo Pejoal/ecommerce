@@ -143,6 +143,24 @@ const fetchPage = (url) => {
     preserveScroll: true,
   });
 };
+
+const clearFilters = () => {
+  form.minPrice = 0;
+  form.maxPrice = 0;
+  form.search = "";
+  form.selectedBrands = [];
+  form.selectedCategories = [];
+  form.isPremiumDeliveryChecked = false;
+
+  selectedBrands.value = [];
+  selectedCategories.value = [];
+  isPremiumDeliveryChecked.value = false;
+
+  form.get(route("home"), {
+    preserveState: true,
+    preserveScroll: true,
+  });
+};
 </script>
 
 <template>
@@ -334,6 +352,12 @@ const fetchPage = (url) => {
             <option :value="20">20</option>
             <option :value="50">50</option>
           </select>
+        </div>
+
+        <div class="flex items-center space-x-2 py-2">
+          <button class="btn btn-danger" @click="clearFilters">
+            Clear Filters
+          </button>
         </div>
       </section>
 
