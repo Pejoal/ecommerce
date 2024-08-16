@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -62,9 +62,16 @@ Route::group([], function () {
     });
 
     // Admin
-    Route::group(['middleware' => 'admins-only'], function () {
+    Route::group(['middleware' => 'admins-only', 'prefix' => 'admin'], function () {
       Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
+    // Products Management
+      Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+      Route::post('products', [ProductController::class, 'store'])->name('products.store');
+      Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+      Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+      Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+      Route::post('products/mass-destroy', [ProductController::class, 'massDestroy'])->name('products.massDestroy');
     });
 
   });
