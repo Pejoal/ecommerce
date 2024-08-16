@@ -6,10 +6,6 @@ import { ref } from "vue";
 
 const props = defineProps({
   products: {
-    type: Array,
-    default: [],
-  },
-  pagination: {
     type: Object,
     default: {},
   },
@@ -326,7 +322,7 @@ const fetchPage = (url) => {
         <h2 class="text-xl font-bold">Products</h2>
         <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div
-            v-for="(product, index) in props.products"
+            v-for="(product, index) in props.products.data"
             :key="index"
             class="bg-white shadow-md rounded-lg p-4 border border-gray-200"
           >
@@ -383,19 +379,19 @@ const fetchPage = (url) => {
         <!-- Pagination Controls -->
         <section class="flex items-center justify-between my-2 bg-slate-300">
           <button
-            v-if="props.pagination.prev_page_url"
-            @click="fetchPage(props.pagination.prev_page_url)"
+            v-if="props.products.prev_page_url"
+            @click="fetchPage(props.products.prev_page_url)"
             class="px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
             Previous
           </button>
           <span class="mx-2"
-            >{{ props.pagination.current_page }} /
-            {{ props.pagination.last_page }}</span
+            >{{ props.products.current_page }} /
+            {{ props.products.last_page }}</span
           >
           <button
-            v-if="props.pagination.next_page_url"
-            @click="fetchPage(props.pagination.next_page_url)"
+            v-if="props.products.next_page_url"
+            @click="fetchPage(props.products.next_page_url)"
             class="px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
             Next

@@ -39,7 +39,7 @@ class HomeController extends Controller {
     }
 
     $paginatedProducts = $query->latest('id')->paginate(5);
-    $products = $paginatedProducts->getCollection()->transform(function ($product) {
+    $paginatedProducts->getCollection()->transform(function ($product) {
       return [
         "id" => $product->id,
         "title" => $product->title,
@@ -56,8 +56,7 @@ class HomeController extends Controller {
     });
 
     return Inertia::render('Home', [
-      "products" => $products,
-      "pagination" => $paginatedProducts->toArray(), // Send pagination metadata
+      "products" => $paginatedProducts->toArray(), // Send pagination metadata
       "brands" => Brand::all(),
       "categories" => Category::all(),
     ]);
