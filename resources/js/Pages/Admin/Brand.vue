@@ -102,9 +102,7 @@ const addBrand = () => {
 
   <AuthLayout>
     <div class="my-2 flex items-center justify-center space-x-2">
-      <button class="btn btn-primary" @click="addBrand">
-        Add Brand
-      </button>
+      <button class="btn btn-primary" @click="addBrand">Add Brand</button>
       <button
         @click="massDeleteBrands"
         class="btn btn-danger"
@@ -185,8 +183,8 @@ const addBrand = () => {
     </ResuableModal>
 
     <!-- Brand Table -->
-    <div class="flex items-center justify-center min-w-full overflow-x-auto">
-      <table class="overflow-auto min-w-full bg-white border border-gray-200 rounded-lg">
+    <div class="lg:flex items-center justify-center overflow-x-auto w-full">
+      <table class="w-full bg-white border border-gray-200 rounded-lg">
         <thead>
           <tr class="bg-gray-100">
             <th class="w-16 p-1 text-left">
@@ -204,7 +202,6 @@ const addBrand = () => {
             <th class="p-1 text-left font-semibold">ID</th>
             <th class="p-1 text-left font-semibold">Name</th>
             <th class="p-1 text-left font-semibold">Active</th>
-            
             <th class="p-1 text-left font-semibold">Actions</th>
           </tr>
         </thead>

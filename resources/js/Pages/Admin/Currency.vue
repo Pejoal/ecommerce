@@ -206,10 +206,8 @@ const addCurrency = () => {
     </ResuableModal>
 
     <!-- Currency Table -->
-    <div class="flex items-center justify-center min-w-full overflow-x-auto">
-      <table
-        class="overflow-auto min-w-full bg-white border border-gray-200 rounded-lg"
-      >
+    <div class="lg:flex items-center justify-center overflow-x-auto w-full">
+      <table class="w-full bg-white border border-gray-200 rounded-lg">
         <thead>
           <tr class="bg-gray-100">
             <th class="w-16 p-1 text-left">
