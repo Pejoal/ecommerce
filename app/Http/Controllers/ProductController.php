@@ -27,7 +27,19 @@ class ProductController extends Controller {
   }
 
   public function update(Request $request, Product $product) {
-    // Logic to update the product
+    $validated = $request->validate([
+      'title' => 'required|string|max:255',
+      'quantity' => 'required|integer|min:1',
+      'description' => 'nullable|string',
+      'published' => 'boolean',
+      'in_stock' => 'boolean',
+      'price' => 'required|numeric|min:0',
+      'brand_id' => 'nullable|exists:brands,id',
+      'category_id' => 'nullable|exists:categories,id',
+    ]);
+
+    $product->update([ ...$validated, "updated_by" => auth()->id()]);
+
   }
 
   public function destroy(Product $product) {

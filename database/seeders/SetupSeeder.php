@@ -25,6 +25,16 @@ class SetupSeeder extends Seeder {
       'password' => bcrypt('88888888'),
       'type' => 'super admin',
     ]);
+    User::create([
+      'firstname' => 'Admin',
+      'lastname' => '2',
+      'username' => 'admin2',
+      'gender' => 'female',
+      'email' => 'admin2@mail.com',
+      'email_verified_at' => now(),
+      'password' => bcrypt('88888888'),
+      'type' => 'super admin',
+    ]);
 
     User::create([
       'firstname' => 'client',

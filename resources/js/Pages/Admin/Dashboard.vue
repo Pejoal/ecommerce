@@ -36,7 +36,7 @@ const form = useForm({
 });
 
 const massForm = useForm({
-  selectedProducts: []
+  selectedProducts: [],
 });
 
 const toggleSelection = (productId) => {
@@ -82,6 +82,16 @@ const storeProduct = () => {
   });
 };
 
+const updateProduct = () => {
+  form.patch(route("admin.products.update", form.id), {
+    onSuccess: () => {
+      showModal.value = false;
+      form.reset();
+    },
+    onError: (errors) => console.error("Form errors:", errors),
+  });
+};
+
 const editProduct = (productId) => {
   axios
     .get(route("admin.products.edit", productId))
@@ -107,10 +117,7 @@ const editProduct = (productId) => {
 
   <AuthLayout>
     <div class="my-2 flex space-x-2">
-      <button
-        class="btn btn-primary"
-        @click="showModal = true"
-      >
+      <button class="btn btn-primary" @click="showModal = true">
         Add Product
       </button>
       <button
@@ -287,15 +294,30 @@ const editProduct = (productId) => {
 
             <div class="flex justify-end">
               <button
+                v-if="form.id"
+                form="updateProduct"
                 type="submit"
                 class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 :disabled="form.processing"
               >
-                {{ form.id ? "Update Product" : "Create Product" }}
+                Update Product
+              </button>
+              <button
+                v-else
+                type="submit"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                :disabled="form.processing"
+              >
+                Create Product
               </button>
             </div>
           </section>
         </form>
+        <form
+          @submit.prevent="updateProduct"
+          id="updateProduct"
+          class="hidden"
+        ></form>
       </template>
     </ResuableModal>
 
@@ -363,16 +385,10 @@ const editProduct = (productId) => {
             <td class="p-1">{{ product.brand }}</td>
             <td class="p-1">{{ product.category }}</td>
             <td class="p-1 flex space-x-2">
-              <button
-                @click="editProduct(product.id)"
-                class="btn btn-success"
-              >
+              <button @click="editProduct(product.id)" class="btn btn-success">
                 Edit
               </button>
-              <button
-                @click="deleteProduct(product.id)"
-                class="btn btn-danger"
-              >
+              <button @click="deleteProduct(product.id)" class="btn btn-danger">
                 Delete
               </button>
             </td>
