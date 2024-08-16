@@ -23,7 +23,7 @@ return new class extends Migration {
       $table->decimal('price', 10, 2);
 
       $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
-      $table->foreignId('updated_by')->constrained('users')->onDelete('cascade');
+      $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('cascade');
 
       $table->foreignIdFor(Brand::class, 'brand_id')->nullable();
 

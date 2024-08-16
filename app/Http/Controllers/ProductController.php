@@ -10,7 +10,6 @@ class ProductController extends Controller {
   public function store(Request $request) {
     $validated = $request->validate([
       'title' => 'required|string|max:255',
-      'slug' => 'required|string|max:255|unique:products',
       'quantity' => 'required|integer|min:1',
       'description' => 'nullable|string',
       'published' => 'boolean',
@@ -20,7 +19,7 @@ class ProductController extends Controller {
       'category_id' => 'nullable|exists:categories,id',
     ]);
 
-    Product::create($validated);
+    auth()->user()->products()->create($validated);
   }
 
   public function edit(Product $product) {

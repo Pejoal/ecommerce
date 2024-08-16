@@ -26,7 +26,6 @@ const selectedProducts = ref([]);
 const form = useForm({
   id: null,
   title: "",
-  slug: "",
   quantity: "",
   description: "",
   published: false,
@@ -49,7 +48,7 @@ const isSelected = (productId) => selectedProducts.value.includes(productId);
 
 const deleteProduct = (productId) => {
   if (confirm("Are you sure you want to delete this product?")) {
-    form.delete(route("products.destroy", productId), {
+    form.delete(route("admin.products.destroy", productId), {
       onSuccess: () => {
         selectedProducts.value = selectedProducts.value.filter(
           (id) => id !== productId
@@ -61,7 +60,7 @@ const deleteProduct = (productId) => {
 
 const massDeleteProducts = () => {
   if (confirm("Are you sure you want to delete the selected products?")) {
-    form.delete(route("products.massDestroy"), {
+    form.delete(route("admin.products.massDestroy"), {
       data: { ids: selectedProducts.value },
       onSuccess: () => {
         selectedProducts.value = [];
@@ -71,7 +70,7 @@ const massDeleteProducts = () => {
 };
 
 const storeProduct = () => {
-  form.post(route("products.store"), {
+  form.post(route("admin.products.store"), {
     onSuccess: () => {
       showModal.value = false;
       form.reset();
@@ -81,7 +80,7 @@ const storeProduct = () => {
 };
 
 const editProduct = (productId) => {
-  form.get(route("products.edit", productId), {
+  form.get(route("admin.products.edit", productId), {
     onSuccess: (data) => {
       form.fill(data);
       showModal.value = true;
@@ -137,22 +136,7 @@ const editProduct = (productId) => {
               </p>
             </div>
 
-            <!-- Slug -->
-            <div>
-              <label for="slug" class="block text-sm font-medium text-gray-700"
-                >Slug</label
-              >
-              <input
-                id="slug"
-                v-model="form.slug"
-                type="text"
-                placeholder="Enter slug"
-                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-              <p v-if="form.errors.slug" class="text-red-600 text-sm">
-                {{ form.errors.slug }}
-              </p>
-            </div>
+          
 
             <!-- Quantity -->
             <div>
@@ -321,7 +305,6 @@ const editProduct = (productId) => {
             </th>
             <th class="p-1 text-left font-semibold">ID</th>
             <th class="p-1 text-left font-semibold">Title</th>
-            <th class="p-1 text-left font-semibold">Slug</th>
             <th class="p-1 text-left font-semibold">Quantity</th>
             <th class="p-1 text-left font-semibold max-w-[10rem]">
               Description
@@ -351,7 +334,6 @@ const editProduct = (productId) => {
             </td>
             <td class="p-1">{{ product.id }}</td>
             <td class="p-1">{{ product.title }}</td>
-            <td class="p-1">{{ product.slug }}</td>
             <td class="p-1">{{ product.quantity }}</td>
             <td class="p-1 truncate max-w-[10rem]">
               {{ product.description }}

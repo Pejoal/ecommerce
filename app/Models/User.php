@@ -48,6 +48,10 @@ class User extends Authenticatable implements MustVerifyEmail {
     'email_verified_at' => 'datetime',
   ];
 
+  function products() {
+    return $this->hasMany(Product::class,'created_by');
+  }
+
   function user_address() {
     return $this->hasMany(UserAddress::class);
   }
