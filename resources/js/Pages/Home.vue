@@ -198,7 +198,6 @@ const clearFilters = () => {
               </template>
               <input
                 v-model="brandQuery"
-                @input="onBrandInput"
                 @blur="closeBrandsDropdown"
                 type="text"
                 placeholder="Search brands..."
@@ -251,7 +250,6 @@ const clearFilters = () => {
               </template>
               <input
                 v-model="categoryQuery"
-                @input="onCategoryInput"
                 @blur="closeCategoriesDropdown"
                 type="text"
                 placeholder="Search categories..."
