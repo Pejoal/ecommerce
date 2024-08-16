@@ -1,8 +1,8 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import { defineProps, watch } from "vue";
-import { ref, computed } from "vue";
+import { Head, useForm } from "@inertiajs/vue3";
+import { defineProps, watch, computed } from "vue";
+import { ref } from "vue";
 
 const props = defineProps({
   brands: {
@@ -19,14 +19,79 @@ const props = defineProps({
   },
 });
 
-const brandQuery = ref(""); // Separate query for brands
-const categoryQuery = ref(""); // Separate query for categories
+const brandQuery = ref("");
+const categoryQuery = ref("");
 const isBrandsDropdownOpen = ref(false);
 const isCategoriesDropdownOpen = ref(false);
 const selectedBrands = ref([]);
 const selectedCategories = ref([]);
-const filteredProducts = ref(props.products);
 const isPremiumDeliveryChecked = ref(false);
+
+const form = useForm({
+  selectedBrands: [],
+  selectedCategories: [],
+  isPremiumDeliveryChecked: false,
+});
+
+const applyFilters = () => {
+  form.selectedBrands = selectedBrands.value.map((brand) => brand.id);
+  form.selectedCategories = selectedCategories.value.map(
+    (category) => category.id
+  );
+  form.isPremiumDeliveryChecked = isPremiumDeliveryChecked.value;
+
+  form.get(route("home"), {
+    preserveState: true, // To preserve the state when navigating
+    preserveScroll: true,
+  });
+};
+
+watch(
+  [selectedBrands, selectedCategories, isPremiumDeliveryChecked],
+  applyFilters
+);
+
+const toggleBrandSelection = (brand) => {
+  if (selectedBrands.value.some((selected) => selected.id === brand.id)) {
+    removeBrand(brand);
+  } else {
+    selectedBrands.value.push(brand);
+    brandQuery.value = "";
+  }
+  applyFilters();
+};
+
+const removeBrand = (brand) => {
+  selectedBrands.value = selectedBrands.value.filter((b) => b.id !== brand.id);
+};
+
+const toggleCategorySelection = (category) => {
+  if (
+    selectedCategories.value.some((selected) => selected.id === category.id)
+  ) {
+    removeCategory(category);
+  } else {
+    selectedCategories.value.push(category);
+    categoryQuery.value = "";
+  }
+  applyFilters();
+};
+
+const removeCategory = (category) => {
+  selectedCategories.value = selectedCategories.value.filter(
+    (c) => c.id !== category.id
+  );
+};
+
+const isBrandSelected = (brand) => {
+  return selectedBrands.value.some((selected) => selected.id === brand.id);
+};
+
+const isCategorySelected = (category) => {
+  return selectedCategories.value.some(
+    (selected) => selected.id === category.id
+  );
+};
 
 const filteredBrands = computed(() => {
   return props.brands
@@ -52,62 +117,6 @@ const filteredCategories = computed(() => {
     );
 });
 
-const filterProducts = () => {
-  filteredProducts.value = props.products.filter(
-    (product) =>
-      (selectedBrands.value.length === 0 ||
-        selectedBrands.value.some((brand) => brand.id === product.brand_id)) &&
-      (selectedCategories.value.length === 0 ||
-        selectedCategories.value.some(
-          (category) => category.id === product.category_id
-        ))
-  );
-};
-
-watch([selectedBrands, selectedCategories], filterProducts);
-
-const toggleBrandSelection = (brand) => {
-  if (selectedBrands.value.some((selected) => selected.id === brand.id)) {
-    removeBrand(brand);
-  } else {
-    selectedBrands.value.push(brand);
-    brandQuery.value = "";
-    closeBrandsDropdown();
-  }
-};
-
-const removeBrand = (brand) => {
-  selectedBrands.value = selectedBrands.value.filter((b) => b.id !== brand.id);
-};
-
-const toggleCategorySelection = (category) => {
-  if (
-    selectedCategories.value.some((selected) => selected.id === category.id)
-  ) {
-    removeCategory(category);
-  } else {
-    selectedCategories.value.push(category);
-    categoryQuery.value = "";
-    closeCategoriesDropdown();
-  }
-};
-
-const removeCategory = (category) => {
-  selectedCategories.value = selectedCategories.value.filter(
-    (c) => c.id !== category.id
-  );
-};
-
-const isBrandSelected = (brand) => {
-  return selectedBrands.value.some((selected) => selected.id === brand.id);
-};
-
-const isCategorySelected = (category) => {
-  return selectedCategories.value.some(
-    (selected) => selected.id === category.id
-  );
-};
-
 const openBrandsDropdown = () => {
   isBrandsDropdownOpen.value = true;
 };
@@ -117,31 +126,11 @@ const openCategoriesDropdown = () => {
 };
 
 const closeBrandsDropdown = () => {
-  setTimeout(() => {
-    isBrandsDropdownOpen.value = false;
-  }, 200);
+  isBrandsDropdownOpen.value = false;
 };
 
 const closeCategoriesDropdown = () => {
-  setTimeout(() => {
-    isCategoriesDropdownOpen.value = false;
-  }, 200);
-};
-
-const onBrandInput = () => {
-  if (brandQuery.value.length > 0) {
-    openBrandsDropdown();
-  } else {
-    closeBrandsDropdown();
-  }
-};
-
-const onCategoryInput = () => {
-  if (categoryQuery.value.length > 0) {
-    openCategoriesDropdown();
-  } else {
-    closeCategoriesDropdown();
-  }
+  isCategoriesDropdownOpen.value = false;
 };
 </script>
 
@@ -284,43 +273,44 @@ const onCategoryInput = () => {
 
       <section class="col-span-2 p-2">
         <h2 class="text-xl font-bold">Products</h2>
-        <!-- Display filtered products here -->
-        <div
-          v-for="(product, index) in filteredProducts"
-          :key="index"
-          class="p-4 border-b"
-        >
-          <h3 class="text-lg font-semibold">{{ product.title }}</h3>
-          <p class="text-gray-600">{{ product.description }}</p>
-          <div class="mt-2 flex items-center">
-            <span class="font-medium text-gray-800">Price:</span>
-            <span class="ml-1 font-bold text-green-600"
-              >${{ product.price }}</span
-            >
+        <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div
+            v-for="(product, index) in props.products"
+            :key="index"
+            class="bg-white shadow-md rounded-lg p-4 border border-gray-200"
+          >
+            <h3 class="text-lg font-semibold mb-2">{{ product.title }}</h3>
+            <p class="text-gray-600 mb-2">{{ product.description }}</p>
+            <div class="mt-2 flex items-center">
+              <span class="font-medium text-gray-800">Price:</span>
+              <span class="ml-1 font-bold text-green-600"
+                >${{ product.price }}</span
+              >
+            </div>
+            <div class="mt-2 flex items-center">
+              <span class="font-medium text-gray-800">Currency:</span>
+              <span class="ml-1 font-bold">{{ product.currency }}</span>
+            </div>
+            <div class="mt-1 flex items-center">
+              <span class="font-medium text-gray-800">In Stock:</span>
+              <span class="ml-1 font-bold">{{
+                product.inStock ? "Yes" : "No"
+              }}</span>
+            </div>
+            <div class="mt-1 flex items-center">
+              <span class="font-medium text-gray-800">Quantity:</span>
+              <span class="ml-1 font-bold">{{ product.quantity }}</span>
+            </div>
+            <div class="mt-1 flex items-center">
+              <span class="font-medium text-gray-800">Brand:</span>
+              <span class="ml-1 font-bold">{{ product.brand }}</span>
+            </div>
+            <div class="mt-1 flex items-center">
+              <span class="font-medium text-gray-800">Category:</span>
+              <span class="ml-1 font-bold">{{ product.category }}</span>
+            </div>
           </div>
-          <div class="mt-2 flex items-center">
-            <span class="font-medium text-gray-800">Currency:</span>
-            <span class="ml-1 font-bold">{{ product.currency }}</span>
-          </div>
-          <div class="mt-1 flex items-center">
-            <span class="font-medium text-gray-800">In Stock:</span>
-            <span class="ml-1 font-bold">{{
-              product.inStock ? "Yes" : "No"
-            }}</span>
-          </div>
-          <div class="mt-1 flex items-center">
-            <span class="font-medium text-gray-800">Quantity:</span>
-            <span class="ml-1 font-bold">{{ product.quantity }}</span>
-          </div>
-          <div class="mt-1 flex items-center">
-            <span class="font-medium text-gray-800">Brand:</span>
-            <span class="ml-1 font-bold">{{ product.brand }}</span>
-          </div>
-          <div class="mt-1 flex items-center">
-            <span class="font-medium text-gray-800">Category:</span>
-            <span class="ml-1 font-bold">{{ product.category }}</span>
-          </div>
-        </div>
+        </section>
       </section>
     </main>
   </AuthLayout>

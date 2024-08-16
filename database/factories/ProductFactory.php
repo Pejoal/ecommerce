@@ -28,6 +28,7 @@ class ProductFactory extends Factory {
       'description' => $this->faker->paragraph(),
       'published' => $this->faker->boolean(),
       'in_stock' => $this->faker->boolean(),
+      'premium_delivery' => $this->faker->boolean(),
       'price' => $this->faker->randomFloat(2, 10, 1000),
       'currency_id' => Currency::inRandomOrder()->first()->id, // Recycle an existing brand
       'created_by' => "1", // Ensure an admin creates the product

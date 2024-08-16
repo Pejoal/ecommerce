@@ -21,6 +21,7 @@ return new class extends Migration {
       $table->longText('description')->nullable();
       $table->boolean('published')->default(0);
       $table->boolean('in_stock')->default(0);
+      $table->boolean('premium_delivery')->default(0);
       $table->decimal('price', 10, 2);
       $table->foreignIdFor(Currency::class, 'currency_id')->nullable();
 

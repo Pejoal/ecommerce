@@ -114,30 +114,8 @@ class SetupSeeder extends Seeder {
       'symbol' => 'A$',
     ]);
 
-    Product::create([
-      'title' => 'Product 1',
-      'price' => 19.99,
-      'currency_id' => 1,
-      'quantity' => 3,
-      'category_id' => 1,
-      'brand_id' => 1,
-      'description' => 'Product 1 Description',
-      'created_by' => 1,
-      'updated_by' => 1,
-    ]);
-    Product::create([
-      'title' => 'Product 2',
-      'price' => 30,
-      'currency_id' => 2,
-      'quantity' => 5,
-      'category_id' => 2,
-      'brand_id' => 2,
-      'description' => 'Product 2 Description',
-      'created_by' => 1,
-      'updated_by' => 1,
-    ]);
     Product::factory()
-      ->count(8)
+      ->count(10)
       ->create();
 
   }
