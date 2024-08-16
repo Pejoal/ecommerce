@@ -311,12 +311,8 @@ const closeCategoriesDropdown = () => {
             <div class="mt-2 flex items-center">
               <span class="font-medium text-gray-800">Price:</span>
               <span class="ml-1 font-bold text-green-600"
-                >${{ product.price }}</span
+                >{{ product.currency + product.price }}</span
               >
-            </div>
-            <div class="mt-2 flex items-center">
-              <span class="font-medium text-gray-800">Currency:</span>
-              <span class="ml-1 font-bold">{{ product.currency }}</span>
             </div>
             <div class="mt-1 flex items-center">
               <span class="font-medium text-gray-800">Published:</span>
