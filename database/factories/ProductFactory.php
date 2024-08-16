@@ -26,8 +26,9 @@ class ProductFactory extends Factory {
       'published' => $this->faker->boolean(),
       'in_stock' => $this->faker->boolean(),
       'price' => $this->faker->randomFloat(2, 10, 1000),
-      'created_by' => User::factory()->admin(), // Ensure an admin creates the product
-      'updated_by' => User::factory()->admin(), // Optional: You can also set this to the same user as created_by
+      'created_by' => "1", // Ensure an admin creates the product
+      // 'updated_by' => User::factory()->admin(), // Optional: You can also set this to the same user as created_by
+      'updated_by' => "1", // Optional: You can also set this to the same user as created_by
       // 'brand_id' => Brand::factory()->create()->id,  // Assuming you have a BrandFactory & that create a new one
       'brand_id' => Brand::inRandomOrder()->first()->id, // Recycle an existing brand
       'category_id' => Category::inRandomOrder()->first()->id, // Recycle an
