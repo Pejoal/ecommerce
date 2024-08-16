@@ -167,7 +167,7 @@ const fetchPage = (url) => {
         </div>
 
         <!-- Brands Filter -->
-        <div class="mb-4">
+        <div class="py-2 border-t border-black">
           <h3 class="text-lg font-semibold">Brands</h3>
           <div class="relative">
             <div
@@ -222,7 +222,7 @@ const fetchPage = (url) => {
         </div>
 
         <!-- Categories Filter -->
-        <div>
+        <div class="py-2 border-t border-black">
           <h3 class="text-lg font-semibold">Categories</h3>
           <div class="relative">
             <div
@@ -280,7 +280,7 @@ const fetchPage = (url) => {
         </div>
 
         <!-- Price Range Filter -->
-        <div class="mb-4">
+        <div class="py-2 border-t border-black">
           <h3 class="text-lg font-semibold">Price Range</h3>
           <div class="flex items-center space-x-2">
             <input
@@ -304,7 +304,7 @@ const fetchPage = (url) => {
           </div>
         </div>
 
-        <div class="flex items-center space-x-2 mt-2">
+        <div class="flex items-center space-x-2 pt-2 border-t border-black">
           <input
             id="premiumDelivery"
             type="checkbox"
