@@ -33,6 +33,7 @@ const form = useForm({
   isPremiumDeliveryChecked: false,
   minPrice: 0,
   maxPrice: 0,
+  search: "",
 });
 
 const applyFilters = () => {
@@ -144,6 +145,18 @@ const closeCategoriesDropdown = () => {
     <main class="grid grid-cols-1 md:grid-cols-3">
       <section class="bg-blue-50 p-2">
         <h2 class="text-xl font-bold underline">Filters</h2>
+
+        <!-- Search Filter -->
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold">Search</h3>
+          <input
+            v-model="form.search"
+            @input="applyFilters"
+            type="text"
+            placeholder="Search by title..."
+            class="w-full border rounded-lg p-2"
+          />
+        </div>
 
         <!-- Brands Filter -->
         <div class="mb-4">
@@ -310,9 +323,9 @@ const closeCategoriesDropdown = () => {
             <p class="text-gray-600 mb-2">{{ product.description }}</p>
             <div class="mt-2 flex items-center">
               <span class="font-medium text-gray-800">Price:</span>
-              <span class="ml-1 font-bold text-green-600"
-                >{{ product.currency + product.price }}</span
-              >
+              <span class="ml-1 font-bold text-green-600">{{
+                product.currency + product.price
+              }}</span>
             </div>
             <div class="mt-1 flex items-center">
               <span class="font-medium text-gray-800">Published:</span>
