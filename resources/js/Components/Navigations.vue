@@ -36,6 +36,26 @@ const props = defineProps({
       >
         {{ trans("words.dashboard") }}
       </Link>
+      <Link
+        :href="route('admin.brands')"
+        class="hover:font-bold"
+        :class="{
+          'text-zinc-700 hover:text-zinc-800': props.dark,
+          'underline font-bold': route().current('admin.brands'),
+        }"
+      >
+        Brands
+      </Link>
+      <Link
+        :href="route('admin.categories')"
+        class="hover:font-bold"
+        :class="{
+          'text-zinc-700 hover:text-zinc-800': props.dark,
+          'underline font-bold': route().current('admin.categories'),
+        }"
+      >
+        Categories
+      </Link>
     </template>
     <template v-if="$page.props.auth?.user?.type === 'client'">
       <Link

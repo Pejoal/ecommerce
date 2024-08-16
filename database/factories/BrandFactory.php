@@ -17,6 +17,7 @@ class BrandFactory extends Factory {
     return [
       'name' => $this->faker->company(), // Generate a fake company name
       'slug' => $this->faker->unique()->slug(), // Generate a unique slug
+      'active' => 1, 
     ];
   }
 }

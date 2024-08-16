@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -63,7 +65,9 @@ Route::group([], function () {
 
     // Admin
     Route::group(['middleware' => 'admins-only', 'prefix' => 'admin'], function () {
-      Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+      Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+      Route::get('brands', [BrandController::class, 'index'])->name('admin.brands');
+      Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories');
 
       // Products Management
       Route::get('products/create', [ProductController::class, 'create'])->name('admin.products.create');

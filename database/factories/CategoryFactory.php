@@ -17,6 +17,7 @@ class CategoryFactory extends Factory {
     return [
       'name' => $this->faker->word(), // Generate a fake category name
       'slug' => $this->faker->unique()->slug(), // Generate a unique slug
+      'active' => 1, 
     ];
   }
 }

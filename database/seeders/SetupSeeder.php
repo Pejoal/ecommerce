@@ -56,7 +56,7 @@ class SetupSeeder extends Seeder {
       ->create();
 
     Product::factory()
-      ->count(20)
+      ->count(10)
       ->create();
 
   }

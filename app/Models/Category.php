@@ -10,7 +10,7 @@ use Spatie\Sluggable\SlugOptions;
 class Category extends Model {
   use HasFactory, HasSlug;
 
-  protected $fillable = ['name', 'slug'];
+  protected $guarded = [];
 
   public function products() {
     return $this->hasMany(Product::class);

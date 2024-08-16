@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AdminController extends Controller {
-  public function dashboard(Request $request) {
+  public function index(Request $request) {
     $products = Product::with('brand', 'category')
       ->select(['id', 'title', 'slug', 'quantity', 'description', 'published', 'in_stock', 'price', 'brand_id', 'category_id'])
       ->latest('id')
