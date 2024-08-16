@@ -365,7 +365,7 @@ const editProduct = (productId) => {
             <td class="p-1 flex space-x-2">
               <button
                 @click="editProduct(product.id)"
-                class="btn btn-primary"
+                class="btn btn-success"
               >
                 Edit
               </button>
