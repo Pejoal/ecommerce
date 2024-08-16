@@ -365,13 +365,13 @@ const editProduct = (productId) => {
             <td class="p-1 flex space-x-2">
               <button
                 @click="editProduct(product.id)"
-                class="bg-yellow-500 text-white py-1 px-2 rounded hover:bg-yellow-600"
+                class="btn btn-primary"
               >
                 Edit
               </button>
               <button
                 @click="deleteProduct(product.id)"
-                class="bg-red-500 text-white py-1 px-2 rounded hover:bg-red-600"
+                class="btn btn-danger"
               >
                 Delete
               </button>
