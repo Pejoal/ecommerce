@@ -10,8 +10,8 @@ use Inertia\Inertia;
 class HomeController extends Controller {
 
   public function index() {
-    $products = Product::with('brand', 'category')
-      ->select(['id', 'title', 'slug', 'quantity', 'description', 'published', 'in_stock', 'price', 'brand_id', 'category_id'])
+    $products = Product::with('brand', 'category', 'currency')
+      ->select(['id', 'title', 'slug', 'quantity', 'description', 'published', 'in_stock', 'price', 'currency_id', 'brand_id', 'category_id'])
       ->latest('id')
       ->get()
       ->map(function ($product) {
@@ -24,6 +24,7 @@ class HomeController extends Controller {
           "published" => $product->published,
           "in_stock" => $product->in_stock,
           "price" => $product->price,
+          "currency" => $product->currency->symbol ?? null,
           "brand" => $product->brand->name ?? null,
           "category" => $product->category->name ?? null,
         ];
