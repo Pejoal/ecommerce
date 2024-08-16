@@ -63,7 +63,7 @@ Route::group([], function () {
 
     // Admin
     Route::group(['middleware' => 'admins-only', 'prefix' => 'admin'], function () {
-      Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+      Route::get('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
       // Products Management
       Route::get('products/create', [ProductController::class, 'create'])->name('admin.products.create');
