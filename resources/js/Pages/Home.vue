@@ -5,15 +5,19 @@ import { defineProps, watch, computed } from "vue";
 import { ref } from "vue";
 
 const props = defineProps({
+  products: {
+    type: Array,
+    default: [],
+  },
+  pagination: {
+    type: Object,
+    default: {},
+  },
   brands: {
     type: Array,
     default: [],
   },
   categories: {
-    type: Array,
-    default: [],
-  },
-  products: {
     type: Array,
     default: [],
   },
@@ -134,6 +138,13 @@ const closeBrandsDropdown = () => {
 
 const closeCategoriesDropdown = () => {
   isCategoriesDropdownOpen.value = false;
+};
+
+const fetchPage = (url) => {
+  form.get(url, {
+    preserveState: true,
+    preserveScroll: true,
+  });
 };
 </script>
 
@@ -367,6 +378,28 @@ const closeCategoriesDropdown = () => {
               <span class="ml-1 font-bold">{{ product.category }}</span>
             </div>
           </div>
+        </section>
+
+        <!-- Pagination Controls -->
+        <section class="flex items-center justify-between my-2 bg-slate-300">
+          <button
+            v-if="props.pagination.prev_page_url"
+            @click="fetchPage(props.pagination.prev_page_url)"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          >
+            Previous
+          </button>
+          <span class="mx-2"
+            >{{ props.pagination.current_page }} /
+            {{ props.pagination.last_page }}</span
+          >
+          <button
+            v-if="props.pagination.next_page_url"
+            @click="fetchPage(props.pagination.next_page_url)"
+            class="px-4 py-2 bg-blue-500 text-white rounded-lg"
+          >
+            Next
+          </button>
         </section>
       </section>
     </main>

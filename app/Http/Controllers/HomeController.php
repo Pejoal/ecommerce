@@ -38,7 +38,8 @@ class HomeController extends Controller {
       $query->where('premium_delivery', true);
     }
 
-    $products = $query->latest('id')->paginate(5)->map(function ($product) {
+    $paginatedProducts = $query->latest('id')->paginate(5);
+    $products = $paginatedProducts->getCollection()->transform(function ($product) {
       return [
         "id" => $product->id,
         "title" => $product->title,
@@ -54,13 +55,11 @@ class HomeController extends Controller {
       ];
     });
 
-    $brands = Brand::all();
-    $categories = Category::all();
-
     return Inertia::render('Home', [
       "products" => $products,
-      "brands" => $brands,
-      "categories" => $categories,
+      "pagination" => $paginatedProducts->toArray(), // Send pagination metadata
+      "brands" => Brand::all(),
+      "categories" => Category::all(),
     ]);
   }
 
