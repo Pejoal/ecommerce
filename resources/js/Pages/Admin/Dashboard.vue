@@ -112,7 +112,7 @@ const editProduct = (productId) => {
 
     <!-- Create/Edit Product Modal -->
     <ResuableModal
-      :classes="['w-[90%] md:w-[80%] lg:w-[60%]']"
+      :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-full']"
       :header="form.id ? 'Edit Product' : 'Create Product'"
       :show="showModal"
       @close="showModal = false"
@@ -261,22 +261,48 @@ const editProduct = (productId) => {
                 {{ form.errors.brand_id }}
               </p>
             </div>
-          </section>
 
-          <footer class="flex items-center justify-center">
-            <button
-              class="btn btn-primary"
-              type="submit"
-              :class="{ 'opacity-25': form.processing }"
-              :disabled="form.processing"
-            >
-              Create
-            </button>
-          </footer>
+            <!-- Category -->
+            <div>
+              <label
+                for="category_id"
+                class="block text-sm font-medium text-gray-700"
+                >Category</label
+              >
+              <select
+                id="category_id"
+                v-model="form.category_id"
+                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+                <option value="">Select Category</option>
+                <option
+                  v-for="category in props.categories"
+                  :key="category.id"
+                  :value="category.id"
+                >
+                  {{ category.name }}
+                </option>
+              </select>
+              <p v-if="form.errors.category_id" class="text-red-600 text-sm">
+                {{ form.errors.category_id }}
+              </p>
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="submit"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                :disabled="form.processing"
+              >
+                {{ form.id ? "Update Product" : "Create Product" }}
+              </button>
+            </div>
+          </section>
         </form>
       </template>
     </ResuableModal>
 
+    <!-- Product Table -->
     <div class="min-w-full border border-solid border-black overflow-x-auto">
       <table class="overflow-auto bg-white border border-gray-200 rounded-lg">
         <thead>
@@ -287,7 +313,7 @@ const editProduct = (productId) => {
                 @click="
                   (e) =>
                     (selectedProducts.value = e.target.checked
-                      ? products.map((p) => p.id)
+                      ? props.products.map((p) => p.id)
                       : [])
                 "
                 class="form-checkbox"
@@ -310,7 +336,7 @@ const editProduct = (productId) => {
         </thead>
         <tbody>
           <tr
-            v-for="product in products"
+            v-for="product in props.products"
             :key="product.id"
             class="border-t hover:bg-gray-50"
           >
@@ -362,4 +388,5 @@ const editProduct = (productId) => {
   </AuthLayout>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
