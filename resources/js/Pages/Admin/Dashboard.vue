@@ -118,6 +118,11 @@ const editProduct = (productId) => {
     })
     .catch((error) => console.error(error));
 };
+
+const addProduct = () => {
+  showModal.value = true;
+  form.reset();
+};
 </script>
 
 <template>
@@ -125,9 +130,7 @@ const editProduct = (productId) => {
 
   <AuthLayout>
     <div class="my-2 flex items-center justify-center space-x-2">
-      <button class="btn btn-primary" @click="showModal = true">
-        Add Product
-      </button>
+      <button class="btn btn-primary" @click="addProduct">Add Product</button>
       <button
         @click="massDeleteProducts"
         class="btn btn-danger"
@@ -433,7 +436,10 @@ const editProduct = (productId) => {
               Yes
             </td>
             <td class="p-1 font-bold text-red-600" v-else>No</td>
-            <td class="p-1 font-bold text-green-600" v-if="product.premium_delivery">
+            <td
+              class="p-1 font-bold text-green-600"
+              v-if="product.premium_delivery"
+            >
               Yes
             </td>
             <td class="p-1 font-bold text-red-600" v-else>No</td>

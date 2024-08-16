@@ -90,6 +90,11 @@ const editBrand = (brandId) => {
     })
     .catch((error) => console.error(error));
 };
+
+const addBrand = () => {
+  showModal.value = true;
+  form.reset();
+};
 </script>
 
 <template>
@@ -97,7 +102,7 @@ const editBrand = (brandId) => {
 
   <AuthLayout>
     <div class="my-2 flex items-center justify-center space-x-2">
-      <button class="btn btn-primary" @click="showModal = true">
+      <button class="btn btn-primary" @click="addBrand">
         Add Brand
       </button>
       <button

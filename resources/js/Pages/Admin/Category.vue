@@ -34,7 +34,8 @@ const toggleSelection = (categoryId) => {
   }
 };
 
-const isSelected = (categoryId) => massForm.selectedCategories.includes(categoryId);
+const isSelected = (categoryId) =>
+  massForm.selectedCategories.includes(categoryId);
 
 const deleteCategory = (categoryId) => {
   if (confirm("Are you sure you want to delete this category?")) {
@@ -90,6 +91,11 @@ const editCategory = (categoryId) => {
     })
     .catch((error) => console.error(error));
 };
+
+const addCategory = () => {
+  showModal.value = true;
+  form.reset();
+};
 </script>
 
 <template>
@@ -97,9 +103,7 @@ const editCategory = (categoryId) => {
 
   <AuthLayout>
     <div class="my-2 flex items-center justify-center space-x-2">
-      <button class="btn btn-primary" @click="showModal = true">
-        Add Category
-      </button>
+      <button class="btn btn-primary" @click="addCategory">Add Category</button>
       <button
         @click="massDeleteCategorys"
         class="btn btn-danger"
@@ -181,7 +185,9 @@ const editCategory = (categoryId) => {
 
     <!-- Category Table -->
     <div class="flex items-center justify-center min-w-full overflow-x-auto">
-      <table class="overflow-auto min-w-full bg-white border border-gray-200 rounded-lg">
+      <table
+        class="overflow-auto min-w-full bg-white border border-gray-200 rounded-lg"
+      >
         <thead>
           <tr class="bg-gray-100">
             <th class="w-16 p-1 text-left">
@@ -199,7 +205,7 @@ const editCategory = (categoryId) => {
             <th class="p-1 text-left font-semibold">ID</th>
             <th class="p-1 text-left font-semibold">Name</th>
             <th class="p-1 text-left font-semibold">Active</th>
-            
+
             <th class="p-1 text-left font-semibold">Actions</th>
           </tr>
         </thead>
@@ -225,10 +231,16 @@ const editCategory = (categoryId) => {
             </td>
             <td class="p-1 font-bold text-red-600" v-else>No</td>
             <td class="p-1 flex space-x-2">
-              <button @click="editCategory(category.id)" class="btn btn-success">
+              <button
+                @click="editCategory(category.id)"
+                class="btn btn-success"
+              >
                 Edit
               </button>
-              <button @click="deleteCategory(category.id)" class="btn btn-danger">
+              <button
+                @click="deleteCategory(category.id)"
+                class="btn btn-danger"
+              >
                 Delete
               </button>
             </td>

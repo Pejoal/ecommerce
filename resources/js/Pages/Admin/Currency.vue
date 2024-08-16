@@ -93,6 +93,11 @@ const editCurrency = (currencyId) => {
     })
     .catch((error) => console.error(error));
 };
+
+const addCurrency = () => {
+  showModal.value = true;
+  form.reset();
+};
 </script>
 
 <template>
@@ -100,9 +105,7 @@ const editCurrency = (currencyId) => {
 
   <AuthLayout>
     <div class="my-2 flex items-center justify-center space-x-2">
-      <button class="btn btn-primary" @click="showModal = true">
-        Add Currency
-      </button>
+      <button class="btn btn-primary" @click="addCurrency">Add Currency</button>
       <button
         @click="massDeleteCurrencys"
         class="btn btn-danger"
