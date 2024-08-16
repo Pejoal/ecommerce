@@ -70,12 +70,18 @@ Route::group([], function () {
       Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories');
 
       // Products Management
-      Route::get('products/create', [ProductController::class, 'create'])->name('admin.products.create');
       Route::post('products', [ProductController::class, 'store'])->name('admin.products.store');
       Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
       Route::delete('products/mass-destroy', [ProductController::class, 'massDestroy'])->name('admin.products.massDestroy');
       Route::patch('products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
       Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+
+      // Brands Management
+      Route::post('brands', [BrandController::class, 'store'])->name('admin.brands.store');
+      Route::get('brands/{product}/edit', [BrandController::class, 'edit'])->name('admin.brands.edit');
+      Route::delete('brands/mass-destroy', [BrandController::class, 'massDestroy'])->name('admin.brands.massDestroy');
+      Route::patch('brands/{product}', [BrandController::class, 'update'])->name('admin.brands.update');
+      Route::delete('brands/{product}', [BrandController::class, 'destroy'])->name('admin.brands.destroy');
     });
 
   });

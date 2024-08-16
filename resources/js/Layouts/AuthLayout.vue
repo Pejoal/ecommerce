@@ -4,7 +4,6 @@ import { Link } from "@inertiajs/vue3";
 import Navigations from "@/Components/Navigations.vue";
 import Hamburger from "@/Components/Hamburger.vue";
 import Locales from "@/Components/Locales.vue";
-import Footer from "./Partials/Footer.vue";
 
 const showNav = ref(false);
 const toggleNav = () => {
@@ -74,7 +73,7 @@ const toggleNav = () => {
         @click="showNav = false"
       ></div>
     </header>
-    <main class="lg:container lg:mx-auto">
+    <main class="lg:container lg:mx-auto w-full">
       <slot />
     </main>
     <!-- <Footer /> -->

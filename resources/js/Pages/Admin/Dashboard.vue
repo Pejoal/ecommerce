@@ -116,7 +116,7 @@ const editProduct = (productId) => {
   <Head :title="'Products Dashboard'" />
 
   <AuthLayout>
-    <div class="my-2 flex space-x-2">
+    <div class="my-2 flex items-center justify-center space-x-2">
       <button class="btn btn-primary" @click="showModal = true">
         Add Product
       </button>
@@ -322,8 +322,10 @@ const editProduct = (productId) => {
     </ResuableModal>
 
     <!-- Product Table -->
-    <div class="min-w-full overflow-x-auto">
-      <table class="overflow-auto bg-white border border-gray-200 rounded-lg">
+    <div class="flex items-center justify-center min-w-full overflow-x-auto">
+      <table
+        class="overflow-auto min-w-full bg-white border border-gray-200 rounded-lg"
+      >
         <thead>
           <tr class="bg-gray-100">
             <th class="w-16 p-1 text-left">

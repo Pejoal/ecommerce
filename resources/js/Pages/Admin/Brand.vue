@@ -17,49 +17,49 @@ let showModal = ref(false);
 
 const form = useForm({
   id: null,
-  brand_id: "",
-  category_id: "",
+  name: "",
+  active: 0,
 });
 
 const massForm = useForm({
-  selectedProducts: [],
+  selectedBrands: [],
 });
 
-const toggleSelection = (productId) => {
-  const index = massForm.selectedProducts.indexOf(productId);
+const toggleSelection = (brandId) => {
+  const index = massForm.selectedBrands.indexOf(brandId);
   if (index > -1) {
-    massForm.selectedProducts.splice(index, 1);
+    massForm.selectedBrands.splice(index, 1);
   } else {
-    massForm.selectedProducts.push(productId);
+    massForm.selectedBrands.push(brandId);
   }
 };
 
-const isSelected = (productId) => massForm.selectedProducts.includes(productId);
+const isSelected = (brandId) => massForm.selectedBrands.includes(brandId);
 
-const deleteProduct = (productId) => {
-  if (confirm("Are you sure you want to delete this product?")) {
-    form.delete(route("admin.products.destroy", productId), {
+const deleteBrand = (brandId) => {
+  if (confirm("Are you sure you want to delete this brand?")) {
+    form.delete(route("admin.brands.destroy", brandId), {
       onSuccess: () => {
-        massForm.selectedProducts = massForm.selectedProducts.filter(
-          (id) => id !== productId
+        massForm.selectedBrands = massForm.selectedBrands.filter(
+          (id) => id !== brandId
         );
       },
     });
   }
 };
 
-const massDeleteProducts = () => {
-  if (confirm("Are you sure you want to delete the selected products?")) {
-    massForm.delete(route("admin.products.massDestroy"), {
+const massDeleteBrands = () => {
+  if (confirm("Are you sure you want to delete the selected brands?")) {
+    massForm.delete(route("admin.brands.massDestroy"), {
       onSuccess: () => {
-        massForm.selectedProducts.value = [];
+        massForm.selectedBrands.value = [];
       },
     });
   }
 };
 
-const storeProduct = () => {
-  form.post(route("admin.products.store"), {
+const storeBrand = () => {
+  form.post(route("admin.brands.store"), {
     onSuccess: () => {
       showModal.value = false;
       form.reset();
@@ -68,8 +68,8 @@ const storeProduct = () => {
   });
 };
 
-const updateProduct = () => {
-  form.patch(route("admin.products.update", form.id), {
+const updateBrand = () => {
+  form.patch(route("admin.brands.update", form.id), {
     onSuccess: () => {
       showModal.value = false;
       form.reset();
@@ -78,9 +78,9 @@ const updateProduct = () => {
   });
 };
 
-const editProduct = (productId) => {
+const editBrand = (brandId) => {
   axios
-    .get(route("admin.products.edit", productId))
+    .get(route("admin.brands.edit", brandId))
     .then((response) => {
       form.id = response.data.id;
       form.brand_id = response.data.brand_id;
@@ -93,83 +93,50 @@ const editProduct = (productId) => {
 </script>
 
 <template>
-  <Head :title="'Products Dashboard'" />
+  <Head :title="'Brands Dashboard'" />
 
   <AuthLayout>
-    <div class="my-2 flex space-x-2">
+    <div class="my-2 flex items-center justify-center space-x-2">
       <button class="btn btn-primary" @click="showModal = true">
-        Add Product
+        Add Brand
       </button>
       <button
-        @click="massDeleteProducts"
+        @click="massDeleteBrands"
         class="btn btn-danger"
-        :disabled="massForm.selectedProducts.length === 0"
+        :disabled="massForm.selectedBrands.length === 0"
       >
         Delete Selected
       </button>
     </div>
 
-    <!-- Create/Edit Product Modal -->
+    <!-- Create/Edit Brand Modal -->
     <ResuableModal
       :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-full']"
-      :header="form.id ? 'Edit Product' : 'Create Product'"
+      :header="form.id ? 'Edit Brand' : 'Create Brand'"
       :show="showModal"
       @close="showModal = false"
     >
       <template #content>
-        <form @submit.prevent="storeProduct" class="mx-2">
+        <form @submit.prevent="storeBrand" class="mx-2">
           <section class="space-y-4">
-            <!-- Title -->
+            <!-- Name -->
             <div>
-              <label for="title" class="block text-sm font-medium text-gray-700"
-                >Title</label
+              <label for="name" class="block text-sm font-medium text-gray-700"
+                >Name</label
               >
               <input
-                id="title"
-                v-model="form.title"
+                id="name"
+                v-model="form.name"
                 type="text"
-                placeholder="Enter title"
+                placeholder="Enter name"
                 class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
-              <p v-if="form.errors.title" class="text-red-600 text-sm">
-                {{ form.errors.title }}
+              <p v-if="form.errors.name" class="text-red-600 text-sm">
+                {{ form.errors.name }}
               </p>
             </div>
 
-            <!-- Quantity -->
-            <div>
-              <label
-                for="quantity"
-                class="block text-sm font-medium text-gray-700"
-                >Quantity</label
-              >
-              <input
-                id="quantity"
-                v-model="form.quantity"
-                type="number"
-                placeholder="Enter quantity"
-                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-              <p v-if="form.errors.quantity" class="text-red-600 text-sm">
-                {{ form.errors.quantity }}
-              </p>
-            </div>
-
-            <!-- Published -->
-            <div class="flex items-center">
-              <input
-                id="published"
-                v-model="form.published"
-                :checked="form.published"
-                type="checkbox"
-                class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-              />
-              <label for="published" class="ml-2 text-sm text-gray-700"
-                >Published</label
-              >
-            </div>
-
-            <!-- In Stock -->
+            <!-- Active -->
             <div class="flex items-center">
               <input
                 id="in_stock"
@@ -179,19 +146,19 @@ const editProduct = (productId) => {
                 class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
               <label for="in_stock" class="ml-2 text-sm text-gray-700"
-                >In Stock</label
+                >Active</label
               >
             </div>
 
             <div class="flex justify-end">
               <button
                 v-if="form.id"
-                form="updateProduct"
+                form="updateBrand"
                 type="submit"
                 class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 :disabled="form.processing"
               >
-                Update Product
+                Update Brand
               </button>
               <button
                 v-else
@@ -199,22 +166,22 @@ const editProduct = (productId) => {
                 class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 :disabled="form.processing"
               >
-                Create Product
+                Create Brand
               </button>
             </div>
           </section>
         </form>
         <form
-          @submit.prevent="updateProduct"
-          id="updateProduct"
+          @submit.prevent="updateBrand"
+          id="updateBrand"
           class="hidden"
         ></form>
       </template>
     </ResuableModal>
 
-    <!-- Product Table -->
-    <div class="min-w-full overflow-x-auto">
-      <table class="overflow-auto bg-white border border-gray-200 rounded-lg">
+    <!-- Brand Table -->
+    <div class="flex items-center justify-center min-w-full overflow-x-auto">
+      <table class="overflow-auto min-w-full bg-white border border-gray-200 rounded-lg">
         <thead>
           <tr class="bg-gray-100">
             <th class="w-16 p-1 text-left">
@@ -222,45 +189,43 @@ const editProduct = (productId) => {
                 type="checkbox"
                 @click="
                   (e) =>
-                    (massForm.selectedProducts = e.target.checked
-                      ? props.products.map((p) => p.id)
+                    (massForm.selectedBrands = e.target.checked
+                      ? props.brands.map((p) => p.id)
                       : [])
                 "
                 class="form-checkbox"
               />
             </th>
             <th class="p-1 text-left font-semibold">ID</th>
-            <th class="p-1 text-left font-semibold">Published</th>
-            <th class="p-1 text-left font-semibold">Brand</th>
-            <th class="p-1 text-left font-semibold">Category</th>
+            <th class="p-1 text-left font-semibold">Name</th>
+            <th class="p-1 text-left font-semibold">Active</th>
             <th class="p-1 text-left font-semibold">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="product in props.products"
-            :key="product.id"
+            v-for="brand in props.brands"
+            :key="brand.id"
             class="border-t hover:bg-gray-50"
           >
             <td class="p-1">
               <input
                 type="checkbox"
-                :value="product.id"
-                @change="toggleSelection(product.id)"
-                :checked="isSelected(product.id)"
+                :value="brand.id"
+                @change="toggleSelection(brand.id)"
+                :checked="isSelected(brand.id)"
                 class="form-checkbox"
               />
             </td>
-            <td class="p-1">{{ product.id }}</td>
-            <td class="p-1">{{ product.title }}</td>
+            <td class="p-1">{{ brand.id }}</td>
+            <td class="p-1">{{ brand.name }}</td>
 
-            <td class="p-1">{{ product.brand }}</td>
-            <td class="p-1">{{ product.category }}</td>
+            <td class="p-1">{{ brand.active }}</td>
             <td class="p-1 flex space-x-2">
-              <button @click="editProduct(product.id)" class="btn btn-success">
+              <button @click="editBrand(brand.id)" class="btn btn-success">
                 Edit
               </button>
-              <button @click="deleteProduct(product.id)" class="btn btn-danger">
+              <button @click="deleteBrand(brand.id)" class="btn btn-danger">
                 Delete
               </button>
             </td>
