@@ -300,7 +300,7 @@ const editProduct = (productId) => {
     </ResuableModal>
 
     <!-- Product Table -->
-    <div class="min-w-full border border-solid border-black overflow-x-auto">
+    <div class="min-w-full overflow-x-auto">
       <table class="overflow-auto bg-white border border-gray-200 rounded-lg">
         <thead>
           <tr class="bg-gray-100">
@@ -309,7 +309,7 @@ const editProduct = (productId) => {
                 type="checkbox"
                 @click="
                   (e) =>
-                    (selectedProducts.value = e.target.checked
+                    (massForm.selectedProducts = e.target.checked
                       ? props.products.map((p) => p.id)
                       : [])
                 "
