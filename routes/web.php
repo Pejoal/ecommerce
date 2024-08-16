@@ -82,6 +82,13 @@ Route::group([], function () {
       Route::delete('brands/mass-destroy', [BrandController::class, 'massDestroy'])->name('admin.brands.massDestroy');
       Route::patch('brands/{brand}', [BrandController::class, 'update'])->name('admin.brands.update');
       Route::delete('brands/{brand}', [BrandController::class, 'destroy'])->name('admin.brands.destroy');
+
+      // Categorys Management
+      Route::post('categories', [CategoryController::class, 'store'])->name('admin.categories.store');
+      Route::get('categories/{brand}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+      Route::delete('categories/mass-destroy', [CategoryController::class, 'massDestroy'])->name('admin.categories.massDestroy');
+      Route::patch('categories/{brand}', [CategoryController::class, 'update'])->name('admin.categories.update');
+      Route::delete('categories/{brand}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
     });
 
   });
