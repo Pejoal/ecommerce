@@ -66,12 +66,12 @@ Route::group([], function () {
       Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     // Products Management
-      Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
-      Route::post('products', [ProductController::class, 'store'])->name('products.store');
-      Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-      Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
-      Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
-      Route::post('products/mass-destroy', [ProductController::class, 'massDestroy'])->name('products.massDestroy');
+      Route::get('products/create', [ProductController::class, 'create'])->name('admin.products.create');
+      Route::post('products', [ProductController::class, 'store'])->name('admin.products.store');
+      Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
+      Route::put('products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
+      Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+      Route::post('products/mass-destroy', [ProductController::class, 'massDestroy'])->name('admin.products.massDestroy');
     });
 
   });

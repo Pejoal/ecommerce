@@ -6,12 +6,21 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller {
-  public function create() {
-    // Logic to display the create product form
-  }
 
   public function store(Request $request) {
-    // Logic to store a new product
+    $validated = $request->validate([
+      'title' => 'required|string|max:255',
+      'slug' => 'required|string|max:255|unique:products',
+      'quantity' => 'required|integer|min:1',
+      'description' => 'nullable|string',
+      'published' => 'boolean',
+      'in_stock' => 'boolean',
+      'price' => 'required|numeric|min:0',
+      'brand_id' => 'nullable|exists:brands,id',
+      'category_id' => 'nullable|exists:categories,id',
+    ]);
+
+    Product::create($validated);
   }
 
   public function edit(Product $product) {

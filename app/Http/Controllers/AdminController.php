@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -25,9 +27,13 @@ class AdminController extends Controller {
           "category" => $product->category->name ?? null,
         ];
       });
+      $brands = Brand::all();
+      $categories = Category::all();
       
     return Inertia::render('Admin/Dashboard', [
       "products" => $products,
+      "brands" => $brands,
+      "categories" => $categories,
     ]);
   }
 
