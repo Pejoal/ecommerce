@@ -320,7 +320,7 @@ const fetchPage = (url) => {
 
       <section class="col-span-2 p-2">
         <h2 class="text-xl font-bold">Products</h2>
-        <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           <div
             v-for="(product, index) in props.products.data"
             :key="index"
