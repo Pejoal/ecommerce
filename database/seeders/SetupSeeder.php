@@ -58,27 +58,33 @@ class SetupSeeder extends Seeder {
     Category::create([
       'name' => 'Computer',
       'slug' => 'computer',
+      'active' => 1,
     ]);
     Category::create([
       'name' => 'Phone',
       'slug' => 'phone',
+      'active' => 1,
     ]);
     Category::create([
       'name' => 'Watch',
       'slug' => 'watch',
+      'active' => 1,
     ]);
 
     Brand::create([
       'name' => 'Dell',
       'slug' => 'dell',
+      'active' => 1,
     ]);
     Brand::create([
       'name' => 'Samsung',
       'slug' => 'samsung',
+      'active' => 1,
     ]);
     Brand::create([
       'name' => 'Apple',
       'slug' => 'apple',
+      'active' => 1,
     ]);
 
     Product::create([

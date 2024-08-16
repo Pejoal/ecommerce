@@ -83,8 +83,8 @@ const editBrand = (brandId) => {
     .get(route("admin.brands.edit", brandId))
     .then((response) => {
       form.id = response.data.id;
-      form.brand_id = response.data.brand_id;
-      form.category_id = response.data.category_id;
+      form.name = response.data.name;
+      form.active = response.data.active;
 
       showModal.value = true;
     })
@@ -139,13 +139,13 @@ const editBrand = (brandId) => {
             <!-- Active -->
             <div class="flex items-center">
               <input
-                id="in_stock"
-                v-model="form.in_stock"
-                :checked="form.in_stock"
+                id="active"
+                v-model="form.active"
+                :checked="form.active"
                 type="checkbox"
                 class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
-              <label for="in_stock" class="ml-2 text-sm text-gray-700"
+              <label for="active" class="ml-2 text-sm text-gray-700"
                 >Active</label
               >
             </div>
@@ -199,6 +199,7 @@ const editBrand = (brandId) => {
             <th class="p-1 text-left font-semibold">ID</th>
             <th class="p-1 text-left font-semibold">Name</th>
             <th class="p-1 text-left font-semibold">Active</th>
+            
             <th class="p-1 text-left font-semibold">Actions</th>
           </tr>
         </thead>
@@ -219,8 +220,10 @@ const editBrand = (brandId) => {
             </td>
             <td class="p-1">{{ brand.id }}</td>
             <td class="p-1">{{ brand.name }}</td>
-
-            <td class="p-1">{{ brand.active }}</td>
+            <td class="p-1 font-bold text-green-600" v-if="brand.active">
+              Yes
+            </td>
+            <td class="p-1 font-bold text-red-600" v-else>No</td>
             <td class="p-1 flex space-x-2">
               <button @click="editBrand(brand.id)" class="btn btn-success">
                 Edit

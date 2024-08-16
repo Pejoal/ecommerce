@@ -78,10 +78,10 @@ Route::group([], function () {
 
       // Brands Management
       Route::post('brands', [BrandController::class, 'store'])->name('admin.brands.store');
-      Route::get('brands/{product}/edit', [BrandController::class, 'edit'])->name('admin.brands.edit');
+      Route::get('brands/{brand}/edit', [BrandController::class, 'edit'])->name('admin.brands.edit');
       Route::delete('brands/mass-destroy', [BrandController::class, 'massDestroy'])->name('admin.brands.massDestroy');
-      Route::patch('brands/{product}', [BrandController::class, 'update'])->name('admin.brands.update');
-      Route::delete('brands/{product}', [BrandController::class, 'destroy'])->name('admin.brands.destroy');
+      Route::patch('brands/{brand}', [BrandController::class, 'update'])->name('admin.brands.update');
+      Route::delete('brands/{brand}', [BrandController::class, 'destroy'])->name('admin.brands.destroy');
     });
 
   });
