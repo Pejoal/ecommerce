@@ -282,7 +282,7 @@ const closeCategoriesDropdown = () => {
               placeholder="Min Price"
               class="w-1/2 border rounded-lg p-2"
               min="0"
-              step="10"
+              step="50"
             />
             <input
               v-model.number="form.maxPrice"
@@ -291,7 +291,7 @@ const closeCategoriesDropdown = () => {
               placeholder="Max Price"
               class="w-1/2 border rounded-lg p-2"
               min="0"
-              step="10"
+              step="50"
             />
           </div>
         </div>
