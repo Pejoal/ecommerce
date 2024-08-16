@@ -198,16 +198,6 @@ const removeCategory = (category) => {
   );
 };
 
-const isBrandSelected = (brand) => {
-  return selectedBrands.value.some((selected) => selected.id === brand.id);
-};
-
-const isCategorySelected = (category) => {
-  return selectedCategories.value.some(
-    (selected) => selected.id === category.id
-  );
-};
-
 const filteredBrands = computed(() => {
   return props.brands
     .filter((brand) =>
@@ -340,11 +330,6 @@ const clearFilters = () => {
                     @mousedown.prevent="toggleBrandSelection(brand)"
                     class="px-4 py-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-100"
                   >
-                    <input
-                      type="button"
-                      @click="isBrandSelected(brand)"
-                      class="h-4 w-4 text-blue-600"
-                    />
                     <span class="ml-2">{{ brand.name }}</span>
                   </li>
                 </ul>
@@ -398,11 +383,6 @@ const clearFilters = () => {
                     @mousedown.prevent="toggleCategorySelection(category)"
                     class="px-4 py-2 flex items-center space-x-2 cursor-pointer hover:bg-gray-100"
                   >
-                    <input
-                      type="button"
-                      @click="isCategorySelected(category)"
-                      class="h-4 w-4 text-blue-600"
-                    />
                     <span class="ml-2">{{ category.name }}</span>
                   </li>
                 </ul>
