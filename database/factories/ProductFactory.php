@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Currency;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,6 +29,7 @@ class ProductFactory extends Factory {
       'published' => $this->faker->boolean(),
       'in_stock' => $this->faker->boolean(),
       'price' => $this->faker->randomFloat(2, 10, 1000),
+      'currency_id' => Currency::inRandomOrder()->first()->id, // Recycle an existing brand
       'created_by' => "1", // Ensure an admin creates the product
       // 'updated_by' => User::factory()->admin(), // Optional: You can also set this to the same user as created_by
       'updated_by' => "1", // Optional: You can also set this to the same user as created_by

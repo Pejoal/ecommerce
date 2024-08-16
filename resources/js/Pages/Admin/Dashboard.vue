@@ -7,17 +7,21 @@ import ResuableModal from "@/Components/ResuableModal.vue";
 import axios from "axios";
 
 const props = defineProps({
+  products: {
+    type: Array,
+    default: [],
+  },
   brands: {
     type: Array,
-    default: () => [],
+    default: [],
   },
   categories: {
     type: Array,
-    default: () => [],
+    default: [],
   },
-  products: {
+  currencies: {
     type: Array,
-    default: () => [],
+    default: [],
   },
 });
 
@@ -31,8 +35,9 @@ const form = useForm({
   published: false,
   in_stock: false,
   price: "",
-  brand_id: "",
-  category_id: "",
+  currency_id: 0,
+  brand_id: 0,
+  category_id: 0,
 });
 
 const massForm = useForm({
@@ -103,6 +108,7 @@ const editProduct = (productId) => {
       form.published = response.data.published;
       form.in_stock = response.data.in_stock;
       form.price = response.data.price;
+      form.currency_id = response.data.currency_id;
       form.brand_id = response.data.brand_id;
       form.category_id = response.data.category_id;
 
@@ -240,6 +246,32 @@ const editProduct = (productId) => {
               </p>
             </div>
 
+            <!-- Currency -->
+            <div>
+              <label
+                for="currency_id"
+                class="block text-sm font-medium text-gray-700"
+                >Currency</label
+              >
+              <select
+                id="currency_id"
+                v-model="form.currency_id"
+                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+                <option value="">Select Currency</option>
+                <option
+                  v-for="currency in props.currencies"
+                  :key="currency.id"
+                  :value="currency.id"
+                >
+                  {{ currency.symbol }}
+                </option>
+              </select>
+              <p v-if="form.errors.currency_id" class="text-red-600 text-sm">
+                {{ form.errors.currency_id }}
+              </p>
+            </div>
+
             <!-- Brand -->
             <div>
               <label
@@ -349,6 +381,7 @@ const editProduct = (productId) => {
             <th class="p-1 text-left font-semibold">Published</th>
             <th class="p-1 text-left font-semibold">In Stock</th>
             <th class="p-1 text-left font-semibold">Price</th>
+            <th class="p-1 text-left font-semibold">Currency</th>
             <th class="p-1 text-left font-semibold">Brand</th>
             <th class="p-1 text-left font-semibold">Category</th>
             <th class="p-1 text-left font-semibold">Actions</th>
@@ -384,6 +417,7 @@ const editProduct = (productId) => {
             </td>
             <td class="p-1 font-bold text-red-600" v-else>No</td>
             <td class="p-1">{{ product.price }}</td>
+            <td class="p-1">{{ product.currency }}</td>
             <td class="p-1">{{ product.brand }}</td>
             <td class="p-1">{{ product.category }}</td>
             <td class="p-1 flex space-x-2">

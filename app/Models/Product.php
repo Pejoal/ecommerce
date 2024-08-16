@@ -17,7 +17,7 @@ class Product extends Model {
       ->generateSlugsFrom('title')
       ->saveSlugsTo('slug');
   }
-  
+
   public function creator() {
     return $this->belongsTo(User::class, 'created_by');
   }
@@ -35,5 +35,9 @@ class Product extends Model {
   }
   public function cartItems() {
     return $this->hasMany(CartItem::class);
+  }
+
+  public function currency() {
+    return $this->belongsTo(Currency::class);
   }
 }

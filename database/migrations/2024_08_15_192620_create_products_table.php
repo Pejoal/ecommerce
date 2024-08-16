@@ -2,6 +2,7 @@
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Currency;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,12 +22,12 @@ return new class extends Migration {
       $table->boolean('published')->default(0);
       $table->boolean('in_stock')->default(0);
       $table->decimal('price', 10, 2);
+      $table->foreignIdFor(Currency::class, 'currency_id')->nullable();
 
       $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
       $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('cascade');
 
       $table->foreignIdFor(Brand::class, 'brand_id')->nullable();
-
       $table->foreignIdFor(Category::class, 'category_id')->nullable();
       $table->softDeletes();
       $table->foreignIdFor(User::class, 'deleted_by')->nullable();

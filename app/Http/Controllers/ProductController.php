@@ -12,9 +12,10 @@ class ProductController extends Controller {
       'title' => 'required|string|max:255',
       'quantity' => 'required|integer|min:1',
       'description' => 'nullable|string',
-      'published' => 'boolean',
+      'currency_id' => 'nullable|exists:currencies,id',
       'in_stock' => 'boolean',
       'price' => 'required|numeric|min:0',
+      'published' => 'boolean',
       'brand_id' => 'nullable|exists:brands,id',
       'category_id' => 'nullable|exists:categories,id',
     ]);
@@ -34,6 +35,7 @@ class ProductController extends Controller {
       'published' => 'boolean',
       'in_stock' => 'boolean',
       'price' => 'required|numeric|min:0',
+      'currency_id' => 'nullable|exists:currencies,id',
       'brand_id' => 'nullable|exists:brands,id',
       'category_id' => 'nullable|exists:categories,id',
     ]);

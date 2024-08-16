@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Currency;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -87,9 +88,36 @@ class SetupSeeder extends Seeder {
       'active' => 1,
     ]);
 
+    Currency::create([
+      'code' => 'USD',
+      'name' => 'United States Dollar',
+      'symbol' => '$',
+    ]);
+    Currency::create([
+      'code' => 'EUR',
+      'name' => 'Euro',
+      'symbol' => '€',
+    ]);
+    Currency::create([
+      'code' => 'GBP',
+      'name' => 'British Pound Sterling',
+      'symbol' => '£',
+    ]);
+    Currency::create([
+      'code' => 'JPY',
+      'name' => 'Japanese Yen',
+      'symbol' => '¥',
+    ]);
+    Currency::create([
+      'code' => 'AUD',
+      'name' => 'Australian Dollar',
+      'symbol' => 'A$',
+    ]);
+
     Product::create([
       'title' => 'Product 1',
       'price' => 19.99,
+      'currency_id' => 1,
       'quantity' => 3,
       'category_id' => 1,
       'brand_id' => 1,
@@ -100,6 +128,7 @@ class SetupSeeder extends Seeder {
     Product::create([
       'title' => 'Product 2',
       'price' => 30,
+      'currency_id' => 2,
       'quantity' => 5,
       'category_id' => 2,
       'brand_id' => 2,
