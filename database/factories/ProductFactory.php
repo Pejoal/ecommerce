@@ -17,10 +17,12 @@ class ProductFactory extends Factory {
    * @return array<string, mixed>
    */
   public function definition(): array {
+    $word = $this->faker->word();
     return [
       // 'user_id' => User::factory()->recycle(User::inRandomOrder()->first()), // Recycle an existing user or create a new one
-      'title' => $this->faker->word(),
-      'slug' => $this->faker->unique()->slug(),
+      'title' => $word,
+      // 'slug' => $this->faker->unique()->slug(),
+      'slug' => $word,
       'quantity' => $this->faker->numberBetween(1, 25),
       'description' => $this->faker->paragraph(),
       'published' => $this->faker->boolean(),

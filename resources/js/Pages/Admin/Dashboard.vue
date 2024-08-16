@@ -80,11 +80,11 @@ const editProduct = (productId) => {
       </button>
     </div>
 
-    <div class="overflow-x-auto">
-      <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+    <div class="min-w-full border border-solid border-black overflow-x-auto">
+      <table class="overflow-auto bg-white border border-gray-200 rounded-lg">
         <thead>
           <tr class="bg-gray-100">
-            <th class="w-16 p-3 text-left">
+            <th class="w-16 p-1 text-left">
               <input
                 type="checkbox"
                 @click="
@@ -96,17 +96,17 @@ const editProduct = (productId) => {
                 class="form-checkbox"
               />
             </th>
-            <th class="p-3 text-left font-semibold">ID</th>
-            <th class="p-3 text-left font-semibold">Title</th>
-            <th class="p-3 text-left font-semibold">Slug</th>
-            <th class="p-3 text-left font-semibold">Quantity</th>
-            <th class="p-3 text-left font-semibold">Description</th>
-            <th class="p-3 text-left font-semibold">Published</th>
-            <th class="p-3 text-left font-semibold">In Stock</th>
-            <th class="p-3 text-left font-semibold">Price</th>
-            <th class="p-3 text-left font-semibold">Brand</th>
-            <th class="p-3 text-left font-semibold">Category</th>
-            <th class="p-3 text-left font-semibold">Actions</th>
+            <th class="p-1 text-left font-semibold">ID</th>
+            <th class="p-1 text-left font-semibold">Title</th>
+            <th class="p-1 text-left font-semibold">Slug</th>
+            <th class="p-1 text-left font-semibold">Quantity</th>
+            <th class="p-1 text-left font-semibold max-w-[10rem]">Description</th>
+            <th class="p-1 text-left font-semibold">Published</th>
+            <th class="p-1 text-left font-semibold">In Stock</th>
+            <th class="p-1 text-left font-semibold">Price</th>
+            <th class="p-1 text-left font-semibold">Brand</th>
+            <th class="p-1 text-left font-semibold">Category</th>
+            <th class="p-1 text-left font-semibold">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -115,7 +115,7 @@ const editProduct = (productId) => {
             :key="product.id"
             class="border-t hover:bg-gray-50"
           >
-            <td class="p-3">
+            <td class="p-1">
               <input
                 type="checkbox"
                 :value="product.id"
@@ -124,23 +124,23 @@ const editProduct = (productId) => {
                 class="form-checkbox"
               />
             </td>
-            <td class="p-3">{{ product.id }}</td>
-            <td class="p-3">{{ product.title }}</td>
-            <td class="p-3">{{ product.slug }}</td>
-            <td class="p-3">{{ product.quantity }}</td>
-            <td class="p-3 truncate max-w-xs">{{ product.description }}</td>
-            <td class="p-3 font-bold text-green-600" v-if="product.published">
+            <td class="p-1">{{ product.id }}</td>
+            <td class="p-1">{{ product.title }}</td>
+            <td class="p-1">{{ product.slug }}</td>
+            <td class="p-1">{{ product.quantity }}</td>
+            <td class="p-1 truncate max-w-[10rem]">{{ product.description }}</td>
+            <td class="p-1 font-bold text-green-600" v-if="product.published">
               Yes
             </td>
-            <td class="p-3 font-bold text-red-600" v-else>No</td>
-            <td class="p-3 font-bold text-green-600" v-if="product.in_stock">
+            <td class="p-1 font-bold text-red-600" v-else>No</td>
+            <td class="p-1 font-bold text-green-600" v-if="product.in_stock">
               Yes
             </td>
-            <td class="p-3 font-bold text-red-600" v-else>No</td>
-            <td class="p-3">{{ product.price }}</td>
-            <td class="p-3">{{ product.brand }}</td>
-            <td class="p-3">{{ product.category }}</td>
-            <td class="p-3 flex space-x-2">
+            <td class="p-1 font-bold text-red-600" v-else>No</td>
+            <td class="p-1">{{ product.price }}</td>
+            <td class="p-1">{{ product.brand }}</td>
+            <td class="p-1">{{ product.category }}</td>
+            <td class="p-1 flex space-x-2">
               <button
                 @click="editProduct(product.id)"
                 class="bg-yellow-500 text-white py-1 px-2 rounded hover:bg-yellow-600"
