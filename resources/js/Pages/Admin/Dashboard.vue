@@ -293,7 +293,6 @@ const clearFilters = () => {
             <div class="relative">
               <div
                 class="flex flex-wrap items-center gap-2 p-2 border rounded-lg bg-white focus-within:ring-2 focus-within:ring-blue-500"
-                @click="openBrandsDropdown"
               >
                 <template v-for="brand in selectedBrands" :key="brand.id">
                   <span
@@ -311,6 +310,7 @@ const clearFilters = () => {
                 </template>
                 <input
                   v-model="brandQuery"
+                  @click="openBrandsDropdown"
                   @blur="closeBrandsDropdown"
                   type="text"
                   placeholder="Search brands..."
@@ -342,7 +342,6 @@ const clearFilters = () => {
             <div class="relative">
               <div
                 class="flex flex-wrap items-center gap-2 p-2 border rounded-lg bg-white focus-within:ring-2 focus-within:ring-blue-500"
-                @click="openCategoriesDropdown"
               >
                 <template
                   v-for="category in selectedCategories"
@@ -363,6 +362,7 @@ const clearFilters = () => {
                 </template>
                 <input
                   v-model="categoryQuery"
+                  @click="openCategoriesDropdown"
                   @blur="closeCategoriesDropdown"
                   type="text"
                   placeholder="Search categories..."
