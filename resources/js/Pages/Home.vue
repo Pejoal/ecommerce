@@ -292,10 +292,19 @@ const closeCategoriesDropdown = () => {
               <span class="ml-1 font-bold">{{ product.currency }}</span>
             </div>
             <div class="mt-1 flex items-center">
+              <span class="font-medium text-gray-800">Published:</span>
+              <span class="ml-1 font-bold text-green-600" v-if="product.published">Yes</span>
+              <span class="ml-1 font-bold text-red-600" v-else>No</span>
+            </div>
+            <div class="mt-1 flex items-center">
               <span class="font-medium text-gray-800">In Stock:</span>
-              <span class="ml-1 font-bold">{{
-                product.inStock ? "Yes" : "No"
-              }}</span>
+              <span class="ml-1 font-bold text-green-600" v-if="product.in_stock">Yes</span>
+              <span class="ml-1 font-bold text-red-600" v-else>No</span>
+            </div>
+            <div class="mt-1 flex items-center">
+              <span class="font-medium text-gray-800">Premium Delivery:</span>
+              <span class="ml-1 font-bold text-green-600" v-if="product.premium_delivery">Yes</span>
+              <span class="ml-1 font-bold text-red-600" v-else>No</span>
             </div>
             <div class="mt-1 flex items-center">
               <span class="font-medium text-gray-800">Quantity:</span>

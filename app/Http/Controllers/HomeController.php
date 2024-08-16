@@ -10,9 +10,7 @@ use Inertia\Inertia;
 
 class HomeController extends Controller {
   public function index(Request $request) {
-    $query = Product::with('brand', 'category', 'currency')
-      ->select(['id', 'title', 'slug', 'quantity', 'description', 'published', 'in_stock', 'price', 'currency_id', 'brand_id', 'category_id']);
-
+    $query = Product::with('brand', 'category', 'currency');
     if ($request->has('search') && !empty($request->search)) {
       $search = $request->search;
       $query->where('title', 'like', "%{$search}%");
@@ -26,19 +24,19 @@ class HomeController extends Controller {
       $query->whereIn('category_id', $request->selectedCategories);
     }
 
-    // if ($request->has('isPremiumDeliveryChecked') && $request->isPremiumDeliveryChecked) {
-    //   $query->where('premium_delivery', true);
-    // }
+    if ($request->has('isPremiumDeliveryChecked') && $request->isPremiumDeliveryChecked === "true") {
+      $query->where('premium_delivery', true);
+    }
 
     $products = $query->latest('id')->paginate(5)->map(function ($product) {
       return [
         "id" => $product->id,
         "title" => $product->title,
-        "slug" => $product->slug,
         "quantity" => $product->quantity,
         "description" => $product->description,
         "published" => $product->published,
         "in_stock" => $product->in_stock,
+        "premium_delivery" => $product->premium_delivery,
         "price" => $product->price,
         "currency" => $product->currency->symbol ?? null,
         "brand" => $product->brand->name ?? null,
