@@ -38,7 +38,8 @@ class HomeController extends Controller {
       $query->where('premium_delivery', true);
     }
 
-    $paginatedProducts = $query->latest('id')->paginate(5);
+    $perPage = $request->input('perPage', 5); // Default to 5 items per page if not provided
+    $paginatedProducts = $query->latest('id')->paginate($perPage);
     $paginatedProducts->getCollection()->transform(function ($product) {
       return [
         "id" => $product->id,

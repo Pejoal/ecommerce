@@ -33,6 +33,7 @@ const form = useForm({
   isPremiumDeliveryChecked: false,
   minPrice: 0,
   maxPrice: 0,
+  perPage: 5,
   search: "",
 });
 
@@ -314,13 +315,35 @@ const fetchPage = (url) => {
             Premium Delivery
           </label>
         </div>
+
+        <div
+          class="flex items-center space-x-2 mt-2 pt-2 border-t border-black"
+        >
+          <label for="perPage" class="text-gray-700 font-bold">
+            Per Page
+          </label>
+
+          <select
+            v-model="form.perPage"
+            id="perPage"
+            @change="applyFilters"
+            class="rounded-lg"
+          >
+            <option :value="5">5</option>
+            <option :value="10">10</option>
+            <option :value="20">20</option>
+            <option :value="50">50</option>
+          </select>
+        </div>
       </section>
 
       <!-- End of first section (Filters) -->
 
       <section class="col-span-2 p-2">
         <h2 class="text-xl font-bold">Products</h2>
-        <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <section
+          class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+        >
           <div
             v-for="(product, index) in props.products.data"
             :key="index"
