@@ -12,6 +12,7 @@ class AdminController extends Controller {
   public function dashboard(Request $request) {
     $products = Product::with('brand', 'category')
       ->select(['id', 'title', 'slug', 'quantity', 'description', 'published', 'in_stock', 'price', 'brand_id', 'category_id'])
+      ->latest('id')
       ->get()
       ->map(function ($product) {
         return [

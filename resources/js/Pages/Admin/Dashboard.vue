@@ -70,7 +70,7 @@ const massDeleteProducts = () => {
   }
 };
 
-const addProduct = () => {
+const storeProduct = () => {
   form.post(route("products.store"), {
     onSuccess: () => {
       showModal.value = false;
@@ -118,7 +118,7 @@ const editProduct = (productId) => {
       @close="showModal = false"
     >
       <template #content>
-        <form @submit.prevent="addProduct" class="mx-2">
+        <form @submit.prevent="storeProduct" class="mx-2">
           <section class="space-y-4">
             <!-- Title -->
             <div>

@@ -12,6 +12,7 @@ class HomeController extends Controller {
   public function index() {
     $products = Product::with('brand', 'category')
       ->select(['id', 'title', 'slug', 'quantity', 'description', 'published', 'in_stock', 'price', 'brand_id', 'category_id'])
+      ->latest('id')
       ->get()
       ->map(function ($product) {
         return [
