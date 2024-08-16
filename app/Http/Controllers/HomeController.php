@@ -24,6 +24,16 @@ class HomeController extends Controller {
       $query->whereIn('category_id', $request->selectedCategories);
     }
 
+    if ($request->has('minPrice') && !empty($request->minPrice)) {
+      $minPrice = $request->minPrice;
+      $query->where('price', '>=', $minPrice);
+    }
+
+    if ($request->has('maxPrice') && !empty($request->maxPrice)) {
+      $maxPrice = $request->maxPrice;
+      $query->where('price', '<=', $maxPrice);
+    }
+
     if ($request->has('isPremiumDeliveryChecked') && $request->isPremiumDeliveryChecked === "true") {
       $query->where('premium_delivery', true);
     }

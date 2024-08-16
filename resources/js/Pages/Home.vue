@@ -31,6 +31,8 @@ const form = useForm({
   selectedBrands: [],
   selectedCategories: [],
   isPremiumDeliveryChecked: false,
+  minPrice: 0,
+  maxPrice: 0,
 });
 
 const applyFilters = () => {
@@ -256,6 +258,27 @@ const closeCategoriesDropdown = () => {
           </div>
         </div>
 
+        <!-- Price Range Filter -->
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold">Price Range</h3>
+          <div class="flex items-center space-x-2">
+            <input
+              v-model.number="form.minPrice"
+              @input="applyFilters"
+              type="number"
+              placeholder="Min Price"
+              class="w-1/2 border rounded-lg p-2"
+            />
+            <input
+              v-model.number="form.maxPrice"
+              @input="applyFilters"
+              type="number"
+              placeholder="Max Price"
+              class="w-1/2 border rounded-lg p-2"
+            />
+          </div>
+        </div>
+
         <div class="flex items-center space-x-2 mt-2">
           <input
             id="premiumDelivery"
@@ -293,17 +316,29 @@ const closeCategoriesDropdown = () => {
             </div>
             <div class="mt-1 flex items-center">
               <span class="font-medium text-gray-800">Published:</span>
-              <span class="ml-1 font-bold text-green-600" v-if="product.published">Yes</span>
+              <span
+                class="ml-1 font-bold text-green-600"
+                v-if="product.published"
+                >Yes</span
+              >
               <span class="ml-1 font-bold text-red-600" v-else>No</span>
             </div>
             <div class="mt-1 flex items-center">
               <span class="font-medium text-gray-800">In Stock:</span>
-              <span class="ml-1 font-bold text-green-600" v-if="product.in_stock">Yes</span>
+              <span
+                class="ml-1 font-bold text-green-600"
+                v-if="product.in_stock"
+                >Yes</span
+              >
               <span class="ml-1 font-bold text-red-600" v-else>No</span>
             </div>
             <div class="mt-1 flex items-center">
               <span class="font-medium text-gray-800">Premium Delivery:</span>
-              <span class="ml-1 font-bold text-green-600" v-if="product.premium_delivery">Yes</span>
+              <span
+                class="ml-1 font-bold text-green-600"
+                v-if="product.premium_delivery"
+                >Yes</span
+              >
               <span class="ml-1 font-bold text-red-600" v-else>No</span>
             </div>
             <div class="mt-1 flex items-center">
