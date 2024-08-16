@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -66,29 +67,37 @@ Route::group([], function () {
     // Admin
     Route::group(['middleware' => 'admins-only', 'prefix' => 'admin'], function () {
       Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-      Route::get('brands', [BrandController::class, 'index'])->name('admin.brands');
-      Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories');
-
+      
       // Products Management
       Route::post('products', [ProductController::class, 'store'])->name('admin.products.store');
       Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
       Route::delete('products/mass-destroy', [ProductController::class, 'massDestroy'])->name('admin.products.massDestroy');
       Route::patch('products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
       Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
-
+      
       // Brands Management
+      Route::get('brands', [BrandController::class, 'index'])->name('admin.brands');
       Route::post('brands', [BrandController::class, 'store'])->name('admin.brands.store');
       Route::get('brands/{brand}/edit', [BrandController::class, 'edit'])->name('admin.brands.edit');
       Route::delete('brands/mass-destroy', [BrandController::class, 'massDestroy'])->name('admin.brands.massDestroy');
       Route::patch('brands/{brand}', [BrandController::class, 'update'])->name('admin.brands.update');
       Route::delete('brands/{brand}', [BrandController::class, 'destroy'])->name('admin.brands.destroy');
 
-      // Categorys Management
+      // Categories Management
+      Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories');
       Route::post('categories', [CategoryController::class, 'store'])->name('admin.categories.store');
-      Route::get('categories/{brand}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+      Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
       Route::delete('categories/mass-destroy', [CategoryController::class, 'massDestroy'])->name('admin.categories.massDestroy');
-      Route::patch('categories/{brand}', [CategoryController::class, 'update'])->name('admin.categories.update');
-      Route::delete('categories/{brand}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+      Route::patch('categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
+      Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+
+      // Currencies Management
+      Route::get('currencies', [CurrencyController::class, 'index'])->name('admin.currencies');
+      Route::post('currencies', [CurrencyController::class, 'store'])->name('admin.currencies.store');
+      Route::get('currencies/{currency}/edit', [CurrencyController::class, 'edit'])->name('admin.currencies.edit');
+      Route::delete('currencies/mass-destroy', [CurrencyController::class, 'massDestroy'])->name('admin.currencies.massDestroy');
+      Route::patch('currencies/{currency}', [CurrencyController::class, 'update'])->name('admin.currencies.update');
+      Route::delete('currencies/{currency}', [CurrencyController::class, 'destroy'])->name('admin.currencies.destroy');
     });
 
   });

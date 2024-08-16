@@ -26,22 +26,22 @@ class CategoryController extends Controller {
     auth()->user()->categories()->create($validated);
   }
 
-  public function edit(Category $brand) {
-    return $brand;
+  public function edit(Category $category) {
+    return $category;
   }
 
-  public function update(Request $request, Category $brand) {
+  public function update(Request $request, Category $category) {
     $validated = $request->validate([
       'name' => 'required|string|max:255',
       'active' => 'boolean',
     ]);
 
-    $brand->update($validated);
+    $category->update($validated);
 
   }
 
-  public function destroy(Category $brand) {
-    $brand->delete();
+  public function destroy(Category $category) {
+    $category->delete();
   }
 
   public function massDestroy(Request $request) {

@@ -58,6 +58,10 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->hasMany(Category::class);
   }
 
+  function currencies() {
+    return $this->hasMany(Currency::class);
+  }
+
   function user_address() {
     return $this->hasMany(UserAddress::class);
   }
