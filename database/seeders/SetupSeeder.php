@@ -82,8 +82,10 @@ class SetupSeeder extends Seeder {
       'description' => 'Product 2 Description',
       'created_by' => 1,
       'updated_by' => 1,
-
     ]);
+
+    // Product::factory(10)->create([
+    // ]);
 
   }
 }
