@@ -22,7 +22,6 @@ const props = defineProps({
 });
 
 let showModal = ref(false);
-const selectedProducts = ref([]);
 
 const form = useForm({
   id: null,
@@ -36,22 +35,26 @@ const form = useForm({
   category_id: "",
 });
 
+const massForm = useForm({
+  selectedProducts: []
+});
+
 const toggleSelection = (productId) => {
-  const index = selectedProducts.value.indexOf(productId);
+  const index = massForm.selectedProducts.indexOf(productId);
   if (index > -1) {
-    selectedProducts.value.splice(index, 1);
+    massForm.selectedProducts.splice(index, 1);
   } else {
-    selectedProducts.value.push(productId);
+    massForm.selectedProducts.push(productId);
   }
 };
 
-const isSelected = (productId) => selectedProducts.value.includes(productId);
+const isSelected = (productId) => massForm.selectedProducts.includes(productId);
 
 const deleteProduct = (productId) => {
   if (confirm("Are you sure you want to delete this product?")) {
     form.delete(route("admin.products.destroy", productId), {
       onSuccess: () => {
-        selectedProducts.value = selectedProducts.value.filter(
+        massForm.selectedProducts = massForm.selectedProducts.filter(
           (id) => id !== productId
         );
       },
@@ -61,10 +64,9 @@ const deleteProduct = (productId) => {
 
 const massDeleteProducts = () => {
   if (confirm("Are you sure you want to delete the selected products?")) {
-    form.delete(route("admin.products.massDestroy"), {
-      data: { ids: selectedProducts.value },
+    massForm.delete(route("admin.products.massDestroy"), {
       onSuccess: () => {
-        selectedProducts.value = [];
+        massForm.selectedProducts.value = [];
       },
     });
   }
@@ -104,17 +106,17 @@ const editProduct = (productId) => {
   <Head :title="'Products Dashboard'" />
 
   <AuthLayout>
-    <div class="mb-4 flex space-x-2">
+    <div class="my-2 flex space-x-2">
       <button
-        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+        class="btn btn-primary"
         @click="showModal = true"
       >
         Add Product
       </button>
       <button
         @click="massDeleteProducts"
-        class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-        :disabled="selectedProducts.length === 0"
+        class="btn btn-danger"
+        :disabled="massForm.selectedProducts.length === 0"
       >
         Delete Selected
       </button>

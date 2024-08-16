@@ -36,8 +36,7 @@ class ProductController extends Controller {
   }
 
   public function massDestroy(Request $request) {
-    $ids = $request->input('ids');
+    $ids = $request->input('selectedProducts');
     Product::whereIn('id', $ids)->delete();
-    return redirect()->route('admin.dashboard')->with('success', 'Selected products deleted successfully.');
   }
 }
