@@ -4,6 +4,7 @@ import { useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import ResuableModal from "@/Components/ResuableModal.vue";
+import axios from "axios";
 
 const props = defineProps({
   brands: {
@@ -80,12 +81,22 @@ const storeProduct = () => {
 };
 
 const editProduct = (productId) => {
-  form.get(route("admin.products.edit", productId), {
-    onSuccess: (data) => {
-      form.fill(data);
+  axios
+    .get(route("admin.products.edit", productId))
+    .then((response) => {
+      form.id = response.data.id;
+      form.title = response.data.title;
+      form.quantity = response.data.quantity;
+      form.description = response.data.description;
+      form.published = response.data.published;
+      form.in_stock = response.data.in_stock;
+      form.price = response.data.price;
+      form.brand_id = response.data.brand_id;
+      form.category_id = response.data.category_id;
+
       showModal.value = true;
-    },
-  });
+    })
+    .catch((error) => console.error(error));
 };
 </script>
 
@@ -136,8 +147,6 @@ const editProduct = (productId) => {
               </p>
             </div>
 
-          
-
             <!-- Quantity -->
             <div>
               <label
@@ -181,6 +190,7 @@ const editProduct = (productId) => {
               <input
                 id="published"
                 v-model="form.published"
+                :checked="form.published"
                 type="checkbox"
                 class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
@@ -194,6 +204,7 @@ const editProduct = (productId) => {
               <input
                 id="in_stock"
                 v-model="form.in_stock"
+                :checked="form.in_stock"
                 type="checkbox"
                 class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
@@ -370,5 +381,4 @@ const editProduct = (productId) => {
   </AuthLayout>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

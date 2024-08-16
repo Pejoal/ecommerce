@@ -23,7 +23,7 @@ class ProductController extends Controller {
   }
 
   public function edit(Product $product) {
-    // Logic to display the edit form for a specific product
+    return $product;
   }
 
   public function update(Request $request, Product $product) {
