@@ -12,7 +12,6 @@ use Inertia\Inertia;
 class AdminController extends Controller {
   public function index(Request $request) {
     $products = Product::with('brand', 'category', 'currency')
-      ->select(['id', 'title', 'slug', 'quantity', 'description', 'published', 'in_stock', 'price','currency_id', 'brand_id', 'category_id'])
       ->latest('id')
       ->get()
       ->map(function ($product) {
@@ -24,6 +23,7 @@ class AdminController extends Controller {
           "description" => $product->description,
           "published" => $product->published,
           "in_stock" => $product->in_stock,
+          "premium_delivery" => $product->premium_delivery,
           "price" => $product->price,
           "currency" => $product->currency->symbol ?? null,
           "brand" => $product->brand->name ?? null,

@@ -34,6 +34,7 @@ const form = useForm({
   description: "",
   published: false,
   in_stock: false,
+  premium_delivery: false,
   price: "",
   currency_id: 0,
   brand_id: 0,
@@ -107,6 +108,7 @@ const editProduct = (productId) => {
       form.description = response.data.description;
       form.published = response.data.published;
       form.in_stock = response.data.in_stock;
+      form.premium_delivery = response.data.premium_delivery;
       form.price = response.data.price;
       form.currency_id = response.data.currency_id;
       form.brand_id = response.data.brand_id;
@@ -225,6 +227,20 @@ const editProduct = (productId) => {
               />
               <label for="in_stock" class="ml-2 text-sm text-gray-700"
                 >In Stock</label
+              >
+            </div>
+
+            <!-- Premium Delivery -->
+            <div class="flex items-center">
+              <input
+                id="premium_delivery"
+                v-model="form.premium_delivery"
+                :checked="form.premium_delivery"
+                type="checkbox"
+                class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              />
+              <label for="premium_delivery" class="ml-2 text-sm text-gray-700"
+                >Premium Delivery</label
               >
             </div>
 
@@ -380,6 +396,7 @@ const editProduct = (productId) => {
             </th>
             <th class="p-1 text-left font-semibold">Published</th>
             <th class="p-1 text-left font-semibold">In Stock</th>
+            <th class="p-1 text-left font-semibold">Premium</th>
             <th class="p-1 text-left font-semibold">Price</th>
             <th class="p-1 text-left font-semibold">Currency</th>
             <th class="p-1 text-left font-semibold">Brand</th>
@@ -413,6 +430,10 @@ const editProduct = (productId) => {
             </td>
             <td class="p-1 font-bold text-red-600" v-else>No</td>
             <td class="p-1 font-bold text-green-600" v-if="product.in_stock">
+              Yes
+            </td>
+            <td class="p-1 font-bold text-red-600" v-else>No</td>
+            <td class="p-1 font-bold text-green-600" v-if="product.premium_delivery">
               Yes
             </td>
             <td class="p-1 font-bold text-red-600" v-else>No</td>
