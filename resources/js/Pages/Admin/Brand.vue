@@ -9,7 +9,7 @@ import axios from "axios";
 const props = defineProps({
   brands: {
     type: Array,
-    default: () => [],
+    default: [],
   },
 });
 
@@ -253,7 +253,7 @@ const editProduct = (productId) => {
             </td>
             <td class="p-1">{{ product.id }}</td>
             <td class="p-1">{{ product.title }}</td>
-  
+
             <td class="p-1">{{ product.brand }}</td>
             <td class="p-1">{{ product.category }}</td>
             <td class="p-1 flex space-x-2">
