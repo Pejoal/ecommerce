@@ -389,6 +389,7 @@ const fetchPage = (url) => {
             >{{ props.products.current_page }} /
             {{ props.products.last_page }}</span
           >
+          <span class="mx-2">Total: {{ props.products.total }}</span>
           <button
             v-if="props.products.next_page_url"
             @click="fetchPage(props.products.next_page_url)"
