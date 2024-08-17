@@ -60,6 +60,8 @@ Route::group([], function () {
     Route::group(['middleware' => 'clients-only'], function () {
       Route::get('home', [HomeController::class, 'index'])->name('home');
 
+      Route::get('products/{product:slug}/show', [ProductController::class, 'show'])->name('products.show');
+
       Route::get('user/profile', [ProfileController::class, 'myProfile'])->name('user.profile.me');
 
     });
@@ -70,7 +72,6 @@ Route::group([], function () {
 
       // Products Management
       Route::post('products', [ProductController::class, 'store'])->name('admin.products.store');
-      Route::get('products/{product}/show', [ProductController::class, 'show'])->name('admin.products.show');
       Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
       Route::delete('products/mass-destroy', [ProductController::class, 'massDestroy'])->name('admin.products.massDestroy');
       Route::post('products/photo/update', [ProductController::class, 'updateProductPhotos'])->name('admin.products.photo.update');

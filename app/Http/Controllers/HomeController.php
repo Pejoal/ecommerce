@@ -49,6 +49,7 @@ class HomeController extends Controller {
     $paginatedProducts->getCollection()->transform(function ($product) {
       return [
         "id" => $product->id,
+        "slug" => $product->slug,
         "title" => $product->title,
         "quantity" => $product->quantity,
         "description" => $product->description,

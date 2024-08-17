@@ -360,7 +360,7 @@ const clearFilters = () => {
             class="bg-white shadow-md rounded-lg p-4 border border-gray-200"
           >
             <Link
-              :href="route('admin.products.show', product.id)"
+              :href="route('products.show', product.slug)"
               class="hover:font-bold"
             >
               <div class="flex flex-col items-center">
