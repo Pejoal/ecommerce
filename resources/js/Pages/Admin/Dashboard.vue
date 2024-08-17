@@ -270,7 +270,7 @@ const uploadProductPhotos = () => {
   form.post(route("admin.products.photo.update"), {
     preserveScroll: true,
     onSuccess: () => {
-      showModal.value = false;
+      storeProduct()
       imagesRef.value.value = "";
     },
   });

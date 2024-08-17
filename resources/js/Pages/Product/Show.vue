@@ -13,7 +13,7 @@ const props = defineProps({
   <Head :title="props.product.title" />
 
   <AuthLayout>
-    <p>pro details</p>
+    <p>product details</p>
     {{ product }}
   </AuthLayout>
 </template>

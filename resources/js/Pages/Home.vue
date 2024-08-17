@@ -154,7 +154,7 @@ const clearFilters = () => {
     <title>{{ trans("words.home") }}</title>
   </Head>
   <AuthLayout>
-    <main class="grid grid-cols-1 md:grid-cols-3">
+    <main class="grid grid-cols-1 md:grid-cols-4">
       <section class="bg-blue-50 p-2">
         <h2 class="text-xl font-bold underline">Filters</h2>
 
@@ -349,15 +349,13 @@ const clearFilters = () => {
 
       <!-- End of first section (Filters) -->
 
-      <section class="col-span-2 p-2">
+      <section class="col-span-3 p-2">
         <h2 class="text-xl font-bold">Products</h2>
-        <section
-          class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-        >
+        <section class="flex flex-wrap gap-4">
           <div
             v-for="(product, index) in props.products.data"
             :key="index"
-            class="bg-white shadow-md rounded-lg p-4 border border-gray-200"
+            class="flex-1 bg-white shadow-md rounded-lg p-4 border border-gray-200"
           >
             <Link
               :href="route('products.show', product.slug)"
