@@ -26,6 +26,7 @@ const props = defineProps({
 });
 
 let showModal = ref(false);
+let allImages = ref([]);
 
 const form = useForm({
   id: null,
@@ -84,6 +85,7 @@ const storeProduct = () => {
     onSuccess: () => {
       showModal.value = false;
       form.reset();
+      allImages.value = [];
     },
     onError: (errors) => console.error("Form errors:", errors),
   });
@@ -94,6 +96,7 @@ const updateProduct = () => {
     onSuccess: () => {
       showModal.value = false;
       form.reset();
+      allImages.value = [];
     },
     onError: (errors) => console.error("Form errors:", errors),
   });
@@ -114,7 +117,7 @@ const editProduct = (productId) => {
       form.currency_id = response.data.currency_id;
       form.brand_id = response.data.brand_id;
       form.category_id = response.data.category_id;
-      form.images = response.data.images;
+      allImages.value = response.data.images;
 
       showModal.value = true;
     })
@@ -124,6 +127,7 @@ const editProduct = (productId) => {
 const addProduct = () => {
   showModal.value = true;
   form.reset();
+  allImages.value = [];
 };
 
 const imagesRef = ref(null);
@@ -283,6 +287,10 @@ const deleteImage = (id) => {
       showModal.value = false;
     },
   });
+};
+
+const handleNewImages = (files) => {
+  form.images = files;
 };
 </script>
 
@@ -720,7 +728,7 @@ const deleteImage = (id) => {
                 type="file"
                 ref="imagesRef"
                 multiple
-                @input="form.images = $event.target.files"
+                @input="handleNewImages($event.target.files)"
               />
             </div>
             <button
@@ -752,7 +760,7 @@ const deleteImage = (id) => {
             <p v-if="form.recentlySuccessful" class="text-sm">Uploaded</p>
           </Transition>
 
-          <div v-for="image in form.images" :key="image.id" class="relative">
+          <div v-for="image in allImages" :key="image.id" class="relative">
             <img
               :src="image.image"
               alt="Product Image"
