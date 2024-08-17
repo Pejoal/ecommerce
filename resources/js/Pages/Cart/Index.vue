@@ -52,7 +52,7 @@ const saveForLater = (id) => {
 
   <AuthLayout>
     <main class="p-2">
-      <h1 class="text-2xl font-bold mb-4">Your Cart</h1>
+      <h1 class="text-2xl font-bold pb-2">Your Cart</h1>
       <section v-if="cartItems.length === 0" class="text-center">
         <p class="text-lg">Your cart is empty.</p>
       </section>
@@ -78,7 +78,7 @@ const saveForLater = (id) => {
           <div>
             <button
               @click="saveForLater(item.id)"
-              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              class="btn  btn-primary"
             >
               Save for later
             </button>
@@ -87,7 +87,7 @@ const saveForLater = (id) => {
           <div>
             <button
               @click="removeItem(item.id)"
-              class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+              class="btn btn-danger"
             >
               Remove
             </button>
@@ -105,7 +105,7 @@ const saveForLater = (id) => {
       </section>
 
       <!-- Saved for Later Items Section -->
-      <h1 class="text-2xl font-bold mb-4 mt-8">Saved for Later</h1>
+      <h1 class="text-2xl font-bold py-2 border-t border-black">Saved for Later</h1>
       <section v-if="savedForLaterItems.length === 0" class="text-center">
         <p class="text-lg">No items saved for later.</p>
       </section>
@@ -129,7 +129,7 @@ const saveForLater = (id) => {
           <div>
             <button
               @click="moveToCart(item.id)"
-              class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              class="btn  btn-primary"
             >
               Move to Cart
             </button>

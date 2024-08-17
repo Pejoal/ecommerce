@@ -108,7 +108,7 @@ const buyNow = () => {
           <button
             type="submit"
             form="addToCart"
-            class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            class="btn btn-primary"
             :disabled="!props.product.in_stock || form.processing"
           >
             Add to Cart
@@ -125,13 +125,13 @@ const buyNow = () => {
           <button
             type="submit"
             form="saveForLater"
-            class="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            class="btn btn-warning"
           >
             Save for Later
           </button>
           <button
             @click="buyNow"
-            class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            class="bt btn-success"
             :disabled="!props.product.in_stock"
           >
             Buy Now
