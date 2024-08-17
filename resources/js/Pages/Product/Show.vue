@@ -42,7 +42,7 @@ const buyNow = () => {
           alt="Product Image"
           class="w-full h-auto object-cover rounded-md"
         />
-        
+
         <div class="overflow-auto flex gap-2 mt-4">
           <img
             v-for="(image, index) in props.product.images?.slice(1)"
@@ -96,14 +96,25 @@ const buyNow = () => {
         </div>
 
         <!-- Add to Cart & Other Buttons -->
+        <form @submit.prevent="addToCart" id="addToCart" class="hidden"></form>
         <div class="flex flex-col gap-4 mt-6">
           <button
-            @click="addToCart"
+            type="submit"
+            form="addToCart"
             class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            :disabled="!props.product.in_stock"
+            :disabled="!props.product.in_stock || form.processing"
           >
             Add to Cart
           </button>
+          <Transition
+            enter-from-class="opacity-0"
+            leave-to-class="opacity-0"
+            class="transition ease-in-out"
+          >
+            <p v-if="form.recentlySuccessful" class="text-sm">
+              Added Successfully
+            </p>
+          </Transition>
           <button
             @click="saveForLater"
             class="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
