@@ -275,6 +275,15 @@ const uploadProductPhotos = () => {
     },
   });
 };
+
+const deleteImage = (id) => {
+  form.delete(route("admin.products.photo", id), {
+    preserveScroll: true,
+    onSuccess: () => {
+      showModal.value = false;
+    },
+  });
+};
 </script>
 
 <template>
@@ -743,14 +752,31 @@ const uploadProductPhotos = () => {
             <p v-if="form.recentlySuccessful" class="text-sm">Uploaded</p>
           </Transition>
 
-          <div class="flex flex-wrap gap-2 mb-4">
+          <div v-for="image in form.images" :key="image.id" class="relative">
             <img
-              v-for="image in form.images"
-              :key="image"
               :src="image.image"
               alt="Product Image"
               class="w-32 h-32 object-cover rounded-md border border-gray-300"
             />
+            <button
+              @click.prevent="deleteImage(image.id)"
+              class="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
           </div>
         </form>
         <form

@@ -67,16 +67,16 @@ Route::group([], function () {
     // Admin
     Route::group(['middleware' => 'admins-only', 'prefix' => 'admin'], function () {
       Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-      
+
       // Products Management
       Route::post('products', [ProductController::class, 'store'])->name('admin.products.store');
       Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
       Route::delete('products/mass-destroy', [ProductController::class, 'massDestroy'])->name('admin.products.massDestroy');
       Route::post('products/photo/update', [ProductController::class, 'updateProductPhotos'])->name('admin.products.photo.update');
+      Route::delete('products/images/{image}', [ProductController::class, 'destroyProductPhoto'])->name('admin.products.photo');
       Route::patch('products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
       Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
 
-      
       // Brands Management
       Route::get('brands', [BrandController::class, 'index'])->name('admin.brands');
       Route::post('brands', [BrandController::class, 'store'])->name('admin.brands.store');

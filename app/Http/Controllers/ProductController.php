@@ -79,4 +79,9 @@ class ProductController extends Controller {
       }
     }
   }
+
+  public function destroyProductPhoto(ProductImage $image) {
+    Storage::disk('public')->delete($image->image);
+    $image->delete();
+  }
 }
