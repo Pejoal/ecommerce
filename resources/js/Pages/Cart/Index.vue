@@ -11,6 +11,14 @@ const props = defineProps({
     type: Object,
     default: {},
   },
+  cartItemsTotalPrice: {
+    type: Number,
+    default: 0,
+  },
+  savedForLaterItemsTotalPrice: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const form = useForm({ quantity: 0 });
@@ -60,7 +68,7 @@ const saveForLater = (id) => {
         <div
           v-for="item in cartItems"
           :key="item.id"
-          class="bg-white shadow-md rounded-lg p-4 border border-gray-200 mb-4 flex items-center space-x-4"
+          class="shadow-md rounded-lg p-4 border border-gray-200 mb-4 flex items-center space-x-4"
         >
           <img
             :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
@@ -76,19 +84,13 @@ const saveForLater = (id) => {
           </div>
 
           <div>
-            <button
-              @click="saveForLater(item.id)"
-              class="btn  btn-primary"
-            >
+            <button @click="saveForLater(item.id)" class="btn btn-primary">
               Save for later
             </button>
           </div>
 
           <div>
-            <button
-              @click="removeItem(item.id)"
-              class="btn btn-danger"
-            >
+            <button @click="removeItem(item.id)" class="btn btn-danger">
               Remove
             </button>
           </div>
@@ -102,10 +104,17 @@ const saveForLater = (id) => {
             />
           </div>
         </div>
+
+        <h3 class="flex items-center justify-center text-lg mb-2">
+          Total Price:&nbsp;
+          <strong> ${{ cartItemsTotalPrice }} </strong>
+        </h3>
       </section>
 
       <!-- Saved for Later Items Section -->
-      <h1 class="text-2xl font-bold py-2 border-t border-black">Saved for Later</h1>
+      <h1 class="text-2xl font-bold py-2 border-t border-black">
+        Saved for Later
+      </h1>
       <section v-if="savedForLaterItems.length === 0" class="text-center">
         <p class="text-lg">No items saved for later.</p>
       </section>
@@ -127,14 +136,16 @@ const saveForLater = (id) => {
             </p>
           </div>
           <div>
-            <button
-              @click="moveToCart(item.id)"
-              class="btn  btn-primary"
-            >
+            <button @click="moveToCart(item.id)" class="btn btn-primary">
               Move to Cart
             </button>
           </div>
         </div>
+
+        <h3 class="flex items-center justify-center text-lg mb-2">
+          Total Price:&nbsp;
+          <strong> ${{ savedForLaterItemsTotalPrice }} </strong>
+        </h3>
       </section>
     </main>
   </AuthLayout>

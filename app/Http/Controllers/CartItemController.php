@@ -18,6 +18,10 @@ class CartItemController extends Controller {
       ])
       ->get();
 
+    $cartItemsTotalPrice = $cartItems->sum(function ($cartItem) {
+      return $cartItem->product->price * $cartItem->quantity;
+    });
+
     $savedForLaterItems = auth()->user()->cartItems()
       ->where('status', 'saved_for_later')
       ->with([
@@ -27,9 +31,16 @@ class CartItemController extends Controller {
       ])
       ->get();
 
+      
+    $savedForLaterItemsTotalPrice = $savedForLaterItems->sum(function ($cartItem) {
+      return $cartItem->product->price * $cartItem->quantity;
+    });
+
     return Inertia::render('Cart/Index', [
       'cartItems' => $cartItems,
       'savedForLaterItems' => $savedForLaterItems,
+      'cartItemsTotalPrice' => $cartItemsTotalPrice,
+      'savedForLaterItemsTotalPrice' => $savedForLaterItemsTotalPrice,
     ]);
   }
 
