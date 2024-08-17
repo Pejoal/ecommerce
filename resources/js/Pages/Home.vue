@@ -30,7 +30,7 @@ const form = useForm({
   selectedBrands: [],
   selectedCategories: [],
   premium_delivery: false,
-  in_stock: false,
+  in_stock: true,
   minPrice: 0,
   maxPrice: 0,
   perPage: 5,
@@ -137,7 +137,7 @@ const clearFilters = () => {
   form.selectedBrands = [];
   form.selectedCategories = [];
   form.premium_delivery = false;
-  form.in_stock = false;
+  form.in_stock = true;
 
   selectedBrands.value = [];
   selectedCategories.value = [];

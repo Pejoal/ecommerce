@@ -39,7 +39,7 @@ class HomeController extends Controller {
       $query->where('premium_delivery', true);
     }
 
-    if ($request->has('in_stock') && $request->in_stock === "true") {
+    if (!$request->has('in_stock') || ($request->has('in_stock') && $request->in_stock === "true")) { // by default checked
       $query->where('in_stock', true);
     }
 
