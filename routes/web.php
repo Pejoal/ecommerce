@@ -70,6 +70,7 @@ Route::group([], function () {
 
       // Products Management
       Route::post('products', [ProductController::class, 'store'])->name('admin.products.store');
+      Route::get('products/{product}/show', [ProductController::class, 'show'])->name('admin.products.show');
       Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
       Route::delete('products/mass-destroy', [ProductController::class, 'massDestroy'])->name('admin.products.massDestroy');
       Route::post('products/photo/update', [ProductController::class, 'updateProductPhotos'])->name('admin.products.photo.update');

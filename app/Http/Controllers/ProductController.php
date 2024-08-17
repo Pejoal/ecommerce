@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class ProductController extends Controller {
 
@@ -24,6 +25,12 @@ class ProductController extends Controller {
     ]);
 
     auth()->user()->products()->create($validated);
+  }
+
+  public function show(Product $product) {
+    return Inertia::render('Product/Show', [
+      "product" => $product,
+    ]);
   }
 
   public function edit(Product $product) {

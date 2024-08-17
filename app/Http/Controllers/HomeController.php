@@ -10,7 +10,8 @@ use Inertia\Inertia;
 
 class HomeController extends Controller {
   public function index(Request $request) {
-    $query = Product::with('brand', 'category', 'currency');
+    $query = Product::with('brand', 'category', 'currency', 'images');
+
     if ($request->has('search') && !empty($request->search)) {
       $search = $request->search;
       $query->where('title', 'like', "%{$search}%");
@@ -44,6 +45,7 @@ class HomeController extends Controller {
 
     $perPage = $request->input('perPage', 5); // Default to 5 items per page if not provided
     $paginatedProducts = $query->latest('id')->paginate($perPage);
+
     $paginatedProducts->getCollection()->transform(function ($product) {
       return [
         "id" => $product->id,
@@ -57,6 +59,12 @@ class HomeController extends Controller {
         "currency" => $product->currency->symbol ?? null,
         "brand" => $product->brand->name ?? null,
         "category" => $product->category->name ?? null,
+        "images" => $product->images->map(function ($image) {
+          return [
+            'id' => $image->id,
+            'image' => $image->image, // URL path of the image
+          ];
+        }),
       ];
     });
 
@@ -66,5 +74,4 @@ class HomeController extends Controller {
       "categories" => Category::all(),
     ]);
   }
-
 }

@@ -1,6 +1,6 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import { defineProps, watch, computed } from "vue";
 import { ref } from "vue";
 
@@ -359,53 +359,73 @@ const clearFilters = () => {
             :key="index"
             class="bg-white shadow-md rounded-lg p-4 border border-gray-200"
           >
-            <h3 class="text-lg font-semibold mb-2">{{ product.title }}</h3>
-            <p class="text-gray-600 mb-2">{{ product.description }}</p>
-            <div class="mt-2 flex items-center">
-              <span class="font-medium text-gray-800">Price:</span>
-              <span class="ml-1 font-bold text-green-600">{{
-                product.currency + product.price
-              }}</span>
-            </div>
-            <div class="mt-1 flex items-center">
-              <span class="font-medium text-gray-800">Published:</span>
-              <span
-                class="ml-1 font-bold text-green-600"
-                v-if="product.published"
-                >Yes</span
-              >
-              <span class="ml-1 font-bold text-red-600" v-else>No</span>
-            </div>
-            <div class="mt-1 flex items-center">
-              <span class="font-medium text-gray-800">In Stock:</span>
-              <span
-                class="ml-1 font-bold text-green-600"
-                v-if="product.in_stock"
-                >Yes</span
-              >
-              <span class="ml-1 font-bold text-red-600" v-else>No</span>
-            </div>
-            <div class="mt-1 flex items-center">
-              <span class="font-medium text-gray-800">Premium Delivery:</span>
-              <span
-                class="ml-1 font-bold text-green-600"
-                v-if="product.premium_delivery"
-                >Yes</span
-              >
-              <span class="ml-1 font-bold text-red-600" v-else>No</span>
-            </div>
-            <div class="mt-1 flex items-center">
-              <span class="font-medium text-gray-800">Quantity:</span>
-              <span class="ml-1 font-bold">{{ product.quantity }}</span>
-            </div>
-            <div class="mt-1 flex items-center">
-              <span class="font-medium text-gray-800">Brand:</span>
-              <span class="ml-1 font-bold">{{ product.brand }}</span>
-            </div>
-            <div class="mt-1 flex items-center">
-              <span class="font-medium text-gray-800">Category:</span>
-              <span class="ml-1 font-bold">{{ product.category }}</span>
-            </div>
+            <Link
+              :href="route('admin.products.show', product.id)"
+              class="hover:font-bold"
+            >
+              <div class="flex flex-col items-center">
+                <!-- Display Product Images -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <img
+                    v-if="product.images.length"
+                    :src="product.images[0].image"
+                    alt="Product Image"
+                    class="w-32 h-32 object-cover rounded-md border border-gray-300"
+                  />
+                  <!-- Add more images if necessary -->
+                </div>
+
+                <h3 class="text-lg font-semibold mb-2">{{ product.title }}</h3>
+                <p class="text-gray-600 mb-2">{{ product.description }}</p>
+                <div class="mt-2 flex items-center">
+                  <span class="font-medium text-gray-800">Price:</span>
+                  <span class="ml-1 font-bold text-green-600">{{
+                    product.currency + product.price
+                  }}</span>
+                </div>
+                <div class="mt-1 flex items-center">
+                  <span class="font-medium text-gray-800">Published:</span>
+                  <span
+                    class="ml-1 font-bold text-green-600"
+                    v-if="product.published"
+                    >Yes</span
+                  >
+                  <span class="ml-1 font-bold text-red-600" v-else>No</span>
+                </div>
+                <div class="mt-1 flex items-center">
+                  <span class="font-medium text-gray-800">In Stock:</span>
+                  <span
+                    class="ml-1 font-bold text-green-600"
+                    v-if="product.in_stock"
+                    >Yes</span
+                  >
+                  <span class="ml-1 font-bold text-red-600" v-else>No</span>
+                </div>
+                <div class="mt-1 flex items-center">
+                  <span class="font-medium text-gray-800"
+                    >Premium Delivery:</span
+                  >
+                  <span
+                    class="ml-1 font-bold text-green-600"
+                    v-if="product.premium_delivery"
+                    >Yes</span
+                  >
+                  <span class="ml-1 font-bold text-red-600" v-else>No</span>
+                </div>
+                <div class="mt-1 flex items-center">
+                  <span class="font-medium text-gray-800">Quantity:</span>
+                  <span class="ml-1 font-bold">{{ product.quantity }}</span>
+                </div>
+                <div class="mt-1 flex items-center">
+                  <span class="font-medium text-gray-800">Brand:</span>
+                  <span class="ml-1 font-bold">{{ product.brand }}</span>
+                </div>
+                <div class="mt-1 flex items-center">
+                  <span class="font-medium text-gray-800">Category:</span>
+                  <span class="ml-1 font-bold">{{ product.category }}</span>
+                </div>
+              </div>
+            </Link>
           </div>
         </section>
 
