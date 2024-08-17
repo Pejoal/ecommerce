@@ -1,28 +1,31 @@
 <script setup>
+import { Head, useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { ref } from "vue";
-import { usePage, useForm, Head } from "@inertiajs/vue3";
 
-const { props } = usePage();
-const cartItems = ref(props.cartItems);
+const props = defineProps({
+  cartItems: {
+    type: Object,
+    default: {},
+  },
+});
 
-const removeItem = async (id) => {
+const form = useForm({ quantity: 0 });
+
+const removeItem = (id) => {
   if (confirm("Are you sure you want to remove this item?")) {
-    try {
-      await axios.post(`/cart/remove/${id}`);
-      cartItems.value = cartItems.value.filter((item) => item.id !== id);
-    } catch (error) {
-      console.error("Error removing item:", error);
-    }
+    form.delete(route("cart.destroy", id), {
+      preserveState: true,
+      preserveScroll: true,
+    });
   }
 };
 
-const updateQuantity = async (id, quantity) => {
-  try {
-    await axios.post(`/cart/update/${id}`, { quantity });
-  } catch (error) {
-    console.error("Error updating quantity:", error);
-  }
+const updateQuantity = (id, quantity) => {
+  form.quantity = quantity;
+  form.patch(route("cart.update", id), {
+    preserveState: true,
+    preserveScroll: true,
+  });
 };
 </script>
 

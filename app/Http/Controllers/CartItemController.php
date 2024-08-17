@@ -7,6 +7,21 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CartItemController extends Controller {
+
+  public function index() {
+    $cartItems = auth()->user()->cartItems()
+      ->with([
+        'product' => function ($query) {
+          $query->with('brand', 'category', 'currency', 'images');
+        },
+      ])
+      ->get();
+
+    return Inertia::render('Cart/Index', [
+      'cartItems' => $cartItems,
+    ]);
+  }
+
   public function add(Request $request) {
     $request->validate([
       'product_id' => 'required|exists:products,id',
@@ -21,19 +36,6 @@ class CartItemController extends Controller {
         'quantity' => \DB::raw('quantity + ' . $request->quantity),
       ]
     );
-  }
-  public function index() {
-    $cartItems = auth()->user()->cartItems()
-      ->with([
-        'product' => function ($query) {
-          $query->with('brand', 'category', 'currency', 'images');
-        },
-      ])
-      ->get();
-
-    return Inertia::render('Cart/Index', [
-      'cartItems' => $cartItems,
-    ]);
   }
 
   public function update(Request $request, CartItem $cartItem) {
