@@ -38,6 +38,13 @@ const moveToCart = (id) => {
     preserveScroll: true,
   });
 };
+
+const saveForLater = (id) => {
+  form.post(route("cart.saveForLater", id), {
+    preserveState: true,
+    preserveScroll: true,
+  });
+};
 </script>
 
 <template>
@@ -66,6 +73,16 @@ const moveToCart = (id) => {
             Price: {{ item.product.currency?.symbol + item.product.price }}
           </p>
         </div>
+
+        <div>
+          <button
+            @click="saveForLater(item.id)"
+            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          >
+            Save for later
+          </button>
+        </div>
+
         <div>
           <button
             @click="removeItem(item.id)"

@@ -56,6 +56,11 @@ class CartItemController extends Controller {
     $cartItem->save();
   }
 
+  public function saveForLater(CartItem $cartItem) {
+    $cartItem->status = "saved_for_later";
+    $cartItem->save();
+  }
+
   public function update(Request $request, CartItem $cartItem) {
     $request->validate([
       'quantity' => 'required|integer|min:1',

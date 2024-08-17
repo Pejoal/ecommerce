@@ -66,6 +66,7 @@ Route::group([], function () {
       Route::get('/cart', [CartItemController::class, 'index'])->name('cart.index');
       Route::post('/cart/add', [CartItemController::class, 'add'])->name('cart.add');
       Route::post('/cart/{cartItem}/moveToCart', [CartItemController::class, 'moveToCart'])->name('cart.moveToCart');
+      Route::post('/cart/{cartItem}/saveForLater', [CartItemController::class, 'saveForLater'])->name('cart.saveForLater');
       Route::patch('/cart/{cartItem}', [CartItemController::class, 'update'])->name('cart.update');
       Route::delete('/cart/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.destroy');
 
