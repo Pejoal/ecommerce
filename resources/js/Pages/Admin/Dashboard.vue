@@ -273,7 +273,7 @@ const clearFilters = () => {
         Toggle Filters
       </button>
 
-      <transition name="fade">
+      <transition name="slide-down">
         <section v-if="filtersVisible" class="p-2 bg-slate-200 rounded-lg">
           <!-- Search Filter -->
           <div class="mb-4">
@@ -805,17 +805,20 @@ const clearFilters = () => {
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: max-height 0.3s ease-in-out;
 }
 
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
+.slide-down-enter-from,
+.slide-down-leave-to {
+  max-height: 0;
+  overflow: hidden;
 }
 
-.fade-enter-to {
-  opacity: 1;
+.slide-down-enter-to,
+.slide-down-leave-from {
+  max-height: 50rem;
+  overflow: auto;
 }
 </style>
