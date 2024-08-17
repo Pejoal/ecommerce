@@ -39,7 +39,6 @@ const form = useForm({
   currency_id: 0,
   brand_id: 0,
   category_id: 0,
-  images: [],
 });
 
 const massForm = useForm({
@@ -114,7 +113,6 @@ const editProduct = (productId) => {
       form.currency_id = response.data.currency_id;
       form.brand_id = response.data.brand_id;
       form.category_id = response.data.category_id;
-      form.images = response.data.images;
 
       showModal.value = true;
     })
@@ -126,6 +124,7 @@ const addProduct = () => {
   form.reset();
 };
 
+const imagesRef = ref(null);
 const filtersVisible = ref(false);
 
 const toggleFilters = () => {
@@ -270,7 +269,7 @@ const uploadProductPhotos = () => {
     preserveScroll: true,
     onSuccess: () => {
       showModal.value = false;
-      form.reset('images');
+      imagesRef.value.value = '';
     },
   });
 };
@@ -708,6 +707,7 @@ const uploadProductPhotos = () => {
               <input
                 id="images"
                 type="file"
+                ref="imagesRef"
                 multiple
                 @input="form.images = $event.target.files"
               />
