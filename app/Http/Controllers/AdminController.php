@@ -35,8 +35,12 @@ class AdminController extends Controller {
       $query->where('price', '<=', $maxPrice);
     }
 
-    if ($request->has('isPremiumDeliveryChecked') && $request->isPremiumDeliveryChecked === "true") {
+    if ($request->has('premium_delivery') && $request->premium_delivery === "true") {
       $query->where('premium_delivery', true);
+    }
+
+    if ($request->has('in_stock') && $request->in_stock === "true") {
+      $query->where('in_stock', true);
     }
 
     $perPage = $request->input('perPage', 5); // Default to 5 items per page if not provided

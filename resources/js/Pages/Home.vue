@@ -25,12 +25,12 @@ const isBrandsDropdownOpen = ref(false);
 const isCategoriesDropdownOpen = ref(false);
 const selectedBrands = ref([]);
 const selectedCategories = ref([]);
-const isPremiumDeliveryChecked = ref(false);
 
 const form = useForm({
   selectedBrands: [],
   selectedCategories: [],
-  isPremiumDeliveryChecked: false,
+  premium_delivery: false,
+  in_stock: false,
   minPrice: 0,
   maxPrice: 0,
   perPage: 5,
@@ -42,7 +42,6 @@ const applyFilters = () => {
   form.selectedCategories = selectedCategories.value.map(
     (category) => category.id
   );
-  form.isPremiumDeliveryChecked = isPremiumDeliveryChecked.value;
 
   form.get(route("home"), {
     preserveState: true, // To preserve the state when navigating
@@ -50,10 +49,7 @@ const applyFilters = () => {
   });
 };
 
-watch(
-  [selectedBrands, selectedCategories, isPremiumDeliveryChecked],
-  applyFilters
-);
+watch([selectedBrands, selectedCategories], applyFilters);
 
 const toggleBrandSelection = (brand) => {
   if (selectedBrands.value.some((selected) => selected.id === brand.id)) {
@@ -140,11 +136,11 @@ const clearFilters = () => {
   form.search = "";
   form.selectedBrands = [];
   form.selectedCategories = [];
-  form.isPremiumDeliveryChecked = false;
+  form.premium_delivery = false;
+  form.in_stock = false;
 
   selectedBrands.value = [];
   selectedCategories.value = [];
-  isPremiumDeliveryChecked.value = false;
 
   form.get(route("home"), {
     preserveState: true,
@@ -304,12 +300,24 @@ const clearFilters = () => {
           <input
             id="premiumDelivery"
             type="checkbox"
-            v-model="isPremiumDeliveryChecked"
+            v-model="form.premium_delivery"
+            @change="applyFilters"
             class="h-5 w-5 text-blue-600 transition duration-150 ease-in-out rounded-full"
           />
           <label for="premiumDelivery" class="text-gray-700">
             Premium Delivery
           </label>
+        </div>
+
+        <div class="flex items-center space-x-2 pt-2 border-black">
+          <input
+            id="in_stock"
+            type="checkbox"
+            v-model="form.in_stock"
+            @change="applyFilters"
+            class="h-5 w-5 text-blue-600 transition duration-150 ease-in-out rounded-full"
+          />
+          <label for="in_stock" class="text-gray-700"> In Stock </label>
         </div>
 
         <div
