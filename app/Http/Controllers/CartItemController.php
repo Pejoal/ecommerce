@@ -10,6 +10,16 @@ class CartItemController extends Controller {
 
   public function index() {
     $cartItems = auth()->user()->cartItems()
+      ->where('status', 'in_cart')
+      ->with([
+        'product' => function ($query) {
+          $query->with('brand', 'category', 'currency', 'images');
+        },
+      ])
+      ->get();
+
+    $savedForLaterItems = auth()->user()->cartItems()
+      ->where('status', 'saved_for_later')
       ->with([
         'product' => function ($query) {
           $query->with('brand', 'category', 'currency', 'images');
@@ -19,6 +29,7 @@ class CartItemController extends Controller {
 
     return Inertia::render('Cart/Index', [
       'cartItems' => $cartItems,
+      'savedForLaterItems' => $savedForLaterItems,
     ]);
   }
 
@@ -40,12 +51,8 @@ class CartItemController extends Controller {
     );
   }
 
-  public function moveToCart(Request $request, CartItem $cartItem) {
-    $request->validate([
-      'status' => 'required|in:in_cart,saved_for_later',
-    ]);
-
-    $cartItem->status = $request->status;
+  public function moveToCart(CartItem $cartItem) {
+    $cartItem->status = "in_cart";
     $cartItem->save();
   }
 
