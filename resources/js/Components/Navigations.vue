@@ -78,6 +78,16 @@ const props = defineProps({
       >
         {{ trans("words.home") }}
       </Link>
+      <Link
+        :href="route('cart.index')"
+        class="hover:font-bold"
+        :class="{
+          'text-zinc-700 hover:text-zinc-800': props.dark,
+          'underline  font-bold': route().current('cart.index'),
+        }"
+      >
+        Cart
+      </Link>
     </template>
     <Link
       v-if="$page.props.auth.user"

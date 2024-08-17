@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomeController;
@@ -61,6 +62,11 @@ Route::group([], function () {
       Route::get('home', [HomeController::class, 'index'])->name('home');
 
       Route::get('products/{product:slug}/show', [ProductController::class, 'show'])->name('products.show');
+
+      Route::post('/cart/add', [CartItemController::class, 'add'])->name('cart.add');
+      Route::get('/cart', [CartItemController::class, 'index'])->name('cart.index');
+      Route::patch('/cart/{cartItem}', [CartItemController::class, 'update'])->name('cart.update');
+      Route::delete('/cart/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.destroy');
 
       Route::get('user/profile', [ProfileController::class, 'myProfile'])->name('user.profile.me');
 
