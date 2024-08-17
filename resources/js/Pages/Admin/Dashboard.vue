@@ -434,7 +434,7 @@ const clearFilters = () => {
       </transition>
     </section>
 
-    <div class="my-2 flex items-center justify-center space-x-2">
+    <div class="p-2 flex items-center gap-2">
       <button class="btn btn-primary" @click="addProduct">Add Product</button>
       <button
         @click="massDeleteProducts"
@@ -444,9 +444,7 @@ const clearFilters = () => {
         Delete Selected
       </button>
 
-      <div class="flex items-center space-x-2 ml-auto">
-        <label for="perPage" class="text-gray-700 font-bold"> Per Page </label>
-
+      <div class="flex items-center ml-auto">
         <select
           v-model="pageForm.perPage"
           id="perPage"
@@ -458,6 +456,8 @@ const clearFilters = () => {
           <option :value="20">20</option>
           <option :value="50">50</option>
         </select>
+
+        <label for="perPage" class="text-gray-700 font-bold"> Per Page </label>
       </div>
     </div>
 

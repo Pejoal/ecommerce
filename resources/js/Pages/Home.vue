@@ -315,10 +315,6 @@ const clearFilters = () => {
         <div
           class="flex items-center space-x-2 mt-2 pt-2 border-t border-black"
         >
-          <label for="perPage" class="text-gray-700 font-bold">
-            Per Page
-          </label>
-
           <select
             v-model="form.perPage"
             id="perPage"
@@ -330,6 +326,10 @@ const clearFilters = () => {
             <option :value="20">20</option>
             <option :value="50">50</option>
           </select>
+
+          <label for="perPage" class="text-gray-700 font-bold">
+            Per Page
+          </label>
         </div>
 
         <div class="flex items-center space-x-2 py-2">
