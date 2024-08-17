@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller {
@@ -54,5 +55,27 @@ class ProductController extends Controller {
   public function massDestroy(Request $request) {
     $ids = $request->input('selectedProducts');
     Product::whereIn('id', $ids)->delete();
+  }
+
+  public function updateProductPhotos(Request $request) {
+    $validatedData = $request->validate([
+      'images.*' => 'required|image|mimes:jpg,jpeg,png,bmp|max:2048',
+    ]);
+
+    // Assuming you have a product ID passed as a hidden input or in the route
+    $productId = $request->id;
+
+
+    if ($request->hasFile('images')) {
+      foreach ($request->file('images') as $image) {
+        $path = $image->store('product_images', 'public'); // Store in 'public/product_images' directory
+
+        // Save the image record in the database
+        ProductImage::create([
+          'product_id' => $productId,
+          'image' => $path,
+        ]);
+      }
+    }
   }
 }

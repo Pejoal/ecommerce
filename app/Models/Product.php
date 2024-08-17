@@ -22,7 +22,7 @@ class Product extends Model {
     return $this->belongsTo(User::class, 'created_by');
   }
 
-  public function product_images() {
+  public function images() {
     return $this->hasMany(ProductImage::class);
   }
 
@@ -40,4 +40,5 @@ class Product extends Model {
   public function currency() {
     return $this->belongsTo(Currency::class);
   }
+
 }

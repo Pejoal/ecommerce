@@ -72,8 +72,10 @@ Route::group([], function () {
       Route::post('products', [ProductController::class, 'store'])->name('admin.products.store');
       Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
       Route::delete('products/mass-destroy', [ProductController::class, 'massDestroy'])->name('admin.products.massDestroy');
+      Route::post('products/photo/update', [ProductController::class, 'updateProductPhotos'])->name('admin.products.photo.update');
       Route::patch('products/{product}', [ProductController::class, 'update'])->name('admin.products.update');
       Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+
       
       // Brands Management
       Route::get('brands', [BrandController::class, 'index'])->name('admin.brands');

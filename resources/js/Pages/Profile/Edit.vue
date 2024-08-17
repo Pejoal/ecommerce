@@ -1,6 +1,5 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import Switcher from "@/Components/Switcher.vue";
 import DeleteUserForm from "./Partials/DeleteUserForm.vue";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm.vue";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm.vue";
@@ -15,15 +14,11 @@ const form = useForm({
   profile_photo: null,
 });
 
-function uploadProfilePhoto() {
+const uploadProfilePhoto = () => {
   form.post(route("profile.photo.update"), {
     preserveScroll: true,
   });
 }
-
-const enableNotifications = (event) => {
-  console.log(event.target.checked);
-};
 </script>
 
 <template>

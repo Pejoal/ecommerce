@@ -39,6 +39,7 @@ const form = useForm({
   currency_id: 0,
   brand_id: 0,
   category_id: 0,
+  images: [],
 });
 
 const massForm = useForm({
@@ -113,6 +114,7 @@ const editProduct = (productId) => {
       form.currency_id = response.data.currency_id;
       form.brand_id = response.data.brand_id;
       form.category_id = response.data.category_id;
+      form.images = response.data.images;
 
       showModal.value = true;
     })
@@ -260,6 +262,16 @@ const clearFilters = () => {
   pageForm.get(route("admin.dashboard"), {
     preserveState: true,
     preserveScroll: true,
+  });
+};
+
+const uploadProductPhotos = () => {
+  form.post(route("admin.products.photo.update"), {
+    preserveScroll: true,
+    onSuccess: () => {
+      showModal.value = false;
+      form.reset('images');
+    },
   });
 };
 </script>
@@ -684,6 +696,50 @@ const clearFilters = () => {
               </button>
             </div>
           </section>
+        </form>
+
+        <form
+          class="p-2 sm:p-4 shadow sm:rounded-lg"
+          @submit.prevent="uploadProductPhotos"
+        >
+          <section class="flex justify-between flex-col sm:flex-row">
+            <div class="my-2">
+              <label class="pr-2" for="images"> Images </label>
+              <input
+                id="images"
+                type="file"
+                multiple
+                @input="form.images = $event.target.files"
+              />
+            </div>
+            <button
+              class="btn btn-success"
+              type="submit"
+              :disabled="form.processing"
+            >
+              Upload
+            </button>
+          </section>
+          <p
+            v-if="form.errors.images"
+            class="text-sm bg-red-600 rounded-md my-1 px-2 py-1"
+          >
+            {{ form.errors.images }}
+          </p>
+          <progress
+            v-if="form.progress"
+            :value="form.progress.percentage"
+            max="100"
+          >
+            {{ form.progress.percentage }}%
+          </progress>
+          <Transition
+            enter-from-class="opacity-0"
+            leave-to-class="opacity-0"
+            class="transition ease-in-out"
+          >
+            <p v-if="form.recentlySuccessful" class="text-sm">Uploaded</p>
+          </Transition>
         </form>
         <form
           @submit.prevent="updateProduct"
