@@ -42,7 +42,7 @@ const updateQuantity = async (id, quantity) => {
           class="bg-white shadow-md rounded-lg p-4 border border-gray-200 mb-4 flex items-center space-x-4"
         >
           <img
-            :src="item.product.image_url"
+            :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
             :alt="item.product.title"
             class="w-24 h-24 object-cover rounded-md border border-gray-300"
           />
@@ -50,7 +50,7 @@ const updateQuantity = async (id, quantity) => {
             <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
             <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
             <p class="text-gray-600">
-              Price: {{ item.product.price | currency }}
+              Price: {{ item.product.currency?.symbol + item.product.price }}
             </p>
           </div>
           <div>

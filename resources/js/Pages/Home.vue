@@ -368,7 +368,7 @@ const clearFilters = () => {
                     v-if="product.images.length"
                     :src="product.images[0].image"
                     alt="Product Image"
-                    class="w-32 h-32 object-cover rounded-md border border-gray-300"
+                    class="w-40 h-40 object-cover rounded-md border border-gray-300"
                   />
                   <!-- Add more images if necessary -->
                 </div>

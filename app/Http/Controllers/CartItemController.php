@@ -22,9 +22,14 @@ class CartItemController extends Controller {
       ]
     );
   }
-
   public function index() {
-    $cartItems = auth()->user()->cartItems()->with('product')->get();
+    $cartItems = auth()->user()->cartItems()
+      ->with([
+        'product' => function ($query) {
+          $query->with('brand', 'category', 'currency', 'images');
+        },
+      ])
+      ->get();
 
     return Inertia::render('Cart/Index', [
       'cartItems' => $cartItems,
