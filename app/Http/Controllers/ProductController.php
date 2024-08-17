@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller {
 
@@ -26,6 +27,7 @@ class ProductController extends Controller {
   }
 
   public function edit(Product $product) {
+    $product->load('images');
     return $product;
   }
 
@@ -72,7 +74,7 @@ class ProductController extends Controller {
         // Save the image record in the database
         ProductImage::create([
           'product_id' => $productId,
-          'image' => $path,
+          'image' => Storage::url($path),
         ]);
       }
     }

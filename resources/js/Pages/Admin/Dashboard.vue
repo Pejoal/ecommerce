@@ -39,6 +39,7 @@ const form = useForm({
   currency_id: 0,
   brand_id: 0,
   category_id: 0,
+  images: [],
 });
 
 const massForm = useForm({
@@ -113,6 +114,7 @@ const editProduct = (productId) => {
       form.currency_id = response.data.currency_id;
       form.brand_id = response.data.brand_id;
       form.category_id = response.data.category_id;
+      form.images = response.data.images;
 
       showModal.value = true;
     })
@@ -269,7 +271,7 @@ const uploadProductPhotos = () => {
     preserveScroll: true,
     onSuccess: () => {
       showModal.value = false;
-      imagesRef.value.value = '';
+      imagesRef.value.value = "";
     },
   });
 };
@@ -740,6 +742,16 @@ const uploadProductPhotos = () => {
           >
             <p v-if="form.recentlySuccessful" class="text-sm">Uploaded</p>
           </Transition>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            <img
+              v-for="image in form.images"
+              :key="image"
+              :src="image.image"
+              alt="Product Image"
+              class="w-32 h-32 object-cover rounded-md border border-gray-300"
+            />
+          </div>
         </form>
         <form
           @submit.prevent="updateProduct"

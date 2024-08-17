@@ -11,7 +11,7 @@ use Inertia\Inertia;
 
 class AdminController extends Controller {
   public function index(Request $request) {
-    $query = Product::with('brand', 'category', 'currency');
+    $query = Product::with('brand', 'category', 'currency', 'images');
     if ($request->has('search') && !empty($request->search)) {
       $search = $request->search;
       $query->where('title', 'like', "%{$search}%");
@@ -54,6 +54,9 @@ class AdminController extends Controller {
         "currency" => $product->currency->symbol ?? null,
         "brand" => $product->brand->name ?? null,
         "category" => $product->category->name ?? null,
+        "images" => $product->images->map(function ($image) {
+          return asset('storage/' . $image->image);
+        }),
       ];
     });
 
