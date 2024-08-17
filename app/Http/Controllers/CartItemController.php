@@ -26,16 +26,27 @@ class CartItemController extends Controller {
     $request->validate([
       'product_id' => 'required|exists:products,id',
       'quantity' => 'required|integer|min:1',
+      'status' => 'required|in:in_cart,saved_for_later',
     ]);
 
     auth()->user()->cartItems()->updateOrCreate(
       [
         'product_id' => $request->product_id,
+        'status' => $request->status,
       ],
       [
         'quantity' => \DB::raw('quantity + ' . $request->quantity),
       ]
     );
+  }
+
+  public function moveToCart(Request $request, CartItem $cartItem) {
+    $request->validate([
+      'status' => 'required|in:in_cart,saved_for_later',
+    ]);
+
+    $cartItem->status = $request->status;
+    $cartItem->save();
   }
 
   public function update(Request $request, CartItem $cartItem) {

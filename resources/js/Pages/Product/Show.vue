@@ -12,9 +12,11 @@ const props = defineProps({
 const form = useForm({
   product_id: props.product.id,
   quantity: 1,
+  status: "in_cart",
 });
 
 const addToCart = () => {
+  form.status = "in_cart";
   form.post(route("cart.add"), {
     preserveState: true,
     preserveScroll: true,
@@ -22,7 +24,11 @@ const addToCart = () => {
 };
 
 const saveForLater = () => {
-  // Implement the logic to save the product for later
+  form.status = "saved_for_later";
+  form.post(route("cart.add"), {
+    preserveState: true,
+    preserveScroll: true,
+  });
 };
 
 const buyNow = () => {
@@ -97,6 +103,7 @@ const buyNow = () => {
 
         <!-- Add to Cart & Other Buttons -->
         <form @submit.prevent="addToCart" id="addToCart" class="hidden"></form>
+        <form @submit.prevent="saveForLater" id="saveForLater" class="hidden"></form>
         <div class="flex flex-col gap-4 mt-6">
           <button
             type="submit"
@@ -116,7 +123,8 @@ const buyNow = () => {
             </p>
           </Transition>
           <button
-            @click="saveForLater"
+            type="submit"
+            form="saveForLater"
             class="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Save for Later

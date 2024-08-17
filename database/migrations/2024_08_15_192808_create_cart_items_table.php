@@ -15,6 +15,7 @@ return new class extends Migration {
       $table->foreignIdFor(User::class, 'user_id');
       $table->foreignId('product_id')->references('id')->on('products');
       $table->integer('quantity');
+      $table->enum('status', ['in_cart', 'saved_for_later'])->default('in_cart');
       $table->timestamps();
     });
   }
