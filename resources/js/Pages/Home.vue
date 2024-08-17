@@ -355,7 +355,7 @@ const clearFilters = () => {
           <div
             v-for="(product, index) in props.products.data"
             :key="index"
-            class="flex-1 bg-white shadow-md rounded-lg p-4 border border-gray-200"
+            class="flex-1 min-w-[240px] bg-white shadow-md rounded-lg p-4 border border-gray-200"
           >
             <Link
               :href="route('products.show', product.slug)"
