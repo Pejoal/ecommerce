@@ -1,7 +1,6 @@
 <script setup>
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { Head, useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
   product: {
@@ -10,9 +9,16 @@ const props = defineProps({
   },
 });
 
-// Cart operations
+const form = useForm({
+  product_id: props.product.id,
+  quantity: 0,
+});
+
 const addToCart = () => {
-  // Implement the logic to add the product to the cart
+  form.post(route("cart.add"), {
+    preserveState: true,
+    preserveScroll: true,
+  });
 };
 
 const saveForLater = () => {
@@ -22,8 +28,6 @@ const saveForLater = () => {
 const buyNow = () => {
   // Implement the logic to proceed with buying the product immediately
 };
-
-const quantity = ref(1);
 </script>
 
 <template>
@@ -81,13 +85,17 @@ const quantity = ref(1);
               >
               <select
                 id="quantity"
-                v-model="quantity"
+                v-model="form.quantity"
                 class="mt-1 block w-20 pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
               >
                 <option v-for="n in props.product.quantity" :key="n" :value="n">
                   {{ n }}
                 </option>
               </select>
+
+              <p v-if="form.errors.quantity" class="text-red-600 text-sm">
+                {{ form.errors.quantity }}
+              </p>
             </div>
 
             <!-- Add to Cart & Other Buttons -->

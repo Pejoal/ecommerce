@@ -13,7 +13,7 @@ class CartItemController extends Controller {
       'quantity' => 'required|integer|min:1',
     ]);
 
-    $cartItem = auth()->user()->cartItems()->updateOrCreate(
+    auth()->user()->cartItems()->updateOrCreate(
       [
         'product_id' => $request->product_id,
       ],
@@ -21,7 +21,6 @@ class CartItemController extends Controller {
         'quantity' => \DB::raw('quantity + ' . $request->quantity),
       ]
     );
-
   }
 
   public function index() {
