@@ -46,7 +46,25 @@ const addAddress = () => {
 };
 
 const deleteAddress = (id) => {
-  addressForm.delete(route("user.address.destroy", id)).then(() => {});
+  addressForm.delete(route("user.address.destroy", id), {
+    preserveState: true,
+    preserveScroll: true,
+  });
+};
+
+const massForm = useForm({
+  selectedAddresses: [],
+});
+
+const isSelected = (id) => massForm.selectedAddresses.includes(id);
+
+const toggleSelection = (id) => {
+  const index = massForm.selectedAddresses.indexOf(id);
+  if (index > -1) {
+    massForm.selectedAddresses.splice(index, 1);
+  } else {
+    massForm.selectedAddresses.push(id);
+  }
 };
 </script>
 
@@ -306,47 +324,77 @@ const deleteAddress = (id) => {
         <div v-if="addresses.length === 0" class="text-center">
           <p class="text-lg">No addresses found.</p>
         </div>
-        <div v-else>
-          <ul>
-            <li
-              v-for="address in addresses"
-              :key="address.id"
-              class="mb-4 p-4 border border-gray-200 rounded-md"
-            >
-              <p><strong>Type:</strong> {{ address.type }}</p>
-              <p>
-                <strong>Address 1:</strong>
-                {{ address.address1 }}
-              </p>
-              <p v-if="address.address2">
-                <strong>Address 2:</strong>
-                {{ address.address2 }}
-              </p>
-              <p><strong>City:</strong> {{ address.city }}</p>
-              <p v-if="address.state">
-                <strong>State:</strong> {{ address.state }}
-              </p>
-              <p>
-                <strong>Zipcode:</strong>
-                {{ address.zipcode }}
-              </p>
-              <p>
-                <strong>Country Code:</strong>
-                {{ address.country_code }}
-              </p>
-              <p>
-                <strong>Is Main</strong>
-                {{ address.is_main }}
-              </p>
-
-              <button
-                @click="deleteAddress(address.id)"
-                class="bg-red-500 text-white px-4 py-2 mt-2 rounded hover:bg-red-600"
+        <div
+          v-else
+          class="lg:flex items-center justify-center overflow-x-auto w-full"
+        >
+          <table class="w-full bg-white border border-gray-200 rounded-lg">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="w-16 p-1 text-left">
+                  <input
+                    type="checkbox"
+                    @click="
+                      (e) =>
+                        (massForm.selectedAddresses = e.target.checked
+                          ? addresses.map((p) => p.id)
+                          : [])
+                    "
+                    class="form-checkbox"
+                  />
+                </th>
+                <th class="p-1 text-left font-semibold">ID</th>
+                <th class="p-1 text-left font-semibold">Type</th>
+                <th class="p-1 text-left font-semibold">Address 1</th>
+                <th class="p-1 text-left font-semibold">Address 2</th>
+                <th class="p-1 text-left font-semibold">City</th>
+                <th class="p-1 text-left font-semibold">State</th>
+                <th class="p-1 text-left font-semibold">Zip Code</th>
+                <th class="p-1 text-left font-semibold">Is Main</th>
+                <th class="p-1 text-left font-semibold">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="address in addresses"
+                :key="address.id"
+                class="border-t hover:bg-gray-50"
               >
-                Delete
-              </button>
-            </li>
-          </ul>
+                <td class="p-1">
+                  <input
+                    type="checkbox"
+                    :value="address.id"
+                    @change="toggleSelection(address.id)"
+                    :checked="isSelected(address.id)"
+                    class="form-checkbox"
+                  />
+                </td>
+                <td class="p-1">{{ address.id }}</td>
+                <td class="p-1">{{ address.type }}</td>
+                <td class="p-1">{{ address.address1 }}</td>
+                <td class="p-1">{{ address.address2 }}</td>
+                <td class="p-1">{{ address.city }}</td>
+                <td class="p-1">{{ address.state }}</td>
+                <td class="p-1">{{ address.zipcode }}</td>
+                <td v-if="address.is_main" class="p-1 text-green-500 font-bold">Yes</td>
+                <td v-else class="p-1 text-red-500 font-bold">No</td>
+                <td class="p-1 flex space-x-2">
+                  <button
+                    @click="editAddress(address.id)"
+                    class="btn btn-success"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    @click="deleteAddress(address.id)"
+                    class="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
