@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 
@@ -50,6 +51,13 @@ class UserAddressController extends Controller {
   }
 
   public function destroy(UserAddress $address) {
+    // Note: if there is an order associated with this address, it will not be deleted
+    $orders = Order::where('user_address_id', $address->id)->get();
+    foreach ($orders as $order) {
+      // Update or handle orders as needed
+      $order->update(['user_address_id' => null]); // or set to a different address
+    }
+
     $address->delete();
   }
   public function setAsMainAddress(UserAddress $address) {
