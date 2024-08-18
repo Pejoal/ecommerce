@@ -131,7 +131,7 @@ const buyNow = () => {
           </button>
           <button
             @click="buyNow"
-            class="bt btn-success"
+            class="btn btn-success"
             :disabled="!props.product.in_stock"
           >
             Buy Now
