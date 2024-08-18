@@ -4,6 +4,7 @@ import DeleteUserForm from "./Partials/DeleteUserForm.vue";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm.vue";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm.vue";
 import { Head, useForm } from "@inertiajs/vue3";
+import axios from "axios";
 
 defineProps({
   mustVerifyEmail: Boolean,
@@ -25,6 +26,7 @@ const uploadProfilePhoto = () => {
 };
 
 const addressForm = useForm({
+  id: 0,
   type: "",
   address1: "",
   address2: "",
@@ -52,6 +54,23 @@ const deleteAddress = (id) => {
   });
 };
 
+const editAddress = (id) => {
+  axios
+    .get(route("user.address.edit", id))
+    .then((response) => {
+      addressForm.id = response.data.id;
+      addressForm.type = response.data.type;
+      addressForm.address1 = response.data.address1;
+      addressForm.address2 = response.data.address2;
+      addressForm.city = response.data.city;
+      addressForm.state = response.data.state;
+      addressForm.zipcode = response.data.zipcode;
+      addressForm.country_code = response.data.country_code;
+      addressForm.is_main = response.data.is_main;
+    })
+    .catch((error) => console.error(error));
+};
+
 const massForm = useForm({
   selectedAddresses: [],
 });
@@ -77,6 +96,17 @@ const massDeleteaddresses = () => {
       },
     });
   }
+};
+
+const updateAddress = () => {
+  addressForm.patch(route("user.address.update", addressForm.id), {
+    preserveState: true,
+    preserveScroll: true,
+    onSuccess: () => {
+      addressForm.reset();
+    },
+    onError: (errors) => console.error("Form errors:", errors),
+  });
 };
 </script>
 
@@ -308,6 +338,7 @@ const massDeleteaddresses = () => {
                 id="is_main"
                 type="checkbox"
                 v-model="addressForm.is_main"
+                :checked="addressForm.is_main"
                 class="h-5 w-5 text-blue-600 transition duration-150 ease-in-out rounded-full"
               />
               <label for="is_main" class="text-gray-700"> Main Address </label>
@@ -324,13 +355,29 @@ const massDeleteaddresses = () => {
           </section>
 
           <button
+            v-if="!addressForm.id"
             type="submit"
             class="btn btn-primary mt-4"
             :disabled="addressForm.processing"
           >
             Add Address
           </button>
+
+          <button
+            v-else
+            type="submit"
+            class="btn btn-success mt-4"
+            form="updateAddress"
+            :disabled="addressForm.processing"
+          >
+            Update Address
+          </button>
         </form>
+        <form
+          @submit.prevent="updateAddress"
+          id="updateAddress"
+          class="hidden"
+        ></form>
 
         <!-- Display Addresses -->
         <div v-if="addresses.length === 0" class="text-center">
