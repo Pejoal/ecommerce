@@ -13,8 +13,9 @@ class OrderController extends Controller {
       return ['error' => 'Your cart is empty.'];
     }
 
-    if (!auth()->user()->default_address_id) {
-      return ['error' => 'You should to add a default address first.'];
+    $mainAddress = auth()->user()->addresses()->where('is_main', 1)->first();
+    if (!$mainAddress) {
+      return ['error' => 'You should add a main address first.'];
     }
 
     // Calculate total price
@@ -26,8 +27,8 @@ class OrderController extends Controller {
     $order = Order::create([
       'total_price' => $totalPrice,
       'status' => 'pending',
+      'user_address_id' => $mainAddress->id,
       'session_id' => session()->getId(),
-      'user_address_id' => auth()->user()->default_address_id,
       'created_by' => auth()->id(),
     ]);
 
