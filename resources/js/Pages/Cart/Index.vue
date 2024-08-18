@@ -67,6 +67,7 @@ const buyNow = () => {
     })
     .catch((error) => console.error(error));
 };
+Intl
 </script>
 
 <template>
@@ -122,7 +123,7 @@ const buyNow = () => {
         <section class="flex items-center justify-center text-lg mb-2 gap-2">
           <p>
             Total Price:&nbsp;
-            <strong> ${{ cartItemsTotalPrice }} </strong>
+            <strong> ${{ cartItemsTotalPrice.toFixed(2) }} </strong>
           </p>
 
           <form @submit.prevent="buyNow">
@@ -181,7 +182,7 @@ const buyNow = () => {
 
         <h3 class="flex items-center justify-center text-lg mb-2">
           Total Price:&nbsp;
-          <strong> ${{ savedForLaterItemsTotalPrice }} </strong>
+          <strong> ${{ savedForLaterItemsTotalPrice.toFixed(2) }} </strong>
         </h3>
       </section>
     </main>

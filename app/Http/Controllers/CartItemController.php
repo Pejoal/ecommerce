@@ -31,7 +31,6 @@ class CartItemController extends Controller {
       ])
       ->get();
 
-      
     $savedForLaterItemsTotalPrice = $savedForLaterItems->sum(function ($cartItem) {
       return $cartItem->product->price * $cartItem->quantity;
     });
