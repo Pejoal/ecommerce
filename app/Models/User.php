@@ -62,12 +62,12 @@ class User extends Authenticatable implements MustVerifyEmail {
     return $this->hasMany(Currency::class);
   }
 
-  function user_address() {
+  function addresses() {
     return $this->hasMany(UserAddress::class);
   }
 
-  public function defaultAddress() {
-    return $this->belongsTo(UserAddress::class, 'default_address_id');
+  public function mainAddress() {
+    return $this->hasOne(UserAddress::class)->where('isMain', 1)->first();
   }
 
   public function cartItems() {

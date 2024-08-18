@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserAddressController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -57,6 +58,10 @@ Route::group([], function () {
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('profile/photo/update', [ProfileController::class, 'updateProfilePhoto'])->name('profile.photo.update');
+
+    Route::post('user/address/store', [UserAddressController::class, 'store'])->name('user.address.store');
+    Route::delete('user/address/{address}', [UserAddressController::class, 'destroy'])->name('user.address.destroy');
+    Route::post('user/address/{address}/update', [UserAddressController::class, 'setAsMainAddress'])->name('profile.address.update');
 
     // User
     Route::group(['middleware' => 'clients-only'], function () {
