@@ -438,27 +438,27 @@ const clearFilters = () => {
                   <span class="ml-1 font-bold">{{ product.category }}</span>
                 </div>
 
-                <form @submit.prevent="addToCart" class="flex flex-col">
-                  <button
-                    type="submit"
-                    form="addToCart"
-                    class="btn btn-primary"
-                    :disabled="!product.in_stock || productForm.processing"
-                  >
-                    Add to Cart
-                  </button>
-                  <Transition
-                    enter-from-class="opacity-0"
-                    leave-to-class="opacity-0"
-                    class="transition ease-in-out"
-                  >
-                    <p v-if="productForm.recentlySuccessful" class="text-sm">
-                      Added Successfully
-                    </p>
-                  </Transition>
-                </form>
               </div>
             </Link>
+
+            <form @submit.prevent="addToCart(product.id)" class="flex flex-col">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                :disabled="!product.in_stock || productForm.processing"
+              >
+                Add to Cart
+              </button>
+              <Transition
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                class="transition ease-in-out"
+              >
+                <p v-if="productForm.recentlySuccessful" class="text-sm">
+                  Added Successfully
+                </p>
+              </Transition>
+            </form>
           </div>
         </section>
 
