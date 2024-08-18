@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class OrderController extends Controller {
@@ -19,12 +20,12 @@ class OrderController extends Controller {
     $cartItems = auth()->user()->cartItems()->where('status', 'in_cart')->get();
 
     if ($cartItems->isEmpty()) {
-      return ['error' => 'Your cart is empty.'];
+      return Redirect::route('cart.index')->with('error', 'Your cart is empty.');
     }
 
     $mainAddress = auth()->user()->addresses()->where('is_main', 1)->first();
     if (!$mainAddress) {
-      return ['error' => 'You should add a main address first.'];
+      return Redirect::route('cart.index')->with('error', 'You should add a main address first.');
     }
 
     // Calculate total price

@@ -1,7 +1,6 @@
 <script setup>
 import { Head, useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
-import { ref } from "vue";
 
 const props = defineProps({
   cartItems: {
@@ -22,7 +21,6 @@ const props = defineProps({
   },
 });
 
-const error = ref("");
 const form = useForm({ quantity: 0 });
 
 const removeItem = (id) => {
@@ -58,23 +56,9 @@ const saveForLater = (id) => {
 
 const buyNow = () => {
   form.post(route("order.store"), {
-    onSuccess: (response) => {
-      console.log(response);
-      setTimeout(() => {
-        error.value = "";
-      }, 3000);
-    },
+    onSuccess: (response) => {},
     onError: (response) => {},
   });
-  // axios
-  //   .post(route("order.store"))
-  //   .then((response) => {
-  //     error.value = response.data.error;
-  //     setTimeout(() => {
-  //       error.value = "";
-  //     }, 3000);
-  //   })
-  //   .catch((error) => console.error(error));
 };
 </script>
 
@@ -150,8 +134,8 @@ const buyNow = () => {
             leave-to-class="opacity-0"
             class="transition ease-in-out"
           >
-            <p v-if="error" class="text-red-600 text-sm">
-              {{ error }}
+            <p v-if="$page.props.flash.error" class="text-red-600 text-sm">
+              {{ $page.props.flash.error }}
             </p>
           </Transition>
         </section>
