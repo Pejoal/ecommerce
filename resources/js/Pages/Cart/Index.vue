@@ -1,6 +1,7 @@
 <script setup>
 import { Head, useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
+import { ref } from "vue";
 
 const props = defineProps({
   cartItems: {
@@ -21,6 +22,7 @@ const props = defineProps({
   },
 });
 
+const error = ref("");
 const form = useForm({ quantity: 0 });
 
 const removeItem = (id) => {
@@ -52,6 +54,18 @@ const saveForLater = (id) => {
     preserveState: true,
     preserveScroll: true,
   });
+};
+
+const buyNow = () => {
+  axios
+    .post(route("order.store"))
+    .then((response) => {
+      error.value = response.data.error;
+      setTimeout(() => {
+        error.value = "";
+      }, 3000);
+    })
+    .catch((error) => console.error(error));
 };
 </script>
 
@@ -105,10 +119,33 @@ const saveForLater = (id) => {
           </div>
         </div>
 
-        <h3 class="flex items-center justify-center text-lg mb-2">
-          Total Price:&nbsp;
-          <strong> ${{ cartItemsTotalPrice }} </strong>
-        </h3>
+        <section class="flex items-center justify-center text-lg mb-2 gap-2">
+          <p>
+            Total Price:&nbsp;
+            <strong> ${{ cartItemsTotalPrice }} </strong>
+          </p>
+
+          <form @submit.prevent="buyNow">
+            <button
+              type="submit"
+              class="btn btn-success"
+              :disabled="form.processing"
+            >
+              Buy Now
+            </button>
+          </form>
+
+          <!-- Error Message -->
+          <Transition
+            enter-from-class="opacity-0"
+            leave-to-class="opacity-0"
+            class="transition ease-in-out"
+          >
+            <p v-if="error" class="text-red-600 text-sm">
+              {{ error }}
+            </p>
+          </Transition>
+        </section>
       </section>
 
       <!-- Saved for Later Items Section -->

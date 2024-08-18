@@ -6,6 +6,7 @@ use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,8 @@ Route::group([], function () {
       Route::post('/cart/{cartItem}/saveForLater', [CartItemController::class, 'saveForLater'])->name('cart.saveForLater');
       Route::patch('/cart/{cartItem}', [CartItemController::class, 'update'])->name('cart.update');
       Route::delete('/cart/{cartItem}', [CartItemController::class, 'destroy'])->name('cart.destroy');
+
+      Route::post('/order/', [OrderController::class, 'store'])->name('order.store');
 
       Route::get('user/profile', [ProfileController::class, 'myProfile'])->name('user.profile.me');
 
