@@ -138,6 +138,7 @@ const deleteAddress = (id) => {
                 </p>
               </Transition>
             </div>
+
             <div>
               <label for="address1">Address 1</label>
               <input
@@ -147,7 +148,20 @@ const deleteAddress = (id) => {
                 class="w-full border border-gray-300 rounded-md p-2"
                 required
               />
+              <Transition
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                class="transition ease-in-out"
+              >
+                <p
+                  v-if="addressForm.errors.address1"
+                  class="text-sm text-red-600"
+                >
+                  {{ addressForm.errors.address1 }}
+                </p>
+              </Transition>
             </div>
+
             <div>
               <label for="address2">Address 2</label>
               <input
@@ -156,7 +170,20 @@ const deleteAddress = (id) => {
                 id="address2"
                 class="w-full border border-gray-300 rounded-md p-2"
               />
+              <Transition
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                class="transition ease-in-out"
+              >
+                <p
+                  v-if="addressForm.errors.address2"
+                  class="text-sm text-red-600"
+                >
+                  {{ addressForm.errors.address2 }}
+                </p>
+              </Transition>
             </div>
+
             <div>
               <label for="city">City</label>
               <input
@@ -166,7 +193,17 @@ const deleteAddress = (id) => {
                 class="w-full border border-gray-300 rounded-md p-2"
                 required
               />
+              <Transition
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                class="transition ease-in-out"
+              >
+                <p v-if="addressForm.errors.city" class="text-sm text-red-600">
+                  {{ addressForm.errors.city }}
+                </p>
+              </Transition>
             </div>
+
             <div>
               <label for="state">State</label>
               <input
@@ -175,7 +212,17 @@ const deleteAddress = (id) => {
                 id="state"
                 class="w-full border border-gray-300 rounded-md p-2"
               />
+              <Transition
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                class="transition ease-in-out"
+              >
+                <p v-if="addressForm.errors.state" class="text-sm text-red-600">
+                  {{ addressForm.errors.state }}
+                </p>
+              </Transition>
             </div>
+
             <div>
               <label for="zipcode">Zipcode</label>
               <input
@@ -185,7 +232,20 @@ const deleteAddress = (id) => {
                 class="w-full border border-gray-300 rounded-md p-2"
                 required
               />
+              <Transition
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                class="transition ease-in-out"
+              >
+                <p
+                  v-if="addressForm.errors.zipcode"
+                  class="text-sm text-red-600"
+                >
+                  {{ addressForm.errors.zipcode }}
+                </p>
+              </Transition>
             </div>
+
             <div>
               <label for="country_code">Country Code</label>
               <input
@@ -195,6 +255,19 @@ const deleteAddress = (id) => {
                 class="w-full border border-gray-300 rounded-md p-2"
                 required
               />
+
+              <Transition
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                class="transition ease-in-out"
+              >
+                <p
+                  v-if="addressForm.errors.country_code"
+                  class="text-sm text-red-600"
+                >
+                  {{ addressForm.errors.country_code }}
+                </p>
+              </Transition>
             </div>
           </div>
           <button
