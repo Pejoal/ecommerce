@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\UserAddress;
 use Illuminate\Database\Seeder;
 
 class SetupSeeder extends Seeder {
@@ -48,13 +49,9 @@ class SetupSeeder extends Seeder {
       'type' => 'client',
     ]);
 
-    // Brand::factory()
-    //   ->count(5)
-    //   ->create();
-
-    // Category::factory()
-    //   ->count(5)
-    //   ->create();
+    UserAddress::factory()
+      ->count(4)
+      ->create();
 
     Category::create([
       'name' => 'Computer',
