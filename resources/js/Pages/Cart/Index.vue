@@ -57,17 +57,25 @@ const saveForLater = (id) => {
 };
 
 const buyNow = () => {
-  axios
-    .post(route("order.store"))
-    .then((response) => {
-      error.value = response.data.error;
+  form.post(route("order.store"), {
+    onSuccess: (response) => {
+      console.log(response);
       setTimeout(() => {
         error.value = "";
       }, 3000);
-    })
-    .catch((error) => console.error(error));
+    },
+    onError: (response) => {},
+  });
+  // axios
+  //   .post(route("order.store"))
+  //   .then((response) => {
+  //     error.value = response.data.error;
+  //     setTimeout(() => {
+  //       error.value = "";
+  //     }, 3000);
+  //   })
+  //   .catch((error) => console.error(error));
 };
-Intl
 </script>
 
 <template>

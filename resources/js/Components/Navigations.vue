@@ -88,6 +88,16 @@ const props = defineProps({
       >
         Cart
       </Link>
+      <Link
+        :href="route('order.index')"
+        class="hover:font-bold"
+        :class="{
+          'text-zinc-700 hover:text-zinc-800': props.dark,
+          'underline  font-bold': route().current('order.index'),
+        }"
+      >
+        Orders
+      </Link>
     </template>
     <Link
       v-if="$page.props.auth.user"

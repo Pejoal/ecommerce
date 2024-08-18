@@ -51,8 +51,6 @@ class UserAddressController extends Controller {
 
   public function destroy(UserAddress $address) {
     $address->delete();
-
-    return redirect()->back()->with('success', 'Address deleted successfully.');
   }
   public function setAsMainAddress(UserAddress $address) {
     // Unset the current main address if one exists

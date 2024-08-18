@@ -4,8 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class OrderController extends Controller {
+
+  public function index(Request $request) {
+
+    $orders = auth()->user()->orders;
+    return Inertia::render('Order/Index', [
+      "orders" => $orders,
+    ]);
+  }
   public function store(Request $request) {
     $cartItems = auth()->user()->cartItems()->where('status', 'in_cart')->get();
 
@@ -44,7 +53,6 @@ class OrderController extends Controller {
     // Clear the cart after placing the order
     auth()->user()->cartItems()->where('status', 'in_cart')->delete();
 
-    // Redirect to the payment page or confirmation page
-    // return redirect()->route('orders.show', $order->id)->with('success', 'Order placed successfully.');
+    return Inertia::location(route('order.index'));
   }
 }
