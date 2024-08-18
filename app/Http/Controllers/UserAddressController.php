@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserAddressController extends Controller {
 
   public function store(Request $request) {
-    $request->validate([
+    $validated = $request->validate([
       'type' => 'required|string|max:45',
       'address1' => 'required|string|max:255',
       'address2' => 'nullable|string|max:255',
@@ -18,7 +18,7 @@ class UserAddressController extends Controller {
       'country_code' => 'required|string|max:3',
     ]);
 
-    $address = new UserAddress($request->all());
+    $address = new UserAddress($validated);
     $address->user_id = $request->user()->id;
     $address->save();
 
