@@ -78,7 +78,6 @@ Route::group([], function () {
 
       Route::post('/order/', [OrderController::class, 'store'])->name('order.store');
 
-      Route::get('user/profile', [ProfileController::class, 'myProfile'])->name('user.profile.me');
 
     });
 
