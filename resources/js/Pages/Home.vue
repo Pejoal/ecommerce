@@ -32,10 +32,15 @@ const productForm = useForm({
   status: "in_cart",
 });
 
+const productSuccess = ref({});
+
 const addToCart = (id) => {
   productForm.product_id = id;
   productForm.status = "in_cart";
   productForm.post(route("cart.add"), {
+    onSuccess: () => {
+      productSuccess.value[id] = true;
+    },
     preserveState: true,
     preserveScroll: true,
   });
@@ -437,7 +442,6 @@ const clearFilters = () => {
                   <span class="font-medium text-gray-800">Category:</span>
                   <span class="ml-1 font-bold">{{ product.category }}</span>
                 </div>
-
               </div>
             </Link>
 
@@ -454,7 +458,7 @@ const clearFilters = () => {
                 leave-to-class="opacity-0"
                 class="transition ease-in-out"
               >
-                <p v-if="productForm.recentlySuccessful" class="text-sm">
+                <p v-if="productSuccess[product.id]" class="text-sm">
                   Added Successfully
                 </p>
               </Transition>
