@@ -26,6 +26,21 @@ const isCategoriesDropdownOpen = ref(false);
 const selectedBrands = ref([]);
 const selectedCategories = ref([]);
 
+const productForm = useForm({
+  product_id: 0,
+  quantity: 1,
+  status: "in_cart",
+});
+
+const addToCart = (id) => {
+  productForm.product_id = id;
+  productForm.status = "in_cart";
+  productForm.post(route("cart.add"), {
+    preserveState: true,
+    preserveScroll: true,
+  });
+};
+
 const form = useForm({
   selectedBrands: [],
   selectedCategories: [],
@@ -422,6 +437,26 @@ const clearFilters = () => {
                   <span class="font-medium text-gray-800">Category:</span>
                   <span class="ml-1 font-bold">{{ product.category }}</span>
                 </div>
+
+                <form @submit.prevent="addToCart" class="flex flex-col">
+                  <button
+                    type="submit"
+                    form="addToCart"
+                    class="btn btn-primary"
+                    :disabled="!product.in_stock || productForm.processing"
+                  >
+                    Add to Cart
+                  </button>
+                  <Transition
+                    enter-from-class="opacity-0"
+                    leave-to-class="opacity-0"
+                    class="transition ease-in-out"
+                  >
+                    <p v-if="productForm.recentlySuccessful" class="text-sm">
+                      Added Successfully
+                    </p>
+                  </Transition>
+                </form>
               </div>
             </Link>
           </div>
