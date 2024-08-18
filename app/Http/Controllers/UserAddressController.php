@@ -19,7 +19,6 @@ class UserAddressController extends Controller {
       'is_main' => 'boolean',
     ]);
 
-
     if ($validated['is_main']) {
       auth()->user()->addresses()->where('is_main', 1)->update(['is_main' => 0]);
     }
@@ -39,5 +38,10 @@ class UserAddressController extends Controller {
     // Set the new main address
     $address->is_main = 1;
     $address->save();
+  }
+
+  public function massDestroy(Request $request) {
+    $ids = $request->input('selectedAddresses');
+    UserAddress::whereIn('id', $ids)->delete();
   }
 }

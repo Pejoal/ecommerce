@@ -60,8 +60,9 @@ Route::group([], function () {
     Route::post('profile/photo/update', [ProfileController::class, 'updateProfilePhoto'])->name('profile.photo.update');
 
     Route::post('user/address/store', [UserAddressController::class, 'store'])->name('user.address.store');
+    Route::delete('user/address/mass-destroy', [UserAddressController::class, 'massDestroy'])->name('user.address.update.massDestroy');
     Route::delete('user/address/{address}', [UserAddressController::class, 'destroy'])->name('user.address.destroy');
-    Route::post('user/address/{address}/update', [UserAddressController::class, 'setAsMainAddress'])->name('profile.address.update');
+    Route::post('user/address/{address}/update', [UserAddressController::class, 'setAsMainAddress'])->name('user.address.mina.update');
 
     // User
     Route::group(['middleware' => 'clients-only'], function () {

@@ -66,6 +66,18 @@ const toggleSelection = (id) => {
     massForm.selectedAddresses.push(id);
   }
 };
+
+const massDeleteaddresses = () => {
+  if (confirm("Are you sure you want to delete the selected addresses?")) {
+    massForm.delete(route("user.address.update.massDestroy"), {
+      preserveState: true,
+      preserveScroll: true,
+      onSuccess: () => {
+        massForm.selectedAddresses.value = [];
+      },
+    });
+  }
+};
 </script>
 
 <template>
@@ -136,7 +148,7 @@ const toggleSelection = (id) => {
         <h2 class="text-xl font-semibold mb-4">Addresses</h2>
 
         <!-- Add Address Form -->
-        <form @submit.prevent="addAddress" class="mb-4">
+        <form @submit.prevent="addAddress" class="pb-4 border-b border-black">
           <div class="grid gap-4 sm:grid-cols-2">
             <div>
               <label for="type">Address Type</label>
@@ -376,7 +388,9 @@ const toggleSelection = (id) => {
                 <td class="p-1">{{ address.city }}</td>
                 <td class="p-1">{{ address.state }}</td>
                 <td class="p-1">{{ address.zipcode }}</td>
-                <td v-if="address.is_main" class="p-1 text-green-500 font-bold">Yes</td>
+                <td v-if="address.is_main" class="p-1 text-green-500 font-bold">
+                  Yes
+                </td>
                 <td v-else class="p-1 text-red-500 font-bold">No</td>
                 <td class="p-1 flex space-x-2">
                   <button
@@ -395,6 +409,16 @@ const toggleSelection = (id) => {
               </tr>
             </tbody>
           </table>
+
+          <div class="p-2 flex items-center gap-2">
+            <button
+              @click="massDeleteaddresses"
+              class="btn btn-danger"
+              :disabled="massForm.selectedAddresses?.length === 0"
+            >
+              Delete Selected
+            </button>
+          </div>
         </div>
       </div>
 
