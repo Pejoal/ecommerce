@@ -54,7 +54,7 @@ const saveForLater = (id) => {
   });
 };
 
-const buyNow = () => {
+const orderNow = () => {
   form.post(route("order.store"), {
     onSuccess: (response) => {},
     onError: (response) => {},
@@ -118,13 +118,13 @@ const buyNow = () => {
             <strong> ${{ cartItemsTotalPrice.toFixed(2) }} </strong>
           </p>
 
-          <form @submit.prevent="buyNow">
+          <form @submit.prevent="orderNow">
             <button
               type="submit"
               class="btn btn-success"
               :disabled="form.processing"
             >
-              Buy Now
+              Order Now
             </button>
           </form>
 

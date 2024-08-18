@@ -31,7 +31,7 @@ const saveForLater = () => {
   });
 };
 
-const buyNow = () => {
+const orderNow = () => {
   // Implement the logic to proceed with buying the product immediately
 };
 </script>
@@ -130,11 +130,11 @@ const buyNow = () => {
             Save for Later
           </button>
           <button
-            @click="buyNow"
+            @click="orderNow"
             class="btn btn-success"
             :disabled="!props.product.in_stock"
           >
-            Buy Now
+            Order Now
           </button>
         </div>
 

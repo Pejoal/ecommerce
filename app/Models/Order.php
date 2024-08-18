@@ -11,8 +11,12 @@ class Order extends Model {
   protected $guarded = [];
 
   use HasFactory;
-  
+
   function items() {
     return $this->hasMany(OrderItem::class);
+  }
+
+  public function address() {
+    return $this->belongsTo(UserAddress::class, 'user_address_id');
   }
 }
