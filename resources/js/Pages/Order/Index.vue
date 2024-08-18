@@ -31,16 +31,21 @@ const props = defineProps({
           <p class="text-gray-600 mb-2">
             Total Price: ${{ order.total_price.toFixed(2) }}
           </p>
-          <p class="text-gray-600 mb-2">Address:</p>
-          <address class="mb-4">
-            <p>{{ order.address.address1 }}</p>
-            <p v-if="order.address.address2">{{ order.address.address2 }}</p>
-            <p>
-              {{ order.address.city }}, {{ order.address.state }}
-              {{ order.address.zipcode }}
-            </p>
-            <p>{{ order.address.country_code }}</p>
-          </address>
+          <template v-if="order.address">
+            <p class="text-gray-600 mb-2">Address:</p>
+            <address class="mb-4">
+              <p>{{ order.address.address1 }}</p>
+              <p v-if="order.address.address2">{{ order.address.address2 }}</p>
+              <p>
+                {{ order.address.city }}, {{ order.address.state }}
+                {{ order.address.zipcode }}
+              </p>
+              <p>{{ order.address.country_code }}</p>
+            </address>
+          </template>
+          <p v-else class="text-red-500">
+            There is no address provide for this order
+          </p>
 
           <h3 class="text-md font-semibold mb-2">Items:</h3>
           <ul>
