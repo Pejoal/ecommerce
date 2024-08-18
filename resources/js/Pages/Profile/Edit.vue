@@ -32,6 +32,7 @@ const addressForm = useForm({
   state: "",
   zipcode: "",
   country_code: "",
+  is_main: false,
 });
 
 const addAddress = () => {
@@ -270,6 +271,28 @@ const deleteAddress = (id) => {
               </Transition>
             </div>
           </div>
+
+          <section>
+            <div class="flex items-center space-x-2 p-2">
+              <input
+                id="is_main"
+                type="checkbox"
+                v-model="addressForm.is_main"
+                class="h-5 w-5 text-blue-600 transition duration-150 ease-in-out rounded-full"
+              />
+              <label for="is_main" class="text-gray-700"> Main Address </label>
+            </div>
+            <Transition
+              enter-from-class="opacity-0"
+              leave-to-class="opacity-0"
+              class="transition ease-in-out"
+            >
+              <p v-if="addressForm.errors.is_main" class="text-sm text-red-600">
+                {{ addressForm.errors.is_main }}
+              </p>
+            </Transition>
+          </section>
+
           <button
             type="submit"
             class="btn btn-primary mt-4"
@@ -310,6 +333,10 @@ const deleteAddress = (id) => {
               <p>
                 <strong>Country Code:</strong>
                 {{ address.country_code }}
+              </p>
+              <p>
+                <strong>Is Main</strong>
+                {{ address.is_main }}
               </p>
 
               <button

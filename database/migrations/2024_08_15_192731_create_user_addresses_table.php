@@ -17,7 +17,7 @@ return new class extends Migration {
       $table->string('city', 255);
       $table->string('state', 45)->nullable();
       $table->string('zipcode', 45);
-      $table->boolean('isMain')->default(1);
+      $table->boolean('is_main')->default(1);
       $table->string('country_code', 3);
       $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
       $table->timestamps();

@@ -16,13 +16,15 @@ class UserAddressController extends Controller {
       'state' => 'nullable|string|max:45',
       'zipcode' => 'required|string|max:45',
       'country_code' => 'required|string|max:3',
+      'is_main' => 'boolean',
     ]);
 
-    $address = new UserAddress($validated);
-    $address->user_id = $request->user()->id;
-    $address->save();
 
-    return redirect()->back()->with('success', 'Address added successfully.');
+    if ($validated['is_main']) {
+      auth()->user()->addresses()->where('is_main', 1)->update(['is_main' => 0]);
+    }
+
+    auth()->user()->addresses()->create($validated);
   }
 
   public function destroy(UserAddress $address) {
@@ -35,7 +37,7 @@ class UserAddressController extends Controller {
     auth()->user()->addresses()->where('isMain', 1)->update(['isMain' => 0]);
 
     // Set the new main address
-    $address->isMain = 1;
+    $address->is_main = 1;
     $address->save();
   }
 }
