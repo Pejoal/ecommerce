@@ -1,13 +1,36 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
+import { ref } from "vue";
 
 const props = defineProps({
   orders: {
     type: Array,
     default: [],
   },
+  addresses: {
+    type: Array,
+    default: [],
+  },
 });
+
+const selectedAddress = ref({});
+
+const form = useForm({
+  addressId: 0,
+});
+
+function saveAddress(orderId, addressId) {
+  // Here you would make an API request to save the selected address for the order
+  form.addressId = addressId;
+  form.patch(route("order.address.update", orderId), {
+    onSuccess: () => {
+      productSuccess.value[id] = true;
+    },
+    preserveState: true,
+    preserveScroll: true,
+  });
+}
 </script>
 
 <template>
@@ -31,6 +54,7 @@ const props = defineProps({
           <p class="text-gray-600 mb-2">
             Total Price: ${{ order.total_price.toFixed(2) }}
           </p>
+
           <template v-if="order.address">
             <p class="text-gray-600 mb-2">Address:</p>
             <address class="mb-4">
@@ -43,9 +67,31 @@ const props = defineProps({
               <p>{{ order.address.country_code }}</p>
             </address>
           </template>
-          <p v-else class="text-red-500">
-            There is no address provide for this order
-          </p>
+
+          <template v-else>
+            <p class="text-red-500 mb-2">No address provided for this order.</p>
+            <select
+              v-model="selectedAddress[order.id]"
+              class="border border-gray-300 rounded-md p-2 mb-4"
+            >
+              <option disabled value="">Select an Address</option>
+              <option
+                v-for="address in addresses"
+                :key="address.id"
+                :value="address.id"
+              >
+                {{ address.address1 }}, {{ address.city }},
+                {{ address.zipcode }}
+              </option>
+            </select>
+            <button
+              @click="saveAddress(order.id, selectedAddress[order.id])"
+              class="btn btn-primary"
+              :disabled="!selectedAddress[order.id]"
+            >
+              Save Address
+            </button>
+          </template>
 
           <h3 class="text-md font-semibold mb-2">Items:</h3>
           <ul>

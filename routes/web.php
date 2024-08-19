@@ -81,6 +81,7 @@ Route::group([], function () {
 
       Route::get('order/', [OrderController::class, 'index'])->name('order.index');
       Route::post('order/', [OrderController::class, 'store'])->name('order.store');
+      Route::patch('order/{order}/address/update', [OrderController::class, 'updateAddress'])->name('order.address.update');
 
     });
 

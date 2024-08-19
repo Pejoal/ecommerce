@@ -17,8 +17,11 @@ class OrderController extends Controller {
       return $order;
     });
 
+    $addresses = auth()->user()->addresses;
+
     return Inertia::render('Order/Index', [
       'orders' => $orders,
+      'addresses' => $addresses,
     ]);
   }
   public function store(Request $request) {
@@ -60,5 +63,10 @@ class OrderController extends Controller {
     auth()->user()->cartItems()->where('status', 'in_cart')->delete();
 
     return Inertia::location(route('order.index'));
+  }
+
+  public function updateAddress(Request $request, Order $order) {
+    $order->user_address_id = $request->addressId;
+    $order->save();
   }
 }
