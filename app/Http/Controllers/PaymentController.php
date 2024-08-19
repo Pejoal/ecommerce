@@ -24,7 +24,7 @@ class PaymentController extends Controller {
       ]);
 
       if ($paymentIntent->status === 'succeeded') {
-        return Redirect::route('order.index')->with('success', 'Payment successful!');
+        return Redirect::route('order.index')->with(['success', 'Payment successful!', 'clientSecret' => $paymentIntent->client_secret]);
       } elseif ($paymentIntent->status === 'requires_action' || $paymentIntent->status === 'requires_source_action') {
         return Redirect::to($paymentIntent->next_action->redirect_to_url->url);
       } else {

@@ -4,6 +4,7 @@ import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { ref, onMounted } from "vue";
 import { loadStripe } from "@stripe/stripe-js";
 import ResuableModal from "@/Components/ResuableModal.vue";
+import { Transition } from "vue";
 
 const props = defineProps({
   orders: {
@@ -25,7 +26,7 @@ const props = defineProps({
   error: {
     type: String,
     default: "",
-  }
+  },
 });
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
@@ -70,7 +71,7 @@ const handlePayment = async (id) => {
   });
 
   if (error) {
-    payError.value = error
+    payError.value = error;
     return;
   }
 
@@ -80,7 +81,14 @@ const handlePayment = async (id) => {
       // Handle successful payment here
       if (props.clientSecret) {
         stripe.confirmCardPayment(props.clientSecret);
+        showModal.value = false;
       }
+
+      setTimeout(() => {
+        props.success = "";
+        props.error = "";
+        payError.value = "";
+      }, 3000);
     },
     onError: () => {
       // Handle errors
@@ -209,13 +217,31 @@ const saveAddress = (orderId, addressId) => {
             <div id="card-element" ref="cardElement"></div>
             <br />
 
-            <button type="submit" class="btn btn-primary" :disabled="orderForm.processing">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              :disabled="orderForm.processing"
+            >
               Submit Payment
             </button>
 
-            <p class="font-semibold text-green-600" v-if="props.success">{{ props.success }}</p>
-            <p class="font-semibold text-red-600" v-if="props.error">{{ props.error }}</p>
-            <p class="font-semibold text-red-600" v-if="payError">{{ payError?.message }}</p>
+            <Transition
+              enter-from-class="opacity-0"
+              leave-to-class="opacity-0"
+              class="transition ease-in-out"
+            >
+              <section>
+                <p class="font-semibold text-green-600" v-if="props.success">
+                  {{ props.success }}
+                </p>
+                <p class="font-semibold text-red-600" v-if="props.error">
+                  {{ props.error }}
+                </p>
+                <p class="font-semibold text-red-600" v-if="payError">
+                  {{ payError?.message }}
+                </p>
+              </section>
+            </Transition>
           </form>
         </template>
       </ResuableModal>
