@@ -2,6 +2,7 @@
 import { Head, Link, useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { ref } from "vue";
+import ResuableModal from "@/Components/ResuableModal.vue";
 
 const props = defineProps({
   orders: {
@@ -20,19 +21,31 @@ const form = useForm({
   addressId: 0,
 });
 
+let showModal = ref(false);
+
 const orderForm = useForm({
+  id: 0,
+  cardholderName: "",
+  cardNumber: "",
+  expMonth: "",
+  expYear: "",
+  cvc: "",
 });
 
-function payNow(id) {
-  orderForm.post(route("order.pay", id), {
-    onSuccess: () => {
-    },
+const payNow = (id) => {
+  orderForm.id = id;
+  showModal.value = true;
+};
+
+const submitPayment = (id) => {
+  orderForm.post(route("process.payment", id), {
+    onSuccess: () => {},
     preserveState: true,
     preserveScroll: true,
   });
-}
+};
 
-function saveAddress(orderId, addressId) {
+const saveAddress = (orderId, addressId) => {
   // Here you would make an API request to save the selected address for the order
   form.addressId = addressId;
   form.patch(route("order.address.update", orderId), {
@@ -42,7 +55,7 @@ function saveAddress(orderId, addressId) {
     preserveState: true,
     preserveScroll: true,
   });
-}
+};
 </script>
 
 <template>
@@ -123,20 +136,101 @@ function saveAddress(orderId, addressId) {
               </Link>
             </li>
           </ul>
-          <form
-            @submit.prevent="payNow(order.id)"
-            class=""
-          >
+          <button @click="payNow(order.id)" class="btn btn-primary"> Pay Now</button>
+        </div>
+      </div>
+
+      <ResuableModal
+        :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-[80vh]']"
+        header="Pay Now"
+        :show="showModal"
+        @close="showModal = false"
+      >
+        <template #content>
+          <form @submit.prevent="submitPayment" class="p-2">
+            <div class="mb-4">
+              <label
+                for="cardholderName"
+                class="block text-sm font-medium text-gray-700"
+                >Cardholder's Name</label
+              >
+              <input
+                type="text"
+                id="cardholderName"
+                v-model="orderForm.cardholderName"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="cardNumber"
+                class="block text-sm font-medium text-gray-700"
+                >Card Number</label
+              >
+              <input
+                type="text"
+                id="cardNumber"
+                v-model="orderForm.cardNumber"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="expMonth"
+                class="block text-sm font-medium text-gray-700"
+                >Expiration Month</label
+              >
+              <input
+                type="text"
+                id="expMonth"
+                v-model="orderForm.expMonth"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="expYear"
+                class="block text-sm font-medium text-gray-700"
+                >Expiration Year</label
+              >
+              <input
+                type="text"
+                id="expYear"
+                v-model="orderForm.expYear"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label for="cvc" class="block text-sm font-medium text-gray-700"
+                >CVC</label
+              >
+              <input
+                type="text"
+                id="cvc"
+                v-model="orderForm.cvc"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                required
+              />
+            </div>
+
             <button
               type="submit"
-              class="btn btn-primary"
+              class="w-full bg-blue-600 text-white py-2 rounded-md shadow-md hover:bg-blue-700 transition duration-150"
               :disabled="orderForm.processing"
             >
               Pay Now
             </button>
           </form>
-        </div>
-      </div>
+        </template>
+      </ResuableModal>
     </main>
   </AuthLayout>
 </template>

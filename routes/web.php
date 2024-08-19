@@ -83,9 +83,14 @@ Route::group([], function () {
       Route::get('order/', [OrderController::class, 'index'])->name('order.index');
       Route::post('order/', [OrderController::class, 'store'])->name('order.store');
       Route::patch('order/{order}/address/update', [OrderController::class, 'updateAddress'])->name('order.address.update');
-      
-      Route::post('order/pay', [PaymentController::class, 'createPaymentIntent'])->name('order.pay');
-      
+
+      Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
+      Route::get('/payment/success', function () {
+        return 'Payment Successful!';
+      })->name('payment.success');
+      Route::get('/payment/failure', function () {
+        return 'Payment Failed!';
+      })->name('payment.failure');
 
     });
 
