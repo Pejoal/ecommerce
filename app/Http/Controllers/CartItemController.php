@@ -62,16 +62,22 @@ class CartItemController extends Controller {
   }
 
   public function moveToCart(CartItem $cartItem) {
+    $this->authorize('update', $cartItem);
+
     $cartItem->status = "in_cart";
     $cartItem->save();
   }
 
   public function saveForLater(CartItem $cartItem) {
+    $this->authorize('update', $cartItem);
+
     $cartItem->status = "saved_for_later";
     $cartItem->save();
   }
 
   public function update(Request $request, CartItem $cartItem) {
+    $this->authorize('update', $cartItem);
+
     $request->validate([
       'quantity' => 'required|integer|min:1',
     ]);
@@ -81,6 +87,8 @@ class CartItemController extends Controller {
   }
 
   public function destroy(CartItem $cartItem) {
+    $this->authorize('update', $cartItem);
+
     $cartItem->delete();
   }
 }

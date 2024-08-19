@@ -13,6 +13,6 @@ class OrderPolicy {
     //
   }
   public function update(User $user, Order $order) {
-    return $user->id === $order->created_by;
+    return $user->id === $order->created_by || $user->type === 'super admin' || $user->type === 'admin';
   }
 }
