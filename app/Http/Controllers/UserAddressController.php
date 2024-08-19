@@ -60,12 +60,12 @@ class UserAddressController extends Controller {
 
     $address->delete();
   }
-  public function setAsMainAddress(UserAddress $address) {
+  public function setAsMainAddress(UserAddress $address, Request $request) {
     // Unset the current main address if one exists
-    auth()->user()->addresses()->where('isMain', 1)->update(['isMain' => 0]);
+    auth()->user()->addresses()->update(['is_main' => 0]);
 
     // Set the new main address
-    $address->is_main = 1;
+    $address->is_main = $request->is_main;
     $address->save();
   }
 

@@ -63,7 +63,7 @@ Route::group([], function () {
     Route::delete('user/address/mass-destroy', [UserAddressController::class, 'massDestroy'])->name('user.address.update.massDestroy');
     Route::get('user/address/{address}/edit', [UserAddressController::class, 'edit'])->name('user.address.edit');
     Route::patch('user/address/{address}/update', [UserAddressController::class, 'update'])->name('user.address.update');
-    Route::post('user/address/main/{address}/update', [UserAddressController::class, 'setAsMainAddress'])->name('user.address.main.update');
+    Route::patch('user/address/main/{address}/update', [UserAddressController::class, 'setAsMainAddress'])->name('user.address.main.update');
     Route::delete('user/address/{address}', [UserAddressController::class, 'destroy'])->name('user.address.destroy');
 
     // User

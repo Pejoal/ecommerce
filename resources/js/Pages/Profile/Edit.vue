@@ -108,6 +108,18 @@ const updateAddress = () => {
     onError: (errors) => console.error("Form errors:", errors),
   });
 };
+
+const handleMainAddressChange = (id, checked) => {
+  addressForm.is_main = checked;
+  addressForm.patch(route("user.address.main.update", id), {
+    preserveState: true,
+    preserveScroll: true,
+    onSuccess: () => {
+      addressForm.reset();
+    },
+    onError: (errors) => console.error("Form errors:", errors),
+  });
+};
 </script>
 
 <template>
@@ -432,10 +444,20 @@ const updateAddress = () => {
                 <td class="p-1">{{ address.city }}</td>
                 <td class="p-1">{{ address.state }}</td>
                 <td class="p-1">{{ address.zipcode }}</td>
-                <td v-if="address.is_main" class="p-1 text-green-500 font-bold">
-                  Yes
+                <td class="p-1">
+                  <input
+                    type="checkbox"
+                    :checked="address.is_main"
+                    @change="
+                      (event) =>
+                        handleMainAddressChange(
+                          address.id,
+                          event.target.checked
+                        )
+                    "
+                    class="h-5 w-5 text-blue-600 transition duration-150 ease-in-out rounded-full"
+                  />
                 </td>
-                <td v-else class="p-1 text-red-500 font-bold">No</td>
                 <td class="p-1 flex space-x-2">
                   <button
                     @click="editAddress(address.id)"
