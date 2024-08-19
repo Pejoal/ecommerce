@@ -90,6 +90,7 @@ Route::group([], function () {
         $paymentIntentId = $request->query('payment_intent');
         $paymentIntent = \Stripe\PaymentIntent::retrieve($paymentIntentId);
 
+        dd($paymentIntent, $paymentIntentId);
         if ($paymentIntent->status == 'succeeded') {
           return redirect()->route('payment.success');
         } else {

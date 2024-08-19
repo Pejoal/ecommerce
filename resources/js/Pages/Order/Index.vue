@@ -17,6 +17,14 @@ const props = defineProps({
   clientSecret: {
     type: String,
     default: "",
+  },
+  success: {
+    type: String,
+    default: "",
+  },
+  error: {
+    type: String,
+    default: "",
   }
 });
 
@@ -35,6 +43,7 @@ const orderForm = useForm({
 });
 
 const showModal = ref(false);
+const payError = ref("");
 
 onMounted(async () => {
   const stripe = await stripePromise;
@@ -61,7 +70,7 @@ const handlePayment = async (id) => {
   });
 
   if (error) {
-    console.error(error);
+    payError.value = error
     return;
   }
 
@@ -71,7 +80,6 @@ const handlePayment = async (id) => {
       // Handle successful payment here
       if (props.clientSecret) {
         stripe.confirmCardPayment(props.clientSecret);
-        console.log("Payed Success");
       }
     },
     onError: () => {
@@ -204,6 +212,10 @@ const saveAddress = (orderId, addressId) => {
             <button type="submit" class="btn btn-primary" :disabled="orderForm.processing">
               Submit Payment
             </button>
+
+            <p class="font-semibold text-green-600" v-if="props.success">{{ props.success }}</p>
+            <p class="font-semibold text-red-600" v-if="props.error">{{ props.error }}</p>
+            <p class="font-semibold text-red-600" v-if="payError">{{ payError }}</p>
           </form>
         </template>
       </ResuableModal>

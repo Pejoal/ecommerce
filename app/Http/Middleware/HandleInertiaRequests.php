@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware {
         'error' => session('error'),
       ],
       'clientSecret' => session('clientSecret'),
+      'message' => session('message'),
     ]);
   }
 }

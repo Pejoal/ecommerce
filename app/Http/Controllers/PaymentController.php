@@ -11,19 +11,29 @@ class PaymentController extends Controller {
   public function processPayment(Request $request) {
     Stripe::setApiKey(env('VITE_STRIPE_SECRET'));
 
-    $paymentIntent = PaymentIntent::create([
-      'amount' => 1099, // amount in cents
-      'currency' => 'usd',
-      'payment_method' => $request->input('payment_method'),
-      'confirm' => true,
-      // 'return_url' => route('payment.handle_return'),
-      'automatic_payment_methods' => [
-        'enabled' => true,
-        'allow_redirects' => 'never', // Disable redirect-based payment methods
-      ],
-    ]);
+    try {
+      $paymentIntent = PaymentIntent::create([
+        'amount' => 1099, // amount in cents (e.g., $10.99)
+        'currency' => 'usd',
+        'payment_method' => $request->input('payment_method'),
+        'confirm' => true,
+        'automatic_payment_methods' => [
+          'enabled' => true,
+          'allow_redirects' => 'never', // Disable redirect-based payment methods
+        ],
+      ]);
 
-    return Redirect::route('order.index')->with('clientSecret', $paymentIntent->client_secret);
+      if ($paymentIntent->status === 'succeeded') {
+        return Redirect::route('order.index')->with('success', 'Payment successful!');
+      } elseif ($paymentIntent->status === 'requires_action' || $paymentIntent->status === 'requires_source_action') {
+        return Redirect::to($paymentIntent->next_action->redirect_to_url->url);
+      } else {
+        return Redirect::route('order.index')->with('error', 'Payment failed!');
+      }
+    } catch (\Exception $e) {
+      return Redirect::route('order.index')->with('error', 'Error: ' . $e->getMessage());
+    }
 
   }
+
 }
