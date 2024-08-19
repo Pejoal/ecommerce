@@ -66,6 +66,9 @@ class OrderController extends Controller {
   }
 
   public function updateAddress(Request $request, Order $order) {
+    $this->authorize('update', $order);
+
+
     $order->user_address_id = $request->addressId;
     $order->save();
   }
