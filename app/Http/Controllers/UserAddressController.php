@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class UserAddressController extends Controller {
 
   public function edit(UserAddress $address) {
+    $this->authorize('update', $address);
     return $address;
   }
 
@@ -32,6 +33,8 @@ class UserAddressController extends Controller {
   }
 
   public function update(Request $request, UserAddress $address) {
+    $this->authorize('update', $address);
+
     $validated = $request->validate([
       'type' => 'required|string|max:45',
       'address1' => 'required|string|max:255',
@@ -51,6 +54,8 @@ class UserAddressController extends Controller {
   }
 
   public function destroy(UserAddress $address) {
+    $this->authorize('update', $address);
+
     // Note: if there is an order associated with this address, it will not be deleted
     $orders = Order::where('user_address_id', $address->id)->get();
     foreach ($orders as $order) {
@@ -61,6 +66,8 @@ class UserAddressController extends Controller {
     $address->delete();
   }
   public function setAsMainAddress(UserAddress $address, Request $request) {
+    $this->authorize('update', $address);
+
     // Unset the current main address if one exists
     auth()->user()->addresses()->update(['is_main' => 0]);
 
@@ -71,6 +78,14 @@ class UserAddressController extends Controller {
 
   public function massDestroy(Request $request) {
     $ids = $request->input('selectedAddresses');
-    UserAddress::whereIn('id', $ids)->delete();
+
+    $addresses = UserAddress::whereIn('id', $ids)->get();
+
+    foreach ($addresses as $address) {
+      if ($this->authorize('update', $address)) {
+        $address->delete();
+      }
+    }
+
   }
 }
