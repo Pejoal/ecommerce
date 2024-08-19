@@ -378,11 +378,11 @@ const clearFilters = () => {
           <div
             v-for="(product, index) in props.products.data"
             :key="index"
-            class="flex-1 min-w-[240px] flex flex-col bg-white shadow-md rounded-lg p-4 border border-gray-200"
+            class="flex-1 min-w-[240px] flex flex-col shadow-md rounded-lg p-4 transition-all duration-300 ease-in-out border border-transparent hover:border-blue-800 group"
           >
             <Link
               :href="route('products.show', product.slug)"
-              class="hover:font-bold"
+              class="hover:font-semibold"
             >
               <div class="flex flex-col items-center">
                 <!-- Display Product Images -->
@@ -396,7 +396,7 @@ const clearFilters = () => {
                   <!-- Add more images if necessary -->
                 </div>
 
-                <h3 class="text-lg font-semibold mb-2">{{ product.title }}</h3>
+                <h3 class="text-lg font-semibold mb-2 group-hover:text-blue-800 transition-colors duration-300">{{ product.title }}</h3>
                 <p class="text-gray-600 mb-2">{{ product.description }}</p>
                 <div class="mt-2 flex items-center">
                   <span class="font-medium text-gray-800">Price:</span>
@@ -448,7 +448,10 @@ const clearFilters = () => {
               </div>
             </Link>
 
-            <form @submit.prevent="addToCart(product.id)" class="flex flex-col mt-auto">
+            <form
+              @submit.prevent="addToCart(product.id)"
+              class="flex flex-col mt-auto"
+            >
               <button
                 type="submit"
                 class="btn btn-primary"
