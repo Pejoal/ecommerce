@@ -85,6 +85,17 @@ Route::group([], function () {
       Route::patch('order/{order}/address/update', [OrderController::class, 'updateAddress'])->name('order.address.update');
 
       Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process.payment');
+      Route::get('/payment/handle-return', function (Request $request) {
+        // Retrieve the PaymentIntent and handle the result
+        $paymentIntentId = $request->query('payment_intent');
+        $paymentIntent = \Stripe\PaymentIntent::retrieve($paymentIntentId);
+
+        if ($paymentIntent->status == 'succeeded') {
+          return redirect()->route('payment.success');
+        } else {
+          return redirect()->route('payment.failure');
+        }
+      })->name('payment.handle_return');
       Route::get('/payment/success', function () {
         return 'Payment Successful!';
       })->name('payment.success');
