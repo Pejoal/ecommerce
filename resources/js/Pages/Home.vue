@@ -316,6 +316,7 @@ const clearFilters = () => {
           </div>
         </div>
 
+        <!-- Premium Delivery Filter -->
         <div class="flex items-center space-x-2 pt-2 border-t border-black">
           <input
             id="premiumDelivery"
@@ -329,6 +330,7 @@ const clearFilters = () => {
           </label>
         </div>
 
+        <!-- In Stock Filter -->
         <div class="flex items-center space-x-2 pt-2 border-black">
           <input
             id="in_stock"
@@ -340,6 +342,7 @@ const clearFilters = () => {
           <label for="in_stock" class="text-gray-700"> In Stock </label>
         </div>
 
+        <!-- Per Page Filter -->
         <div
           class="flex items-center space-x-2 mt-2 pt-2 border-t border-black"
         >
@@ -367,7 +370,7 @@ const clearFilters = () => {
         </div>
       </section>
 
-      <!-- End of first section (Filters) -->
+      <!-- End of Filters -->
 
       <section class="col-span-3 p-2">
         <h2 class="text-xl font-bold">Products</h2>
@@ -375,7 +378,7 @@ const clearFilters = () => {
           <div
             v-for="(product, index) in props.products.data"
             :key="index"
-            class="flex-1 min-w-[240px] bg-white shadow-md rounded-lg p-4 border border-gray-200"
+            class="flex-1 min-w-[240px] flex flex-col bg-white shadow-md rounded-lg p-4 border border-gray-200"
           >
             <Link
               :href="route('products.show', product.slug)"
@@ -445,7 +448,7 @@ const clearFilters = () => {
               </div>
             </Link>
 
-            <form @submit.prevent="addToCart(product.id)" class="flex flex-col">
+            <form @submit.prevent="addToCart(product.id)" class="flex flex-col mt-auto">
               <button
                 type="submit"
                 class="btn btn-primary"
