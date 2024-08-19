@@ -215,7 +215,7 @@ const saveAddress = (orderId, addressId) => {
 
             <p class="font-semibold text-green-600" v-if="props.success">{{ props.success }}</p>
             <p class="font-semibold text-red-600" v-if="props.error">{{ props.error }}</p>
-            <p class="font-semibold text-red-600" v-if="payError">{{ payError }}</p>
+            <p class="font-semibold text-red-600" v-if="payError">{{ payError?.message }}</p>
           </form>
         </template>
       </ResuableModal>
