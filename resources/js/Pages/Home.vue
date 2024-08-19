@@ -381,7 +381,7 @@ const clearFilters = () => {
             class="flex-1 min-w-[240px] flex flex-col shadow-md rounded-lg p-4 transition-all duration-300 ease-in-out border border-transparent hover:border-blue-800 group"
           >
             <Link
-              :href="route('products.show', product.slug)"
+              :href="route('product.show', product.slug)"
               class="hover:font-semibold"
             >
               <div class="flex flex-col items-center">

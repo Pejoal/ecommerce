@@ -1,5 +1,5 @@
 <script setup>
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { ref } from "vue";
 
@@ -100,10 +100,12 @@ function saveAddress(orderId, addressId) {
               :key="item.id"
               class="mb-2 flex justify-between border-b border-gray-300 pb-2"
             >
-              <span>{{ item.product.title }} (x{{ item.quantity }})</span>
-              <span
-                >${{ (item.product.price * item.quantity).toFixed(2) }}</span
-              >
+              <Link :href="route('product.show', item.product.slug)" class="hover:font-bold">
+                <span>{{ item.product.title }} (x{{ item.quantity }})</span>
+                <span
+                  >${{ (item.product.price * item.quantity).toFixed(2) }}</span
+                >
+              </Link>
             </li>
           </ul>
         </div>

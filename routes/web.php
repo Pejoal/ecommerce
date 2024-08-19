@@ -70,7 +70,7 @@ Route::group([], function () {
     Route::group(['middleware' => 'clients-only'], function () {
       Route::get('home', [HomeController::class, 'index'])->name('home');
 
-      Route::get('products/{product:slug}/show', [ProductController::class, 'show'])->name('products.show');
+      Route::get('products/{product:slug}/show', [ProductController::class, 'show'])->name('product.show');
 
       Route::get('cart', [CartItemController::class, 'index'])->name('cart.index');
       Route::post('cart/add', [CartItemController::class, 'add'])->name('cart.add');
