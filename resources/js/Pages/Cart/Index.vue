@@ -134,8 +134,8 @@ const orderNow = () => {
             leave-to-class="opacity-0"
             class="transition ease-in-out"
           >
-            <p v-if="$page.props.flash.error" class="text-red-600 text-sm">
-              {{ $page.props.flash.error }}
+            <p v-if="$page.props.error" class="text-red-600 text-sm">
+              {{ $page.props.error }}
             </p>
           </Transition>
         </section>
