@@ -81,14 +81,7 @@ const handlePayment = async (id) => {
       // Handle successful payment here
       if (props.clientSecret) {
         stripe.confirmCardPayment(props.clientSecret);
-        showModal.value = false;
       }
-
-      setTimeout(() => {
-        props.success = "";
-        props.error = "";
-        payError.value = "";
-      }, 3000);
     },
     onError: () => {
       // Handle errors
