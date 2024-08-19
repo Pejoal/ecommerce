@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserAddressController;
@@ -82,6 +83,9 @@ Route::group([], function () {
       Route::get('order/', [OrderController::class, 'index'])->name('order.index');
       Route::post('order/', [OrderController::class, 'store'])->name('order.store');
       Route::patch('order/{order}/address/update', [OrderController::class, 'updateAddress'])->name('order.address.update');
+      
+      Route::post('order/pay', [PaymentController::class, 'createPaymentIntent'])->name('order.pay');
+      
 
     });
 

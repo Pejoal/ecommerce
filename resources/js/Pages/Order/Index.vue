@@ -20,6 +20,18 @@ const form = useForm({
   addressId: 0,
 });
 
+const orderForm = useForm({
+});
+
+function payNow(id) {
+  orderForm.post(route("order.pay", id), {
+    onSuccess: () => {
+    },
+    preserveState: true,
+    preserveScroll: true,
+  });
+}
+
 function saveAddress(orderId, addressId) {
   // Here you would make an API request to save the selected address for the order
   form.addressId = addressId;
@@ -100,7 +112,10 @@ function saveAddress(orderId, addressId) {
               :key="item.id"
               class="mb-2 flex justify-between border-b border-gray-300 pb-2"
             >
-              <Link :href="route('product.show', item.product.slug)" class="hover:font-bold">
+              <Link
+                :href="route('product.show', item.product.slug)"
+                class="hover:font-bold"
+              >
                 <span>{{ item.product.title }} (x{{ item.quantity }})</span>
                 <span
                   >${{ (item.product.price * item.quantity).toFixed(2) }}</span
@@ -108,6 +123,18 @@ function saveAddress(orderId, addressId) {
               </Link>
             </li>
           </ul>
+          <form
+            @submit.prevent="payNow(order.id)"
+            class=""
+          >
+            <button
+              type="submit"
+              class="btn btn-primary"
+              :disabled="orderForm.processing"
+            >
+              Pay Now
+            </button>
+          </form>
         </div>
       </div>
     </main>
