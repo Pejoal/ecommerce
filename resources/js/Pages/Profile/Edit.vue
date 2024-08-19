@@ -383,10 +383,7 @@ const updateAddress = () => {
         <div v-if="addresses.length === 0" class="text-center">
           <p class="text-lg">No addresses found.</p>
         </div>
-        <div
-          v-else
-          class="lg:flex items-center justify-center overflow-x-auto w-full"
-        >
+        <div v-else class="overflow-x-auto w-full">
           <table class="w-full bg-white border border-gray-200 rounded-lg">
             <thead>
               <tr class="bg-gray-100">
