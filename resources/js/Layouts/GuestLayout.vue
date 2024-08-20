@@ -26,7 +26,7 @@ const toggleNav = () => {
           :alt="trans('words.logo')"
         />
         <Link class="font-bold text-xl" :href="route('home')">
-          {{ trans("words.game") }}
+          E-Commerce
         </Link>
       </section>
       <Locales :horizontal="true" />

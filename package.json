@@ -1,5 +1,5 @@
 {
-  "name": "game",
+  "name": "e-commerce",
   "private": true,
   "scripts": {
     "dev": "vite",
