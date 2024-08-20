@@ -50,15 +50,22 @@ class CartItemController extends Controller {
       'status' => 'required|in:in_cart,saved_for_later',
     ]);
 
-    auth()->user()->cartItems()->updateOrCreate(
-      [
+    $cartItem = auth()->user()->cartItems()->where([
+      'product_id' => $request->product_id,
+      'status' => $request->status,
+    ])->first();
+
+    if ($cartItem) {
+      $cartItem->update([
+        'quantity' => $cartItem->quantity + $request->quantity,
+      ]);
+    } else {
+      auth()->user()->cartItems()->create([
         'product_id' => $request->product_id,
         'status' => $request->status,
-      ],
-      [
-        'quantity' => \DB::raw('quantity + ' . $request->quantity),
-      ]
-    );
+        'quantity' => $request->quantity,
+      ]);
+    }
   }
 
   public function moveToCart(CartItem $cartItem) {
