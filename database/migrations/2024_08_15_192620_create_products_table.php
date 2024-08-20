@@ -33,6 +33,14 @@ return new class extends Migration {
       $table->softDeletes();
       $table->foreignIdFor(User::class, 'deleted_by')->nullable();
       $table->timestamps();
+
+      // Creating indexes
+      $table->index('title');
+      $table->index('in_stock');
+      $table->index('premium_delivery');
+      $table->index('price');
+      $table->index('brand_id');
+      $table->index('category_id');
     });
   }
 
