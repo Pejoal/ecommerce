@@ -216,7 +216,7 @@ const saveAddress = (orderId, addressId) => {
           <button
             @click="payNow(order.id)"
             class="btn btn-primary"
-            v-if="order?.payment?.status !== 'succeeded'"
+            v-if="order?.payment?.status !== 'succeeded' && order.address"
           >
             Pay Now
           </button>
