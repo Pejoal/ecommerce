@@ -12,6 +12,10 @@ class PaymentController extends Controller {
   public function processPayment(Request $request, Order $order) {
     $this->authorize('update', $order);
 
+    if ($order->payment && $order->payment->status === 'succeeded') {
+      return Redirect::route('order.index')->with('error', 'This order has already been paid.');
+    }
+
     Stripe::setApiKey(env('VITE_STRIPE_SECRET'));
 
     try {

@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { ref, onMounted } from "vue";
 import { loadStripe } from "@stripe/stripe-js";
@@ -33,9 +33,12 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 const cardElement = ref(null);
 let card;
 
+const page = usePage().props;
+
+
 const orderForm = useForm({
   id: 0,
-  cardholderName: "",
+  cardholderName: `${page.auth.user.firstname} ${page.auth.user.lastname}` ,
   cardNumber: "",
   expMonth: "",
   expYear: "",
