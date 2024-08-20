@@ -55,7 +55,7 @@ const verificationLinkSent = computed(
           :href="route('logout')"
           method="post"
           as="button"
-          class="underline text-white ml-3 bg-red-600 px-2 py-1 rounded-md"
+          class="btn btn-danger"
         >
           {{ trans("words.logout") }}
         </Link>

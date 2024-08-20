@@ -198,7 +198,7 @@ const submit = () => {
           </p>
         </Transition>
 
-        <div class="flex items-center justify-end mt-2">
+        <div class="flex items-center justify-between mt-2">
           <Link
             :href="route('login')"
             class="underline text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
