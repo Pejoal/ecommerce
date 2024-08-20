@@ -16,7 +16,7 @@ class PaymentController extends Controller {
       return Redirect::route('order.index')->with('error', 'This order has already been paid.');
     }
 
-    if (!$order->payment) {
+    if (!$order->address) {
       return Redirect::route('order.index')->with('error', 'This order has no address.');
     }
 
