@@ -212,9 +212,12 @@ const saveAddress = (orderId, addressId) => {
               </Link>
             </li>
           </ul>
-          <button @click="payNow(order.id)" class="btn btn-primary">
+          <button @click="payNow(order.id)" class="btn btn-primary" v-if="order?.payment?.status !== 'succeeded'">
             Pay Now
           </button>
+          <section class="text-green-600 text-lg font-bold" v-else-if="order?.payment?.status === 'succeeded'">
+            Already Paid
+          </section>
         </div>
       </section>
 
