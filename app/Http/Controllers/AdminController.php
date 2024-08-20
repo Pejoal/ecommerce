@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Inertia\Inertia;
 
 class AdminController extends Controller {
@@ -45,6 +46,11 @@ class AdminController extends Controller {
 
     $perPage = $request->input('perPage', 5); // Default to 5 items per page if not provided
     $paginatedProducts = $query->latest('id')->paginate($perPage);
+
+    if (App::environment('production')) {
+      $paginatedProducts->withPath(secure_url($request->path()));
+    }
+
     $paginatedProducts->getCollection()->transform(function ($product) {
       return [
         "id" => $product->id,
