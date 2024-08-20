@@ -294,13 +294,13 @@ const handleNewImages = (files) => {
   <Head :title="'Products Dashboard'" />
 
   <AuthLayout>
-    <section>
-      <button @click="toggleFilters" class="font-bold text-lg px-2">
+    <section class="px-2 pt-1">
+      <button @click="toggleFilters" class="btn btn-primary">
         Toggle Filters
       </button>
 
       <transition name="slide-down">
-        <section v-if="filtersVisible" class="p-2 bg-slate-200 rounded-lg">
+        <section v-if="filtersVisible" class="p-2 m-1 bg-slate-200 rounded-lg">
           <!-- Search Filter -->
           <div class="mb-4">
             <h3 class="text-lg font-semibold">Search</h3>
@@ -472,7 +472,7 @@ const handleNewImages = (files) => {
       </transition>
     </section>
 
-    <div class="p-2 flex items-center gap-2">
+    <div class="pb-2 px-2 flex items-center gap-2">
       <button class="btn btn-primary" @click="addProduct">Add Product</button>
       <button
         @click="massDeleteProducts"
