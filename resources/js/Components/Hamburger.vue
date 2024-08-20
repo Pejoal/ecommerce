@@ -14,9 +14,9 @@ const props = defineProps({
     class="hamburger-icon"
     :class="{ active: show }"
   >
-    <span class="bar bg-white" :class="{ 'bg-black': props.dark }"></span>
-    <span class="bar bg-white" :class="{ 'bg-black': props.dark }"></span>
-    <span class="bar bg-white" :class="{ 'bg-black': props.dark }"></span>
+    <span class="bar bg-gray-800" :class="{ 'bg-black': props.dark }"></span>
+    <span class="bar bg-gray-800" :class="{ 'bg-black': props.dark }"></span>
+    <span class="bar bg-gray-800" :class="{ 'bg-black': props.dark }"></span>
   </section>
 </template>
 <style scoped>
@@ -25,7 +25,7 @@ const props = defineProps({
   position: relative;
   width: 30px;
   height: 20px;
-  z-index: 980;
+  z-index: 400;
 }
 .hamburger-icon.active {
   position: fixed;
