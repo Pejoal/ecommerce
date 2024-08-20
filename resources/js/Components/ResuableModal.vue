@@ -4,20 +4,26 @@ const props = defineProps({
   classes: Array,
   header: String,
 });
-
 </script>
 
 <template>
   <Transition name="modal">
     <div v-show="props.show" class="modal-mask" @click.self="$emit('close')">
-      <div class="modal-container m-auto bg-white overflow-y-auto transition-all pb-4 rounded-lg" :class="props.classes">
+      <div
+        class="modal-container m-auto bg-white overflow-y-auto transition-all pb-4 rounded-lg"
+        :class="props.classes"
+      >
         <slot name="header">
           <div class="flex items-center justify-between px-4 bg-gray-200">
-            <h2 class="text-2xl">{{ props.header ? props.header : 'Header'  }}</h2>
+            <h2 class="text-2xl">
+              {{ props.header ? props.header : "Header" }}
+            </h2>
             <button class="text-5xl" @click="$emit('close')">&times;</button>
           </div>
         </slot>
-        <slot name="content">default body</slot>
+        <div class="p-2">
+          <slot name="content">default body</slot>
+        </div>
       </div>
     </div>
   </Transition>

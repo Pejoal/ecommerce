@@ -10,7 +10,7 @@ use Inertia\Inertia;
 class OrderController extends Controller {
 
   public function index(Request $request) {
-    $orders = auth()->user()->orders()->with(['items.product', 'address'])->get()->map(function ($order) {
+    $orders = auth()->user()->orders()->with(['items.product', 'address','payment'])->get()->map(function ($order) {
       $order->total_price = $order->items->sum(function ($item) {
         return $item->product->price * $item->quantity;
       });

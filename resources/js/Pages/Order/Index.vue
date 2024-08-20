@@ -3,7 +3,7 @@ import { Head, Link, useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { ref, onMounted } from "vue";
 import { loadStripe } from "@stripe/stripe-js";
-import ResuableModal from "@/Components/ResuableModal.vue";
+import ReuseableModal from "@/Components/ReuseableModal.vue";
 import { Transition } from "vue";
 
 const props = defineProps({
@@ -215,14 +215,14 @@ const saveAddress = (orderId, addressId) => {
         </div>
       </section>
 
-      <ResuableModal
+      <ReuseableModal
         :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-3/4']"
         header="Pay Now"
         :show="showModal"
         @close="showModal = false"
       >
         <template #content>
-          <form @submit.prevent="handlePayment" class="p-2">
+          <form @submit.prevent="handlePayment">
             <label for="cardholderName">Cardholder's Name</label>
             <input
               type="text"
@@ -264,7 +264,7 @@ const saveAddress = (orderId, addressId) => {
             </Transition>
           </form>
         </template>
-      </ResuableModal>
+      </ReuseableModal>
     </main>
   </AuthLayout>
 </template>

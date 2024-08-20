@@ -3,7 +3,7 @@ import { ref, watch, computed } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import ResuableModal from "@/Components/ResuableModal.vue";
+import ReuseableModal from "@/Components/ReuseableModal.vue";
 import axios from "axios";
 
 const props = defineProps({
@@ -270,7 +270,7 @@ const uploadProductPhotos = () => {
   form.post(route("admin.products.photo.update"), {
     preserveScroll: true,
     onSuccess: () => {
-      storeProduct()
+      storeProduct();
       imagesRef.value.value = "";
     },
   });
@@ -500,14 +500,14 @@ const handleNewImages = (files) => {
     </div>
 
     <!-- Create/Edit Product Modal -->
-    <ResuableModal
+    <ReuseableModal
       :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-full']"
       :header="form.id ? 'Edit Product' : 'Create Product'"
       :show="showModal"
       @close="showModal = false"
     >
       <template #content>
-        <form @submit.prevent="storeProduct" class="mx-2">
+        <form @submit.prevent="storeProduct">
           <section class="space-y-4">
             <!-- Title -->
             <div>
@@ -801,7 +801,7 @@ const handleNewImages = (files) => {
           class="hidden"
         ></form>
       </template>
-    </ResuableModal>
+    </ReuseableModal>
 
     <!-- Product Table -->
     <div class="lg:flex items-center justify-center overflow-x-auto w-full">

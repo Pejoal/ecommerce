@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import ResuableModal from "@/Components/ResuableModal.vue";
+import ReuseableModal from "@/Components/ReuseableModal.vue";
 import axios from "axios";
 
 const props = defineProps({
@@ -116,14 +116,14 @@ const addCurrency = () => {
     </div>
 
     <!-- Create/Edit Currency Modal -->
-    <ResuableModal
+    <ReuseableModal
       :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-full']"
       :header="form.id ? 'Edit Currency' : 'Create Currency'"
       :show="showModal"
       @close="showModal = false"
     >
       <template #content>
-        <form @submit.prevent="storeCurrency" class="mx-2">
+        <form @submit.prevent="storeCurrency">
           <section class="space-y-4">
             <!-- Name -->
             <div>
@@ -203,7 +203,7 @@ const addCurrency = () => {
           class="hidden"
         ></form>
       </template>
-    </ResuableModal>
+    </ReuseableModal>
 
     <!-- Currency Table -->
     <div class="lg:flex items-center justify-center overflow-x-auto w-full">

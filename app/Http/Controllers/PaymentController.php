@@ -25,7 +25,7 @@ class PaymentController extends Controller {
       ]);
 
       if ($paymentIntent->status === 'succeeded') {
-        $order->payments()->create([
+        $order->payment()->create([
           'order_id' => $request->input('order_id'), // Make sure to pass order_id in the request
           'amount' => $paymentIntent->amount / 100, // Convert from cents to dollars
           'status' => $paymentIntent->status,

@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import ResuableModal from "@/Components/ResuableModal.vue";
+import ReuseableModal from "@/Components/ReuseableModal.vue";
 import axios from "axios";
 
 const props = defineProps({
@@ -114,14 +114,14 @@ const addCategory = () => {
     </div>
 
     <!-- Create/Edit Category Modal -->
-    <ResuableModal
+    <ReuseableModal
       :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-full']"
       :header="form.id ? 'Edit Category' : 'Create Category'"
       :show="showModal"
       @close="showModal = false"
     >
       <template #content>
-        <form @submit.prevent="storeCategory" class="mx-2">
+        <form @submit.prevent="storeCategory">
           <section class="space-y-4">
             <!-- Name -->
             <div>
@@ -181,7 +181,7 @@ const addCategory = () => {
           class="hidden"
         ></form>
       </template>
-    </ResuableModal>
+    </ReuseableModal>
 
     <!-- Category Table -->
     <div class="lg:flex items-center justify-center overflow-x-auto w-full">
