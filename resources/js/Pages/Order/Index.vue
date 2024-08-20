@@ -35,10 +35,9 @@ let card;
 
 const page = usePage().props;
 
-
 const orderForm = useForm({
   id: 0,
-  cardholderName: `${page.auth.user.firstname} ${page.auth.user.lastname}` ,
+  cardholderName: `${page.auth.user.firstname} ${page.auth.user.lastname}`,
   cardNumber: "",
   expMonth: "",
   expYear: "",
@@ -83,6 +82,8 @@ const handlePayment = async (id) => {
 
   orderForm.payment_method = paymentMethod.id;
   orderForm.post(route("process.payment", orderForm.id), {
+    preserveState: true,
+    preserveScroll: true,
     onSuccess: async () => {
       try {
         setTimeout(() => {
@@ -212,10 +213,17 @@ const saveAddress = (orderId, addressId) => {
               </Link>
             </li>
           </ul>
-          <button @click="payNow(order.id)" class="btn btn-primary" v-if="order?.payment?.status !== 'succeeded'">
+          <button
+            @click="payNow(order.id)"
+            class="btn btn-primary"
+            v-if="order?.payment?.status !== 'succeeded'"
+          >
             Pay Now
           </button>
-          <section class="text-green-600 text-lg font-bold" v-else-if="order?.payment?.status === 'succeeded'">
+          <section
+            class="text-green-600 text-lg font-bold"
+            v-else-if="order?.payment?.status === 'succeeded'"
+          >
             Already Paid
           </section>
         </div>
