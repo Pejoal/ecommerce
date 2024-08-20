@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,9 +29,11 @@ class AuthenticatedSessionController extends Controller {
    */
   public function store(LoginRequest $request): RedirectResponse {
     $request->authenticate();
-    // dd($request->session());
     $request->session()->regenerate();
 
+    if (App::environment('production')) {
+      return redirect()->intended(secure_url(RouteServiceProvider::HOME));
+    }
     return redirect()->intended(RouteServiceProvider::HOME);
   }
 
@@ -44,6 +47,10 @@ class AuthenticatedSessionController extends Controller {
 
     $request->session()->regenerateToken();
 
+    if (App::environment('production')) {
+      return redirect(secure_url('/'));
+    }
     return redirect('/');
+
   }
 }
