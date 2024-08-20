@@ -56,10 +56,9 @@ const verificationLinkSent = computed(
           method="post"
           as="button"
           class="underline text-white ml-3 bg-red-600 px-2 py-1 rounded-md"
-          >
-          {{ trans("words.logout") }}
-          </Link
         >
+          {{ trans("words.logout") }}
+        </Link>
       </div>
     </form>
   </GuestLayout>

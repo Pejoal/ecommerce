@@ -67,7 +67,7 @@ const toggleNav = () => {
         @click="showNav = false"
       ></div>
     </header>
-    <div>
+    <div class="p-2">
       <slot />
     </div>
   </div>
