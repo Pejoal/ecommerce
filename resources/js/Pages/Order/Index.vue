@@ -222,43 +222,55 @@ const saveAddress = (orderId, addressId) => {
         @close="showModal = false"
       >
         <template #content>
-          <form @submit.prevent="handlePayment">
-            <label for="cardholderName">Cardholder's Name</label>
+          <form
+            @submit.prevent="handlePayment"
+            class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg"
+          >
+            <h2 class="text-2xl font-semibold mb-4">Payment Details</h2>
+
+            <label
+              for="cardholderName"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Cardholder's Name
+            </label>
             <input
               type="text"
               v-model="orderForm.cardholderName"
               required
-            /><br />
+              class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            />
 
-            <div id="card-element" ref="cardElement"></div>
-            <br />
+            <div id="card-element" ref="cardElement" class="mt-4">
+              <!-- Stripe Card Element will be mounted here -->
+            </div>
 
             <button
               type="submit"
-              class="btn btn-primary"
+              class="mt-4 w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               :disabled="orderForm.processing"
             >
               Submit Payment
             </button>
 
             <Transition
-              enter-from-class="opacity-0"
+              enter-active-class="transition-opacity duration-300"
+              leave-active-class="transition-opacity duration-300"
               leave-to-class="opacity-0"
-              class="transition ease-in-out"
+              class="mt-4"
             >
-              <section>
-                <p class="font-semibold text-green-600" v-if="props.success">
+              <section
+                v-if="props.success || props.error || payError"
+                class="mt-4"
+              >
+                <p v-if="props.success" class="text-green-600 font-semibold">
                   {{ props.success }}
                 </p>
-                <p class="font-semibold text-red-600" v-if="props.error">
+                <p v-if="props.error" class="text-red-600 font-semibold">
                   {{ props.error }}
                 </p>
-                <p
-                  class="font-semibold text-red-600"
-                  id="payError"
-                  v-if="payError"
-                >
-                  {{ payError?.message }}
+                <p v-if="payError" class="text-red-600 font-semibold">
+                  {{ payError.message }}
                 </p>
               </section>
             </Transition>
