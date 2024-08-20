@@ -40,7 +40,6 @@ class ProductController extends Controller {
   }
 
   public function update(Request $request, Product $product) {
-    dd($request->all());
     $validated = $request->validate([
       'title' => 'required|string|max:255',
       'quantity' => 'required|integer|min:1',
