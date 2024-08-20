@@ -727,6 +727,7 @@ const handleNewImages = (files) => {
         <form
           class="p-2 sm:p-4 shadow sm:rounded-lg"
           @submit.prevent="uploadProductPhotos"
+          v-if="form.id"
         >
           <section class="flex justify-between flex-col sm:flex-row">
             <div class="my-2">
