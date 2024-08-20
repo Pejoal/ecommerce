@@ -72,6 +72,9 @@ const handlePayment = async (id) => {
 
   if (error) {
     payError.value = error;
+    setTimeout(() => {
+      payError.value = "";
+    }, 3000);
     return;
   }
 
@@ -79,7 +82,17 @@ const handlePayment = async (id) => {
   orderForm.post(route("process.payment"), {
     onSuccess: async () => {
       try {
-        const result = await stripe.confirmCardPayment(props.clientSecret);
+        setTimeout(() => {
+          props.success = "";
+          props.error = "";
+        }, 3000);
+
+        if (props.clientSecret) {
+          const result = await stripe.confirmCardPayment(props.clientSecret);
+          setTimeout(() => {
+            showModal.value = false;
+          }, 3000);
+        }
 
         // if (result.error) {
         //   console.error("Payment failed:", result.error.message);
@@ -240,7 +253,11 @@ const saveAddress = (orderId, addressId) => {
                 <p class="font-semibold text-red-600" v-if="props.error">
                   {{ props.error }}
                 </p>
-                <p class="font-semibold text-red-600" v-if="payError">
+                <p
+                  class="font-semibold text-red-600"
+                  id="payError"
+                  v-if="payError"
+                >
                   {{ payError?.message }}
                 </p>
               </section>
