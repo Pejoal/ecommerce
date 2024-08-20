@@ -9,7 +9,9 @@ use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
 class PaymentController extends Controller {
-  public function processPayment(Request $request,Order $order) {
+  public function processPayment(Request $request, Order $order) {
+    $this->authorize('update', $order);
+
     Stripe::setApiKey(env('VITE_STRIPE_SECRET'));
 
     try {
