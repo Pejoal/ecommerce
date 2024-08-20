@@ -79,7 +79,7 @@ const handlePayment = async (id) => {
   }
 
   orderForm.payment_method = paymentMethod.id;
-  orderForm.post(route("process.payment"), {
+  orderForm.post(route("process.payment", orderForm.id), {
     onSuccess: async () => {
       try {
         setTimeout(() => {

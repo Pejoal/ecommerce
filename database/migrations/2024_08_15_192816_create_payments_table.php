@@ -17,7 +17,6 @@ return new class extends Migration {
       $table->string('status', 45);
       $table->string('type', 45);
       $table->foreignIdFor(User::class, 'created_by')->nullable();
-      $table->foreignIdFor(User::class, 'updated_by')->nullable();
       $table->timestamps();
     });
   }

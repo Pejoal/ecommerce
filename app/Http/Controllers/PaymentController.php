@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
 class PaymentController extends Controller {
-  public function processPayment(Request $request) {
+  public function processPayment(Request $request,Order $order) {
     Stripe::setApiKey(env('VITE_STRIPE_SECRET'));
 
     try {
@@ -24,6 +25,13 @@ class PaymentController extends Controller {
       ]);
 
       if ($paymentIntent->status === 'succeeded') {
+        $order->payments()->create([
+          'order_id' => $request->input('order_id'), // Make sure to pass order_id in the request
+          'amount' => $paymentIntent->amount / 100, // Convert from cents to dollars
+          'status' => $paymentIntent->status,
+          'type' => 'card', // Adjust this based on the payment method used
+          'created_by' => auth()->id(), // Assuming the user is authenticated
+        ]);
         return Redirect::route('order.index')->with(['success' => 'Payment successful!', 'clientSecret' => $paymentIntent->client_secret]);
       } elseif ($paymentIntent->status === 'requires_action' || $paymentIntent->status === 'requires_source_action') {
         return Redirect::to($paymentIntent->next_action->redirect_to_url->url);
