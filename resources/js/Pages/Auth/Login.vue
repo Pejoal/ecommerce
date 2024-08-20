@@ -95,8 +95,10 @@ const submit = () => {
 
             <button
               class="ml-4 btn btn-primary"
-              :class="{ 'opacity-25': form.processing }"
-              :disabled="form.processing"
+              :class="{
+                'opacity-25': form.processing || form.password.length < 8,
+              }"
+              :disabled="form.processing || form.password.length < 8"
             >
               {{ trans("words.login") }}
             </button>
