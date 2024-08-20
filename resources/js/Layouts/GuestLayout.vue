@@ -50,16 +50,7 @@ const toggleNav = () => {
           <!-- Translations -->
           <Locales class="border-t" :vertical="true" />
 
-          <div class="py-2 border-b">
-            <Link
-              class="btn btn-danger"
-              :href="route('logout')"
-              method="post"
-              as="button"
-            >
-              {{ trans("words.logout") }}
-            </Link>
-          </div>
+        
           <!-- Button to close the menu -->
           <button
             @click="showNav = false"
