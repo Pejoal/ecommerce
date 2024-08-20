@@ -77,10 +77,20 @@ const handlePayment = async (id) => {
 
   orderForm.payment_method = paymentMethod.id;
   orderForm.post(route("process.payment"), {
-    onSuccess: () => {
-      // Handle successful payment here
-      if (props.clientSecret) {
-        stripe.confirmCardPayment(props.clientSecret);
+    onSuccess: async () => {
+      try {
+        const result = await stripe.confirmCardPayment(props.clientSecret);
+
+        // if (result.error) {
+        //   console.error("Payment failed:", result.error.message);
+        // } else if (
+        //   result.paymentIntent &&
+        //   result.paymentIntent.status === "succeeded"
+        // ) {
+        //   console.log("Payment succeeded:", result.paymentIntent);
+        // }
+      } catch (error) {
+        console.error("An error occurred:", error);
       }
     },
     onError: () => {
