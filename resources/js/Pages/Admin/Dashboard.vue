@@ -28,6 +28,11 @@ const props = defineProps({
 let showModal = ref(false);
 let allImages = ref([]);
 
+const imagesForm = useForm({
+  id: 0,
+  images: [],
+});
+
 const form = useForm({
   id: null,
   title: "",
@@ -40,7 +45,6 @@ const form = useForm({
   currency_id: 0,
   brand_id: 0,
   category_id: 0,
-  images: [],
 });
 
 const massForm = useForm({
@@ -107,6 +111,7 @@ const editProduct = (productId) => {
     .get(route("admin.products.edit", productId))
     .then((response) => {
       form.id = response.data.id;
+      imagesForm.id = response.data.id;
       form.title = response.data.title;
       form.quantity = response.data.quantity;
       form.description = response.data.description;
@@ -267,11 +272,11 @@ const clearFilters = () => {
 };
 
 const uploadProductPhotos = () => {
-  form.post(route("admin.products.photo.update"), {
+  imagesForm.post(route("admin.products.photo.update"), {
     preserveScroll: true,
     onSuccess: () => {
-      // updateProduct();
       imagesRef.value.value = "";
+      showModal.value = false;
     },
   });
 };
@@ -286,7 +291,7 @@ const deleteImage = (id) => {
 };
 
 const handleNewImages = (files) => {
-  form.images = files;
+  imagesForm.images = files;
 };
 </script>
 
@@ -748,12 +753,11 @@ const handleNewImages = (files) => {
               Upload
             </button>
           </section>
-          <p
-            v-if="form.errors.images"
-            class="text-sm text-red-600 rounded-md my-1 px-2 py-1"
-          >
-            {{ form.errors.images }}
-          </p>
+          <div v-if="imagesForm.errors" v-for="(error, key) in imagesForm.errors">
+            <p class="text-sm text-red-600 rounded-md my-1 px-2 py-1">
+              {{ error }}
+            </p>
+          </div>
           <progress
             v-if="form.progress"
             :value="form.progress.percentage"

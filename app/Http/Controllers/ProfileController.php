@@ -66,7 +66,7 @@ class ProfileController extends Controller {
     if ($request->hasFile('profile_photo')) {
       $request->validate([
         // 'profile_photo' => ['required', 'image', 'max:1024'], // Maximum file size of 1MB
-        'profile_photo' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:50000'],
+        'profile_photo' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:20000'],
       ]);
       $path = $request->file('profile_photo')->store('public/profiles');
       auth()->user()->profile_photo_url = Storage::url($path);

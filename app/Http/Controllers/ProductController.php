@@ -69,7 +69,7 @@ class ProductController extends Controller {
 
   public function updateProductPhotos(Request $request) {
     $request->validate([
-      'images.*' => 'required|image|mimes:jpg,jpeg,png,bmp|max:2048',
+      'images.*' => 'required|image|mimes:jpg,jpeg,png,bmp|max:20000',
     ]);
 
     // Assuming you have a product ID passed as a hidden input or in the route
