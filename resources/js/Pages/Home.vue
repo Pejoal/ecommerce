@@ -180,13 +180,15 @@ const toggleFilters = () => {
     <title>{{ trans("words.home") }}</title>
   </Head>
   <AuthLayout>
-    <main class="grid grid-cols-1 md:grid-cols-4">
-      <section class="bg-blue-50 p-2">
+    <main>
+      <section class="p-2">
         <button @click="toggleFilters" class="btn btn-primary">
           Toggle Filters
         </button>
+      </section>
+      <section class="grid grid-cols-1 md:grid-cols-4 p-2">
         <transition name="slide-down">
-          <section v-show="filtersVisible">
+          <section class="bg-blue-50" v-if="filtersVisible">
             <!-- Search Filter -->
             <div class="mb-4">
               <h3 class="text-lg font-semibold">Search</h3>
@@ -381,135 +383,135 @@ const toggleFilters = () => {
             </div>
           </section>
         </transition>
-      </section>
 
-      <!-- End of Filters -->
+        <!-- End of Filters -->
 
-      <section class="col-span-3 p-2">
-        <h2 class="text-xl font-bold">Products</h2>
-        <section class="flex flex-wrap gap-4">
-          <div
-            v-for="(product, index) in props.products.data"
-            :key="index"
-            class="flex-1 min-w-[240px] flex flex-col shadow-md rounded-lg p-4 transition-all duration-300 ease-in-out border border-transparent hover:border-blue-800 group"
-          >
-            <Link
-              :href="route('product.show', product.slug)"
-              class="hover:font-semibold"
+        <section class="p-2" :class="[filtersVisible ? 'col-span-3' : 'col-span-4']">
+          <h2 class="text-xl font-bold">Products</h2>
+          <section class="flex flex-wrap gap-4">
+            <div
+              v-for="(product, index) in props.products.data"
+              :key="index"
+              class="flex-1 min-w-[240px] flex flex-col shadow-md rounded-lg p-4 transition-all duration-300 ease-in-out border border-transparent hover:border-blue-800 group"
             >
-              <div class="flex flex-col items-center">
-                <!-- Display Product Images -->
-                <div class="flex flex-wrap gap-2 mb-4">
-                  <img
-                    v-if="product.images.length"
-                    :src="product.images[0].image"
-                    alt="Product Image"
-                    class="w-40 h-40 object-cover rounded-md border border-gray-300"
-                  />
-                  <!-- Add more images if necessary -->
-                </div>
+              <Link
+                :href="route('product.show', product.slug)"
+                class="hover:font-semibold"
+              >
+                <div class="flex flex-col items-center">
+                  <!-- Display Product Images -->
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <img
+                      v-if="product.images.length"
+                      :src="product.images[0].image"
+                      alt="Product Image"
+                      class="w-40 h-40 object-cover rounded-md border border-gray-300"
+                    />
+                    <!-- Add more images if necessary -->
+                  </div>
 
-                <h3
-                  class="text-lg font-semibold mb-2 group-hover:text-blue-800 transition-colors duration-300"
+                  <h3
+                    class="text-lg font-semibold mb-2 group-hover:text-blue-800 transition-colors duration-300"
+                  >
+                    {{ product.title }}
+                  </h3>
+                  <p class="text-gray-600 mb-2">{{ product.description }}</p>
+                  <div class="mt-2 flex items-center">
+                    <span class="font-medium text-gray-800">Price:</span>
+                    <span class="ml-1 font-bold text-green-600">{{
+                      product.currency + product.price
+                    }}</span>
+                  </div>
+                  <div class="mt-1 flex items-center">
+                    <span class="font-medium text-gray-800">Published:</span>
+                    <span
+                      class="ml-1 font-bold text-green-600"
+                      v-if="product.published"
+                      >Yes</span
+                    >
+                    <span class="ml-1 font-bold text-red-600" v-else>No</span>
+                  </div>
+                  <div class="mt-1 flex items-center">
+                    <span class="font-medium text-gray-800">In Stock:</span>
+                    <span
+                      class="ml-1 font-bold text-green-600"
+                      v-if="product.in_stock"
+                      >Yes</span
+                    >
+                    <span class="ml-1 font-bold text-red-600" v-else>No</span>
+                  </div>
+                  <div class="mt-1 flex items-center">
+                    <span class="font-medium text-gray-800"
+                      >Premium Delivery:</span
+                    >
+                    <span
+                      class="ml-1 font-bold text-green-600"
+                      v-if="product.premium_delivery"
+                      >Yes</span
+                    >
+                    <span class="ml-1 font-bold text-red-600" v-else>No</span>
+                  </div>
+                  <div class="mt-1 flex items-center">
+                    <span class="font-medium text-gray-800">Quantity:</span>
+                    <span class="ml-1 font-bold">{{ product.quantity }}</span>
+                  </div>
+                  <div class="mt-1 flex items-center">
+                    <span class="font-medium text-gray-800">Brand:</span>
+                    <span class="ml-1 font-bold">{{ product.brand }}</span>
+                  </div>
+                  <div class="mt-1 flex items-center">
+                    <span class="font-medium text-gray-800">Category:</span>
+                    <span class="ml-1 font-bold">{{ product.category }}</span>
+                  </div>
+                </div>
+              </Link>
+
+              <form
+                @submit.prevent="addToCart(product.id)"
+                class="flex flex-col mt-auto"
+              >
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  :disabled="!product.in_stock || productForm.processing"
                 >
-                  {{ product.title }}
-                </h3>
-                <p class="text-gray-600 mb-2">{{ product.description }}</p>
-                <div class="mt-2 flex items-center">
-                  <span class="font-medium text-gray-800">Price:</span>
-                  <span class="ml-1 font-bold text-green-600">{{
-                    product.currency + product.price
-                  }}</span>
-                </div>
-                <div class="mt-1 flex items-center">
-                  <span class="font-medium text-gray-800">Published:</span>
-                  <span
-                    class="ml-1 font-bold text-green-600"
-                    v-if="product.published"
-                    >Yes</span
-                  >
-                  <span class="ml-1 font-bold text-red-600" v-else>No</span>
-                </div>
-                <div class="mt-1 flex items-center">
-                  <span class="font-medium text-gray-800">In Stock:</span>
-                  <span
-                    class="ml-1 font-bold text-green-600"
-                    v-if="product.in_stock"
-                    >Yes</span
-                  >
-                  <span class="ml-1 font-bold text-red-600" v-else>No</span>
-                </div>
-                <div class="mt-1 flex items-center">
-                  <span class="font-medium text-gray-800"
-                    >Premium Delivery:</span
-                  >
-                  <span
-                    class="ml-1 font-bold text-green-600"
-                    v-if="product.premium_delivery"
-                    >Yes</span
-                  >
-                  <span class="ml-1 font-bold text-red-600" v-else>No</span>
-                </div>
-                <div class="mt-1 flex items-center">
-                  <span class="font-medium text-gray-800">Quantity:</span>
-                  <span class="ml-1 font-bold">{{ product.quantity }}</span>
-                </div>
-                <div class="mt-1 flex items-center">
-                  <span class="font-medium text-gray-800">Brand:</span>
-                  <span class="ml-1 font-bold">{{ product.brand }}</span>
-                </div>
-                <div class="mt-1 flex items-center">
-                  <span class="font-medium text-gray-800">Category:</span>
-                  <span class="ml-1 font-bold">{{ product.category }}</span>
-                </div>
-              </div>
-            </Link>
+                  Add to Cart
+                </button>
+                <Transition
+                  enter-from-class="opacity-0"
+                  leave-to-class="opacity-0"
+                  class="transition ease-in-out"
+                >
+                  <p v-if="productSuccess[product.id]" class="text-sm">
+                    Added Successfully
+                  </p>
+                </Transition>
+              </form>
+            </div>
+          </section>
 
-            <form
-              @submit.prevent="addToCart(product.id)"
-              class="flex flex-col mt-auto"
+          <!-- Pagination Controls -->
+          <section class="flex items-center justify-between my-2 bg-slate-300">
+            <button
+              v-if="props.products.prev_page_url"
+              @click="fetchPage(props.products.prev_page_url)"
+              class="px-4 py-2 bg-blue-500 text-white rounded-lg"
             >
-              <button
-                type="submit"
-                class="btn btn-primary"
-                :disabled="!product.in_stock || productForm.processing"
-              >
-                Add to Cart
-              </button>
-              <Transition
-                enter-from-class="opacity-0"
-                leave-to-class="opacity-0"
-                class="transition ease-in-out"
-              >
-                <p v-if="productSuccess[product.id]" class="text-sm">
-                  Added Successfully
-                </p>
-              </Transition>
-            </form>
-          </div>
-        </section>
-
-        <!-- Pagination Controls -->
-        <section class="flex items-center justify-between my-2 bg-slate-300">
-          <button
-            v-if="props.products.prev_page_url"
-            @click="fetchPage(props.products.prev_page_url)"
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg"
-          >
-            Previous
-          </button>
-          <span class="mx-2"
-            >{{ props.products.current_page }} /
-            {{ props.products.last_page }}</span
-          >
-          <span class="mx-2">Total: {{ props.products.total }}</span>
-          <button
-            v-if="props.products.next_page_url"
-            @click="fetchPage(props.products.next_page_url)"
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg"
-          >
-            Next
-          </button>
+              Previous
+            </button>
+            <span class="mx-2"
+              >{{ props.products.current_page }} /
+              {{ props.products.last_page }}</span
+            >
+            <span class="mx-2">Total: {{ props.products.total }}</span>
+            <button
+              v-if="props.products.next_page_url"
+              @click="fetchPage(props.products.next_page_url)"
+              class="px-4 py-2 bg-blue-500 text-white rounded-lg"
+            >
+              Next
+            </button>
+          </section>
         </section>
       </section>
     </main>
