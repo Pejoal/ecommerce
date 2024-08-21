@@ -501,7 +501,7 @@ const handleNewImages = (files) => {
 
     <!-- Create/Edit Product Modal -->
     <ReuseableModal
-      :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-full']"
+      :classes="['w-[90%] md:w-[80%] lg:w-[60%] max-h-[100%]']"
       :header="form.id ? 'Edit Product' : 'Create Product'"
       :show="showModal"
       @close="showModal = false"
@@ -750,7 +750,7 @@ const handleNewImages = (files) => {
           </section>
           <p
             v-if="form.errors.images"
-            class="text-sm bg-red-600 rounded-md my-1 px-2 py-1"
+            class="text-sm text-red-600 rounded-md my-1 px-2 py-1"
           >
             {{ form.errors.images }}
           </p>

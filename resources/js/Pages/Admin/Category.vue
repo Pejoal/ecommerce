@@ -115,7 +115,7 @@ const addCategory = () => {
 
     <!-- Create/Edit Category Modal -->
     <ReuseableModal
-      :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-full']"
+      :classes="['w-[90%] md:w-[80%] lg:w-[60%] max-h-[100%']"
       :header="form.id ? 'Edit Category' : 'Create Category'"
       :show="showModal"
       @close="showModal = false"
