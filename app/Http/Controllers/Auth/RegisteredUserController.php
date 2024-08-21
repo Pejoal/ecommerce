@@ -65,8 +65,8 @@ class RegisteredUserController extends Controller {
     }
 
     if (App::environment('production')) {
-      return redirect(secure_url(RouteServiceProvider::HOME));
+      return redirect(secure_url(route('home')));
     }
-    return redirect(RouteServiceProvider::HOME);
+    return redirect(route('home'));
   }
 }

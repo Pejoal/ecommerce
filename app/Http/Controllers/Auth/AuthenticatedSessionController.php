@@ -38,7 +38,6 @@ class AuthenticatedSessionController extends Controller {
       return redirect(route('admin.dashboard'));
     } else if (auth()->user()->type === 'client') {
       if (App::environment('production')) {
-        dd(secure_url(route('home')));
         return redirect(secure_url(route('home')));
       }
       return redirect(route('home'));
