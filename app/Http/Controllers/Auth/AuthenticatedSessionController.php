@@ -48,9 +48,9 @@ class AuthenticatedSessionController extends Controller {
     $request->session()->regenerateToken();
 
     if (App::environment('production')) {
-      return redirect(secure_url('/'));
+      return redirect(secure_url(route('login')));
     }
-    return redirect('/');
+    return redirect(route('login'));
 
   }
 }
