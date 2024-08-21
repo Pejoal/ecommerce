@@ -31,9 +31,19 @@ class AuthenticatedSessionController extends Controller {
     $request->authenticate();
     $request->session()->regenerate();
 
-    if (App::environment('production')) {
-      return redirect()->intended(secure_url(RouteServiceProvider::HOME));
+    if (in_array(auth()->user()->type, ['super admin', 'admin'])) {
+      if (App::environment('production')) {
+        return redirect(secure_url(route('admin.dashboard')));
+      }
+      return redirect(route('admin.dashboard'));
+    } else if (auth()->user()->type === 'client') {
+      if (App::environment('production')) {
+        dd(secure_url(route('home')));
+        return redirect(secure_url(route('home')));
+      }
+      return redirect(route('home'));
     }
+
     return redirect()->intended(RouteServiceProvider::HOME);
   }
 
