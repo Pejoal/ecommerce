@@ -66,7 +66,7 @@ const orderNow = () => {
   <Head title="Cart" />
 
   <AuthLayout>
-    <main class="p-2">
+    <main class="p-1">
       <h1 class="text-2xl font-bold pb-2">Your Cart</h1>
       <section v-if="cartItems.length === 0" class="text-center">
         <p class="text-lg">Your cart is empty.</p>
@@ -75,12 +75,12 @@ const orderNow = () => {
         <div
           v-for="item in cartItems"
           :key="item.id"
-          class="shadow-md rounded-lg p-4 border border-gray-200 mb-4 flex items-center space-x-4"
+          class="shadow-md rounded-lg p-1 border border-gray-200 mb-4 flex items-center space-x-2"
         >
           <img
             :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
             :alt="item.product.title"
-            class="w-24 h-24 object-cover rounded-md border border-gray-300"
+            class="w-20 h-20 object-cover rounded-md border border-gray-300"
           />
           <div class="flex-1">
             <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
@@ -152,12 +152,12 @@ const orderNow = () => {
         <div
           v-for="item in savedForLaterItems"
           :key="item.id"
-          class="bg-white shadow-md rounded-lg p-4 border border-gray-200 mb-4 flex items-center space-x-4"
+          class="bg-white shadow-md rounded-lg p-1 border border-gray-200 mb-4 flex items-center space-x-2"
         >
           <img
             :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
             :alt="item.product.title"
-            class="w-24 h-24 object-cover rounded-md border border-gray-300"
+            class="w-20 h-20 object-cover rounded-md border border-gray-300"
           />
           <div class="flex-1">
             <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
