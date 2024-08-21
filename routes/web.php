@@ -61,12 +61,14 @@ Route::group([], function () {
 
   require __DIR__ . '/auth.php';
 
-  Route::middleware(['auth', 'verified'])->group(function () {
-
+  Route::middleware(['auth'])->group(function () {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('profile/photo/update', [ProfileController::class, 'updateProfilePhoto'])->name('profile.photo.update');
+  });
+
+  Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('user/address/store', [UserAddressController::class, 'store'])->name('user.address.store');
     Route::delete('user/address/mass-destroy', [UserAddressController::class, 'massDestroy'])->name('user.address.update.massDestroy');
