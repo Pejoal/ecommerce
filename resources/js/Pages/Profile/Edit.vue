@@ -25,6 +25,11 @@ const uploadProfilePhoto = () => {
   });
 };
 
+const mianAddressForm = useForm({
+  id: 0,
+  is_main: false,
+});
+
 const addressForm = useForm({
   id: 0,
   type: "",
@@ -59,6 +64,7 @@ const editAddress = (id) => {
     .get(route("user.address.edit", id))
     .then((response) => {
       addressForm.id = response.data.id;
+      mianAddressForm.id = response.data.id;
       addressForm.type = response.data.type;
       addressForm.address1 = response.data.address1;
       addressForm.address2 = response.data.address2;
@@ -110,12 +116,12 @@ const updateAddress = () => {
 };
 
 const handleMainAddressChange = (id, checked) => {
-  addressForm.is_main = checked;
-  addressForm.patch(route("user.address.main.update", id), {
+  mianAddressForm.is_main = checked;
+  mianAddressForm.patch(route("user.address.main.update", id), {
     preserveState: true,
     preserveScroll: true,
     onSuccess: () => {
-      addressForm.reset();
+      mianAddressForm.reset();
     },
     onError: (errors) => console.error("Form errors:", errors),
   });
