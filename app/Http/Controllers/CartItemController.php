@@ -13,7 +13,7 @@ class CartItemController extends Controller {
       ->where('status', 'in_cart')
       ->with([
         'product' => function ($query) {
-          $query->with('brand', 'category', 'currency', 'images');
+          $query->withTrashed()->with('brand', 'category', 'currency', 'images');
         },
       ])
       ->get();
@@ -26,7 +26,7 @@ class CartItemController extends Controller {
       ->where('status', 'saved_for_later')
       ->with([
         'product' => function ($query) {
-          $query->with('brand', 'category', 'currency', 'images');
+          $query->withTrashed()->with('brand', 'category', 'currency', 'images');
         },
       ])
       ->get();
