@@ -31,14 +31,8 @@ class AuthenticatedSessionController extends Controller {
     $request->session()->regenerate();
 
     if (in_array(auth()->user()->type, ['super admin', 'admin'])) {
-      if (App::environment('production')) {
-        return redirect(secure_url(route('admin.dashboard')));
-      }
       return redirect(route('admin.dashboard'));
     } else if (auth()->user()->type === 'client') {
-      if (App::environment('production')) {
-        return redirect(secure_url(route('home')));
-      }
       return redirect(route('home'));
     }
 
@@ -55,9 +49,6 @@ class AuthenticatedSessionController extends Controller {
 
     $request->session()->regenerateToken();
 
-    if (App::environment('production')) {
-      return redirect(secure_url(route('login')));
-    }
     return redirect(route('login'));
 
   }

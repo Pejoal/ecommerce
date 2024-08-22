@@ -21,9 +21,6 @@ class RedirectIfAuthenticated {
 
     foreach ($guards as $guard) {
       if (Auth::guard($guard)->check()) {
-        if (App::environment('production')) {
-          return redirect(secure_url(route('home')));
-        }
         return redirect(route('home'));
       }
     }
