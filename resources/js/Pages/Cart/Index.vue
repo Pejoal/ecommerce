@@ -90,6 +90,10 @@ const orderNow = () => {
             </p>
           </div>
 
+          <p class="text-red-500" v-if="item.product.deleted_at">
+            product is deleted
+          </p>
+
           <div>
             <button @click="saveForLater(item.id)" class="btn btn-primary">
               Save for later
@@ -165,6 +169,11 @@ const orderNow = () => {
               Price: {{ item.product.currency?.symbol + item.product.price }}
             </p>
           </div>
+
+          <p class="text-red-500" v-if="item.product.deleted_at">
+            product is deleted
+          </p>
+
           <div>
             <button @click="moveToCart(item.id)" class="btn btn-primary">
               Move to Cart
