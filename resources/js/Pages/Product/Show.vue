@@ -30,10 +30,6 @@ const saveForLater = () => {
     preserveScroll: true,
   });
 };
-
-const orderNow = () => {
-  // Implement the logic to proceed with buying the product immediately
-};
 </script>
 
 <template>
@@ -103,7 +99,11 @@ const orderNow = () => {
 
         <!-- Add to Cart & Other Buttons -->
         <form @submit.prevent="addToCart" id="addToCart" class="hidden"></form>
-        <form @submit.prevent="saveForLater" id="saveForLater" class="hidden"></form>
+        <form
+          @submit.prevent="saveForLater"
+          id="saveForLater"
+          class="hidden"
+        ></form>
         <div class="flex flex-col gap-4 mt-6">
           <button
             type="submit"
@@ -122,19 +122,8 @@ const orderNow = () => {
               Added Successfully
             </p>
           </Transition>
-          <button
-            type="submit"
-            form="saveForLater"
-            class="btn btn-warning"
-          >
+          <button type="submit" form="saveForLater" class="btn btn-warning">
             Save for Later
-          </button>
-          <button
-            @click="orderNow"
-            class="btn btn-success"
-            :disabled="!props.product.in_stock"
-          >
-            Order Now
           </button>
         </div>
 
