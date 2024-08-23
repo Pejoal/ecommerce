@@ -20,6 +20,7 @@ class PaymentController extends Controller {
       return Redirect::route('order.index')->with('error', 'This order has no address.');
     }
 
+
     Stripe::setApiKey(env('VITE_STRIPE_SECRET'));
 
     try {

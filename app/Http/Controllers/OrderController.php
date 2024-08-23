@@ -32,6 +32,13 @@ class OrderController extends Controller {
       return Redirect::route('cart.index')->with('error', 'Your cart is empty.');
     }
 
+    // Check if any of the cart items are deleted
+    foreach ($cartItems as $item) {
+      if ($item->product === null) {
+        return Redirect::route('cart.index')->with('error', 'One or more items in your cart have been deleted.');
+      }
+    }
+
     $mainAddress = auth()->user()->addresses()->where('is_main', 1)->first();
     if (!$mainAddress) {
       return Redirect::route('cart.index')->with('error', 'You should add a main address first.');
