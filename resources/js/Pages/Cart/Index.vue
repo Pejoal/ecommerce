@@ -75,14 +75,14 @@ const orderNow = () => {
         <div
           v-for="item in cartItems"
           :key="item.id"
-          class="shadow-md rounded-lg p-1 border border-gray-200 mb-4 flex items-center space-x-2"
+          class="shadow-md rounded-lg p-1 border border-gray-200 mb-4 flex items-center"
         >
           <img
             :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
             :alt="item.product.title"
             class="w-20 h-20 object-cover rounded-md border border-gray-300"
           />
-          <div class="flex-1">
+          <div class="px-2">
             <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
             <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
             <p class="text-gray-600">
@@ -90,22 +90,18 @@ const orderNow = () => {
             </p>
           </div>
 
-          <p class="text-red-500" v-if="item.product.deleted_at">
+          <p class="text-red-500 px-2" v-if="item.product.deleted_at">
             product is deleted
           </p>
 
-          <div>
+          <div class="flex flex-col justify-center items-center gap-1 ml-auto">
             <button @click="saveForLater(item.id)" class="btn btn-primary">
               Save for later
             </button>
-          </div>
 
-          <div>
             <button @click="removeItem(item.id)" class="btn btn-danger">
               Remove
             </button>
-          </div>
-          <div>
             <input
               v-model.number="item.quantity"
               @change="updateQuantity(item.id, item.quantity)"
