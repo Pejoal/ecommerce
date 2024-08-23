@@ -1,5 +1,5 @@
 <script setup>
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 
 const props = defineProps({
@@ -77,18 +77,38 @@ const orderNow = () => {
           :key="item.id"
           class="shadow-md rounded-lg p-1 border border-gray-200 mb-4 flex items-center"
         >
-          <img
-            :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
-            :alt="item.product.title"
-            class="w-20 h-20 object-cover rounded-md border border-gray-300"
-          />
-          <div class="px-2">
-            <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
-            <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
-            <p class="text-gray-600">
-              Price: {{ item.product.currency?.symbol + item.product.price }}
-            </p>
-          </div>
+          <Link
+            :href="route('product.show', item.product.slug)"
+            class="hover:font-bold flex items-center"
+            v-if="!item.product.deleted_at"
+          >
+            <img
+              :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
+              :alt="item.product.title"
+              class="w-20 h-20 object-cover rounded-md border border-gray-300"
+            />
+            <div class="px-2">
+              <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
+              <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
+              <p class="text-gray-600">
+                Price: {{ item.product.currency?.symbol + item.product.price }}
+              </p>
+            </div>
+          </Link>
+          <template v-else>
+            <img
+              :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
+              :alt="item.product.title"
+              class="w-20 h-20 object-cover rounded-md border border-gray-300"
+            />
+            <div class="px-2">
+              <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
+              <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
+              <p class="text-gray-600">
+                Price: {{ item.product.currency?.symbol + item.product.price }}
+              </p>
+            </div>
+          </template>
 
           <p class="text-red-500 px-2" v-if="item.product.deleted_at">
             product is deleted
@@ -152,25 +172,47 @@ const orderNow = () => {
         <div
           v-for="item in savedForLaterItems"
           :key="item.id"
-          class="bg-white shadow-md rounded-lg p-1 border border-gray-200 mb-4 flex items-center space-x-2"
+          class="bg-white shadow-md rounded-lg p-1 border border-gray-200 mb-4 flex items-center"
         >
-          <img
-            :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
-            :alt="item.product.title"
-            class="w-20 h-20 object-cover rounded-md border border-gray-300"
-          />
-          <div class="flex-1">
-            <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
-            <p class="text-gray-600">
-              Price: {{ item.product.currency?.symbol + item.product.price }}
-            </p>
-          </div>
+          <Link
+            :href="route('product.show', item.product.slug)"
+            class="hover:font-bold flex items-center"
+            v-if="!item.product.deleted_at"
+          >
+            <img
+              :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
+              :alt="item.product.title"
+              class="w-20 h-20 object-cover rounded-md border border-gray-300"
+            />
+            <div class="px-2">
+              <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
+              <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
+              <p class="text-gray-600">
+                Price: {{ item.product.currency?.symbol + item.product.price }}
+              </p>
+            </div>
+          </Link>
+          <template v-else>
+            <img
+              :src="item.product.images[0]?.image || '/images/no_image.jpeg'"
+              :alt="item.product.title"
+              class="w-20 h-20 object-cover rounded-md border border-gray-300"
+            />
+            <div class="px-2">
+              <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
+              <p class="text-gray-600">Quantity: {{ item.quantity }}</p>
+              <p class="text-gray-600">
+                Price: {{ item.product.currency?.symbol + item.product.price }}
+              </p>
+              
+            </div>
+          </template>
 
-          <p class="text-red-500" v-if="item.product.deleted_at">
+          <p class="text-red-500 px-2" v-if="item.product.deleted_at">
             product is deleted
           </p>
 
-          <div>
+          <div class="flex flex-col justify-center items-center gap-1 ml-auto">
             <button @click="moveToCart(item.id)" class="btn btn-primary">
               Move to Cart
             </button>
