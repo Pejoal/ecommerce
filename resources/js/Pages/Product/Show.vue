@@ -69,7 +69,7 @@ const orderNow = () => {
 
         <div class="flex items-center mb-4">
           <span class="text-2xl font-bold text-green-600">{{
-            props.product.currency.symbol + props.product.price
+            props.product.currency?.symbol + props.product.price
           }}</span>
           <span
             v-if="props.product.in_stock"
@@ -142,11 +142,11 @@ const orderNow = () => {
         <div class="mt-6">
           <p>
             <span class="font-medium text-gray-800">Brand:</span>
-            {{ props.product.brand.name }}
+            {{ props.product.brand?.name }}
           </p>
           <p>
             <span class="font-medium text-gray-800">Category:</span>
-            {{ props.product.category.name }}
+            {{ props.product.category?.name }}
           </p>
           <p v-if="props.product.premium_delivery">
             <span class="font-medium text-gray-800">Premium Delivery:</span>
