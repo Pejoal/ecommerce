@@ -20,6 +20,12 @@ class PaymentController extends Controller {
       return Redirect::route('order.index')->with('error', 'This order has no address.');
     }
 
+    // Check if any of the order items' products are deleted
+    foreach ($order->items as $item) {
+      if ($item->product === null) {
+        return Redirect::route('order.index')->with('error', 'One or more products associated with the order have been deleted.');
+      }
+    }
 
     Stripe::setApiKey(env('VITE_STRIPE_SECRET'));
 
