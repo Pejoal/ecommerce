@@ -202,15 +202,26 @@ const saveAddress = (orderId, addressId) => {
               :key="item.id"
               class="mb-2 flex justify-between border-b border-gray-300 pb-2"
             >
-              <Link
-                :href="route('product.show', item.product.slug)"
-                class="hover:font-bold"
-              >
+              <section v-if="item.product.deleted_at">
                 <span>{{ item.product.title }} (x{{ item.quantity }})</span>
                 <span
                   >${{ (item.product.price * item.quantity).toFixed(2) }}</span
                 >
-              </Link>
+                <p class="text-red-500 px-2">Product is deleted</p>
+              </section>
+              <section v-else>
+                <Link
+                  :href="route('product.show', item.product.slug)"
+                  class="hover:font-bold"
+                >
+                  <span>{{ item.product.title }} (x{{ item.quantity }})</span>
+                  <span
+                    >${{
+                      (item.product.price * item.quantity).toFixed(2)
+                    }}</span
+                  >
+                </Link>
+              </section>
             </li>
           </ul>
           <button

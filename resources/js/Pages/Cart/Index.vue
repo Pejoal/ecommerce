@@ -111,7 +111,7 @@ const orderNow = () => {
           </template>
 
           <p class="text-red-500 px-2" v-if="item.product.deleted_at">
-            product is deleted
+            Product is deleted
           </p>
 
           <div class="flex flex-col justify-center items-center gap-1 ml-auto">
@@ -204,12 +204,11 @@ const orderNow = () => {
               <p class="text-gray-600">
                 Price: {{ item.product.currency?.symbol + item.product.price }}
               </p>
-              
             </div>
           </template>
 
           <p class="text-red-500 px-2" v-if="item.product.deleted_at">
-            product is deleted
+            Product is deleted
           </p>
 
           <div class="flex flex-col justify-center items-center gap-1 ml-auto">
