@@ -56,7 +56,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin
-    restart: unless-stopped
     expose:
       - "81"
     ports:
