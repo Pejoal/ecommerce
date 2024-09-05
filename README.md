@@ -1,6 +1,6 @@
 # E-Commerce App
 
-#### [Live Demo](http://)
+#### [Live Demo](https://pejoal.live)
 
 ![Example Image](public/docs/images/Screenshot1.png)
 ---
@@ -14,11 +14,11 @@
 ## Installation
 
 ```shell
-git clone git@github.com:Pejoal/Game.git
+git clone git@github.com:Pejoal/ecommerce.git
 ```
 
 ```shell
-cd Game
+cd ecommerce
 ```
 
 ```shell
