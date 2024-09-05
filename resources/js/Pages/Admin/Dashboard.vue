@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, computed } from "vue";
+import { ref, watch, computed, Transition } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import AuthLayout from "@/Layouts/AuthLayout.vue";
 import { Head } from "@inertiajs/vue3";
@@ -107,6 +107,7 @@ const updateProduct = () => {
 };
 
 const editProduct = (productId) => {
+  form.errors = [];
   axios
     .get(route("admin.products.edit", productId))
     .then((response) => {
@@ -526,9 +527,15 @@ const handleNewImages = (files) => {
                 placeholder="Enter title"
                 class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
-              <p v-if="form.errors.title" class="text-red-600 text-sm">
-                {{ form.errors.title }}
-              </p>
+              <Transition
+                enter-from-class="opacity-0"
+                leave-to-class="opacity-0"
+                class="transition ease-in-out"
+              >
+                <p v-if="form.errors.title" class="text-red-600 text-sm">
+                  {{ form.errors.title }}
+                </p>
+              </Transition>
             </div>
 
             <!-- Quantity -->
@@ -753,7 +760,10 @@ const handleNewImages = (files) => {
               Upload
             </button>
           </section>
-          <div v-if="imagesForm.errors" v-for="(error, key) in imagesForm.errors">
+          <div
+            v-if="imagesForm.errors"
+            v-for="(error, key) in imagesForm.errors"
+          >
             <p class="text-sm text-red-600 rounded-md my-1 px-2 py-1">
               {{ error }}
             </p>

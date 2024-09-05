@@ -79,6 +79,7 @@ const updateBrand = () => {
 };
 
 const editBrand = (brandId) => {
+  form.errors = [];
   axios
     .get(route("admin.brands.edit", brandId))
     .then((response) => {

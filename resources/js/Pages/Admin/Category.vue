@@ -80,6 +80,7 @@ const updateCategory = () => {
 };
 
 const editCategory = (categoryId) => {
+  form.errors = [];
   axios
     .get(route("admin.categories.edit", categoryId))
     .then((response) => {

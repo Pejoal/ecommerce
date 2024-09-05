@@ -81,6 +81,7 @@ const updateCurrency = () => {
 };
 
 const editCurrency = (currencyId) => {
+  form.errors = [];
   axios
     .get(route("admin.currencies.edit", currencyId))
     .then((response) => {
