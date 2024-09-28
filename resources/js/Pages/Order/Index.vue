@@ -241,7 +241,7 @@ const saveAddress = (orderId, addressId) => {
       </section>
 
       <ReuseableModal
-        :classes="['w-[90%] md:w-[80%] lg:w-[60%] h-3/4']"
+        :classes="['w-[90%] md:w-[80%] lg:w-[60%]']"
         header="Pay Now"
         :show="showModal"
         @close="showModal = false"
@@ -275,7 +275,7 @@ const saveAddress = (orderId, addressId) => {
               class="mt-4 w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               :disabled="orderForm.processing"
             >
-              Submit Payment
+              Pay Now
             </button>
 
             <Transition
