@@ -3,10 +3,16 @@ import { ref } from "vue";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import {
+  faGithub,
+  faHtml5,
+  faCss3Alt,
+  faJs,
+  faNodeJs,
+} from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faGithub);
+library.add(faGithub, faHtml5, faCss3Alt, faJs, faNodeJs);
 
 AOS.init();
 
@@ -40,9 +46,16 @@ const languages = ref([
 const jobs = ref(["Job 1", "Job 2", "Job 3"]);
 const certificates = ref(["Certificate 1", "Certificate 2", "Certificate 3"]);
 
+const techSkills = ref({
+  Frontend: [
+    { name: "HTML", icon: faHtml5 },
+    { name: "CSS", icon: faCss3Alt },
+    { name: "JavaScript", icon: faJs },
+  ],
+  Backend: [{ name: "Node.js", icon: faNodeJs }],
+});
+
 const skills = ref({
-  Frontend: ["HTML", "CSS", "JavaScript", "Vue.js"],
-  Backend: ["Node.js", "Express.js", "MongoDB"],
   "Other Technical Skills": ["Git", "Docker", "AWS"],
   "Soft Skills": ["Communication", "Teamwork", "Problem-solving"],
 });
@@ -94,6 +107,29 @@ const skills = ref({
       </section>
 
       <section class="border-t my-2">
+        <!-- Tech Skills Section -->
+        <section
+          class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
+          data-aos="zoom-out"
+        >
+          <h2 class="font-bold text-2xl">Skills</h2>
+          <div v-for="(skillGroup, groupName) in techSkills" :key="groupName">
+            <h3 class="text-blue-500 font-semibold text-lg">
+              {{ groupName }}
+            </h3>
+            <ul class="list-disc list-inside">
+              <li
+                v-for="skill in skillGroup"
+                :key="skill"
+                class="text-zinc-800"
+              >
+                <FontAwesomeIcon :icon="skill.icon" class="mr-1" />
+                {{ skill.name }}
+              </li>
+            </ul>
+          </div>
+        </section>
+
         <!-- Skills Section -->
         <section
           class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
