@@ -165,7 +165,7 @@ const certificates = ref([
     <title>Pejoal Hanna's Portfolio</title>
   </Head>
   <section
-    class="min-h-screen bg-gray-100 flex flex-col justify-center items-center"
+    class="min-h-screen bg-gray-100 flex flex-col justify-center items-center overflow-x-hidden"
   >
     <div class="bg-white shadow rounded-3xl w-full sm:max-w-2xl p-2">
       <section
