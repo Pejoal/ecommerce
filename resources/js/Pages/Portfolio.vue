@@ -144,18 +144,21 @@ const jobs = ref([
 const certificates = ref([
   {
     id: 1,
-    name: "Germany Language B1",
+    name: "German Language B1 - Goethe",
+    place: "Cairo",
     date: "April 2022",
   },
   {
     id: 2,
     name: "Certificate B",
-    date: "February 2019",
+    place: "Muenchen",
+    date: "February 2021",
   },
   {
     id: 3,
     name: "Certificate C",
-    date: "March 2018",
+    place: "Bielfield",
+    date: "March 2020",
   },
 ]);
 </script>
@@ -292,8 +295,13 @@ const certificates = ref([
       >
         <h2 class="font-bold text-2xl">Languages</h2>
         <ul>
-          <li v-for="language in languages" :key="language.language">
-            {{ language.language }}: {{ language.proficiency }}
+          <li class="relative" v-for="language in languages" :key="language.language">
+            <div
+              class="absolute h-full border-2 w-[1px] border-red-500 left-0"
+            ></div>
+            <p class="pl-4">
+              {{ language.language }}: {{ language.proficiency }}
+            </p>
           </li>
         </ul>
       </section>
@@ -315,12 +323,14 @@ const certificates = ref([
           <div
             class="absolute h-full border-2 w-[1px] border-blue-500 left-0"
           ></div>
-          <h3 class="text-xl font-semibold pl-4">{{ job.title }}</h3>
-          <p class="text-blue-500 pl-4">{{ job.company }}</p>
-          <p class="text-gray-500 pl-4">
-            {{ job.startDate }} - {{ job.endDate || "Present" }}
-          </p>
-          <p class="pl-4">{{ job.description }}</p>
+          <section class="pl-4">
+            <h3 class="text-xl font-semibold">{{ job.title }}</h3>
+            <p class="text-blue-500">{{ job.company }}</p>
+            <p class="text-gray-500">
+              {{ job.startDate }} - {{ job.endDate || "Present" }}
+            </p>
+            <p>{{ job.description }}</p>
+          </section>
         </div>
       </section>
 
@@ -331,11 +341,24 @@ const certificates = ref([
       >
         <h2 class="font-bold text-2xl">Certificates</h2>
         <ul>
-          <li v-for="certificate in certificates" :key="certificate.id">
-            <h3 class="text-xl font-semibold text-blue-500">
-              {{ certificate.name }}
-            </h3>
-            <p class="text-gray-500 indent-4">{{ certificate.date }}</p>
+          <li
+            class="relative"
+            v-for="certificate in certificates"
+            :key="certificate.id"
+          >
+            <div
+              class="absolute h-full border-2 w-[1px] border-green-500 left-0"
+            ></div>
+            <section class="pl-4">
+              <h3 class="text-xl font-semibold text-blue-500">
+                {{ certificate.name }}
+              </h3>
+              <p class="text-gray-500 indent-2">
+                {{ certificate.place }}
+                -
+                {{ certificate.date }}
+              </p>
+            </section>
           </li>
         </ul>
       </section>
