@@ -3,6 +3,11 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="author" content="Pejoal Hanna">
+  <meta name="title" content="Portfolio">
+  <meta name="description" content="Pejoal Hanna's Portfolio">
+  <meta name="keywords" content="Pejoal, Pejoal Hanna">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="theme-color" content="#6777ef" />
