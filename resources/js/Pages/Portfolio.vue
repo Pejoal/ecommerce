@@ -20,6 +20,7 @@ import {
   faLinux,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { Head } from "@inertiajs/vue3";
 
 library.add(
   faGithub,
@@ -70,23 +71,26 @@ AOS.init();
 const projects = ref([
   {
     title: "E-commerce",
-    description: "E-commerce project",
+    description:
+      "This is an E-commerce project that I developed using Vue.js and Laravel. It features a user-friendly interface with a responsive design that works well on both desktop and mobile devices. The application includes features such as user authentication, product listing, shopping cart functionality, and secure payment processing. It also has an admin panel for managing products, orders, and users.",
     link: "https://github.com/Pejoal/ecommerce",
-    liveLink: "https://user.github.io/project1",
+    liveLink: "https://pejoal.live",
     image: "logo.jpg",
   },
   {
-    title: "Project 2",
-    description: "This is a description of Project 1.",
-    link: "https://github.com/user/project1",
-    liveLink: "https://user.github.io/project1",
+    title: "Appointments App",
+    description:
+      "This app was designed to streamline appointment scheduling and coordination for a driving school. It aimed to enhance efficiency and provide a seamless experience for both instructors and students",
+    link: "https://github.com/Pejoal/Termin",
+    liveLink: "https://pejoal.live",
     image: "logo.jpg",
   },
   {
-    title: "Project 3",
-    description: "This is a description of Project 1.",
-    link: "https://github.com/user/project1",
-    liveLink: "https://user.github.io/project1",
+    title: "Cards Game",
+    description:
+      "A multiplayer card game with features such as card deck management (shuffling, dealing, etc.), animations for card movements, responsive design for different devices, and real-time playing. Developed using Laravel, Inertia, Vue 3, TailwindCSS, Docker, and MySQL.",
+    link: "https://github.com/Pejoal/Game",
+    liveLink: "https://pejoal.live",
     image: "logo.jpg",
   },
 ]);
@@ -101,12 +105,14 @@ const jobs = ref(["Job 1", "Job 2", "Job 3"]);
 const certificates = ref(["Certificate 1", "Certificate 2", "Certificate 3"]);
 
 const softSkills = ref({
-  "Other Technical Skills": ["Git", "Docker", "AWS"],
   "Soft Skills": ["Communication", "Teamwork", "Problem-solving"],
 });
 </script>
 
 <template>
+  <Head>
+    <title>Pejoal Hanna's Portfolio</title>
+  </Head>
   <section
     class="min-h-screen bg-gray-100 flex flex-col justify-center items-center"
   >
@@ -123,7 +129,7 @@ const softSkills = ref({
       </section>
 
       <section class="border-t my-2 text-gray-700" data-aos="fade-up">
-        <h2 class="font-semibold pb-2">Projects</h2>
+        <h2 class="font-semibold text-xl pb-2">Projects</h2>
         <section
           v-for="project in projects"
           :key="project.title"
@@ -155,7 +161,7 @@ const softSkills = ref({
           </div>
         </section>
 
-        <section class="pt-4 text-base leading-6 font-bold sm:text-lg">
+        <section class="text-base leading-6 font-bold sm:text-lg">
           <p>
             Contact me at
             <a href="mailto:pejoal.official@gmail.com" class="text-blue-500"
@@ -165,79 +171,87 @@ const softSkills = ref({
         </section>
       </section>
 
-      <section class="border-t">
-        <!-- Skills Section -->
-        <section
-          class="py-4 text-base text-gray-700 sm:text-lg"
-          data-aos="zoom-out"
-        >
-          <h2 class="font-bold text-2xl">Skills</h2>
-          <div v-for="(skillGroup, groupName) in skills" :key="groupName">
-            <h3 class="text-blue-500 font-semibold text-lg">
-              {{ groupName }}
-            </h3>
-            <ul class="list-disc list-inside">
-              <li v-for="skill in skillGroup" :key="skill" class="indent-2">
-                <FontAwesomeIcon
-                  v-if="skill.icon"
-                  :icon="skill.icon"
-                  class="mr-1"
-                />
-                {{ skill.name }}
-              </li>
-            </ul>
-          </div>
-        </section>
+      <!-- Skills Section -->
+      <hr class="h-[2px] my-2 bg-black" />
 
-        <!-- Soft Skills Section -->
-        <section
-          class="py-4 text-base text-gray-700 sm:text-lg"
-          data-aos="zoom-in"
+      <section
+        class="py-4 text-base text-gray-700 sm:text-lg"
+        data-aos="zoom-out"
+      >
+        <h2 class="font-bold text-2xl">Skills</h2>
+        <div
+          v-for="(skillGroup, groupName) in skills"
+          :key="groupName"
+          class="rounded-lg shadow-lg p-2"
         >
-          <div v-for="(skillGroup, groupName) in softSkills" :key="groupName">
-            <h3 class="text-blue-500 font-semibold text-lg">
-              {{ groupName }}
-            </h3>
-            <ul class="list-disc list-inside">
-              <li v-for="skill in skillGroup" :key="skill" class="indent-2">
-                {{ skill }}
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- Languages Section -->
-        <section
-          class="py-4 text-base text-gray-700 sm:text-lg"
-          data-aos="flip-left"
-          data-aos-easing="ease-out-cubic"
-          data-aos-duration="500"
-        >
-          <h2 class="font-bold text-2xl">Languages</h2>
-          <ul>
-            <li v-for="language in languages" :key="language.language">
-              {{ language.language }}: {{ language.proficiency }}
+          <h3 class="text-blue-500 font-semibold text-lg">
+            {{ groupName }}
+          </h3>
+          <ul class="list-disc list-inside">
+            <li v-for="skill in skillGroup" :key="skill" class="indent-2">
+              <FontAwesomeIcon
+                v-if="skill.icon"
+                :icon="skill.icon"
+                class="mr-1"
+              />
+              {{ skill.name }}
             </li>
           </ul>
-        </section>
+        </div>
+      </section>
 
-        <!-- Jobs Section -->
-        <section class="py-4 text-base text-gray-700 sm:text-lg">
-          <h2 class="font-bold text-2xl">Jobs</h2>
-          <ul>
-            <li v-for="job in jobs" :key="job">{{ job }}</li>
-          </ul>
-        </section>
-
-        <!-- Certificates Section -->
-        <section class="py-4 text-base text-gray-700 sm:text-lg">
-          <h2 class="font-bold text-2xl">Certificates</h2>
-          <ul>
-            <li v-for="certificate in certificates" :key="certificate">
-              {{ certificate }}
+      <!-- Soft Skills Section -->
+      <section
+        class="py-4 text-base text-gray-700 sm:text-lg shadow-lg rounded-lg p-4"
+        data-aos="zoom-in"
+      >
+        <div v-for="(skillGroup, groupName) in softSkills" :key="groupName">
+          <h3 class="text-blue-500 font-semibold text-lg">
+            {{ groupName }}
+          </h3>
+          <ul class="list-disc list-inside">
+            <li v-for="skill in skillGroup" :key="skill" class="indent-2">
+              {{ skill }}
             </li>
           </ul>
-        </section>
+        </div>
+      </section>
+
+      <!-- Languages Section -->
+      <hr class="h-[2px] my-2 bg-black" />
+      <section
+        class="py-4 text-base text-gray-700 sm:text-lg shadow-lg rounded-lg p-4"
+        data-aos="flip-left"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="500"
+      >
+        <h2 class="font-bold text-2xl">Languages</h2>
+        <ul>
+          <li v-for="language in languages" :key="language.language">
+            {{ language.language }}: {{ language.proficiency }}
+          </li>
+        </ul>
+      </section>
+
+      <!-- Jobs Section -->
+      <hr class="h-[2px] my-2 bg-black" />
+      <section
+        class="text-base text-gray-700 sm:text-lg shadow-lg rounded-lg p-4"
+      >
+        <h2 class="font-bold text-2xl">Jobs / Experience</h2>
+        <ul>
+          <li v-for="job in jobs" :key="job">{{ job }}</li>
+        </ul>
+      </section>
+
+      <!-- Certificates Section -->
+      <section class="py-4 text-base text-gray-700 sm:text-lg">
+        <h2 class="font-bold text-2xl">Certificates</h2>
+        <ul>
+          <li v-for="certificate in certificates" :key="certificate">
+            {{ certificate }}
+          </li>
+        </ul>
       </section>
     </div>
   </section>
