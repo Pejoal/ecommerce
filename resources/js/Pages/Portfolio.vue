@@ -110,7 +110,7 @@ const softSkills = ref({
   <section
     class="min-h-screen bg-gray-100 flex flex-col justify-center items-center"
   >
-    <div class="bg-white shadow rounded-3xl w-full sm:max-w-2xl p-2">
+    <div class="bg-white shadow rounded-3xl w-full sm:max-w-2xl p-2 pb-52">
       <section class="p-6 bg-white shadow-lg rounded-lg">
         <h2 class="font-bold text-2xl mb-4">Pejoal Hanna (21)</h2>
         <div class="text-gray-700">
@@ -210,6 +210,8 @@ const softSkills = ref({
         <section
           class="py-4 text-base text-gray-700 sm:text-lg"
           data-aos="flip-left"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="500"
         >
           <h2 class="font-bold text-2xl">Languages</h2>
           <ul>
