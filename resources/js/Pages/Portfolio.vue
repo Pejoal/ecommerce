@@ -31,15 +31,20 @@ const projects = ref([
   },
 ]);
 
+const languages = ref([
+  { language: "Arabic", proficiency: "Mother Tongue" },
+  { language: "English", proficiency: "Fluent" },
+  { language: "German", proficiency: "Conversational" },
+]);
+
 const jobs = ref(["Job 1", "Job 2", "Job 3"]);
 const certificates = ref(["Certificate 1", "Certificate 2", "Certificate 3"]);
 
 const skills = ref({
-  frontend: ["HTML", "CSS", "JavaScript", "Vue.js"],
-  backend: ["Node.js", "Express.js", "MongoDB"],
-  languages: ["Python", "Java", "C++"],
-  otherTechnicalSkills: ["Git", "Docker", "AWS"],
-  softSkills: ["Communication", "Teamwork", "Problem-solving"],
+  Frontend: ["HTML", "CSS", "JavaScript", "Vue.js"],
+  Backend: ["Node.js", "Express.js", "MongoDB"],
+  "Other Technical Skills": ["Git", "Docker", "AWS"],
+  "Soft Skills": ["Communication", "Teamwork", "Problem-solving"],
 });
 </script>
 
@@ -48,29 +53,24 @@ const skills = ref({
     class="min-h-screen bg-gray-100 flex flex-col justify-center items-center"
   >
     <div class="bg-white shadow rounded-3xl w-full sm:max-w-2xl p-2">
-      <section class="flex items-center space-x-1">
-        <div class="block font-semibold text-xl self-start text-gray-700">
-          <h2 class="leading-relaxed">Pejoal Hanna (21)</h2>
-          <p class="text-sm text-gray-500 font-normal leading-relaxed">
-            Full Stack Developer
-          </p>
-          <p class="text-sm text-gray-500 font-normal leading-relaxed">
-            Rees, Germany
-          </p>
-          <p class="text-sm text-gray-500 font-normal leading-relaxed">
-            Full Stack Developer
-          </p>
+      <section>
+        <h2 class="font-bold">Pejoal Hanna (21)</h2>
+        <div
+          class="indent-2 block font-semibold text-xl self-start text-gray-700"
+        >
+          <p class="text-sm text-gray-500 font-normal">Full Stack Developer</p>
+          <p class="text-sm text-gray-500 font-normal">Rees, Germany</p>
+          <p class="text-sm text-gray-500 font-normal">Full Stack Developer</p>
         </div>
       </section>
 
-      <section class="divide-y divide-gray-200">
-        <section
-          class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
-        >
+      <section class="border-t my-2">
+        <section class="text-base text-gray-700 sm:text-lg" data-aos="fade-up">
+          <h2 class="font-semibold pb-2">Projects</h2>
           <section
             v-for="project in projects"
             :key="project.title"
-            data-aos="fade-up"
+            class="border-b"
           >
             <p class="text-blue-500">{{ project.title }}</p>
             <p>{{ project.description }}</p>
@@ -93,10 +93,11 @@ const skills = ref({
         </section>
       </section>
 
-      <section class="divide-y divide-gray-200">
+      <section class="border-t my-2">
         <!-- Skills Section -->
         <section
           class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
+          data-aos="zoom-in"
         >
           <h2 class="font-bold text-2xl">Skills</h2>
           <div v-for="(skillGroup, groupName) in skills" :key="groupName">
@@ -107,12 +108,25 @@ const skills = ref({
               <li
                 v-for="skill in skillGroup"
                 :key="skill"
-                class="text-green-500"
+                class="text-zinc-800"
               >
                 {{ skill }}
               </li>
             </ul>
           </div>
+        </section>
+
+        <!-- Languages Section -->
+        <section
+          class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
+          data-aos="flip-left"
+        >
+          <h2 class="font-bold text-2xl">Languages</h2>
+          <ul>
+            <li v-for="language in languages" :key="language.language">
+              {{ language.language }}: {{ language.proficiency }}
+            </li>
+          </ul>
         </section>
 
         <!-- Jobs Section -->
