@@ -168,7 +168,10 @@ const certificates = ref([
     class="min-h-screen bg-gray-100 flex flex-col justify-center items-center"
   >
     <div class="bg-white shadow rounded-3xl w-full sm:max-w-2xl p-2">
-      <section class="p-6 bg-white shadow-lg rounded-lg">
+      <section
+        class="p-6 bg-white shadow-lg rounded-lg"
+        data-aos="zoom-out-left"
+      >
         <h2 class="font-bold text-2xl mb-4">Pejoal Hanna (21)</h2>
         <div class="text-gray-700">
           <p class="text-sm text-gray-500 font-normal mb-2">
