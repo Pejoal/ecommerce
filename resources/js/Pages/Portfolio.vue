@@ -66,6 +66,10 @@ const skills = ref({
   ],
 });
 
+const softSkills = ref({
+  "Soft Skills": ["Communication", "Teamwork", "Problem-solving"],
+});
+
 AOS.init();
 
 const projects = ref([
@@ -130,11 +134,23 @@ const jobs = ref([
       "Assisted in the development of a web application using HTML, CSS, and JavaScript. Gained experience in software development methodologies and best practices.",
   },
 ]);
-const certificates = ref(["Certificate 1", "Certificate 2", "Certificate 3"]);
-
-const softSkills = ref({
-  "Soft Skills": ["Communication", "Teamwork", "Problem-solving"],
-});
+const certificates = ref([
+  {
+    id: 1,
+    name: "Certificate A",
+    date: "January 2020",
+  },
+  {
+    id: 2,
+    name: "Certificate B",
+    date: "February 2019",
+  },
+  {
+    id: 3,
+    name: "Certificate C",
+    date: "March 2018",
+  },
+]);
 </script>
 
 <template>
@@ -144,7 +160,7 @@ const softSkills = ref({
   <section
     class="min-h-screen bg-gray-100 flex flex-col justify-center items-center"
   >
-    <div class="bg-white shadow rounded-3xl w-full sm:max-w-2xl p-2 pb-52">
+    <div class="bg-white shadow rounded-3xl w-full sm:max-w-2xl p-2">
       <section class="p-6 bg-white shadow-lg rounded-lg">
         <h2 class="font-bold text-2xl mb-4">Pejoal Hanna (21)</h2>
         <div class="text-gray-700">
@@ -156,12 +172,15 @@ const softSkills = ref({
         </div>
       </section>
 
-      <section class="border-t my-2 text-gray-700" data-aos="fade-up">
+      <section class="border-t my-2 text-gray-700">
         <h2 class="font-semibold text-xl pb-2">Projects</h2>
         <section
           v-for="project in projects"
           :key="project.title"
-          class="border rounded-lg shadow-lg p-6 mb-6 bg-white"
+          class="border rounded-lg shadow-xl p-6 mb-6 bg-white"
+          data-aos="fade-up"
+          data-aos-duration="600"
+          data-aos-easing="linear"
         >
           <img
             :src="project.image"
@@ -210,7 +229,7 @@ const softSkills = ref({
         <div
           v-for="(skillGroup, groupName) in skills"
           :key="groupName"
-          class="rounded-lg shadow-lg p-2"
+          class="rounded-lg shadow-2xl p-2"
         >
           <h3 class="text-blue-500 font-semibold text-lg">
             {{ groupName }}
@@ -230,7 +249,7 @@ const softSkills = ref({
 
       <!-- Soft Skills Section -->
       <section
-        class="py-4 text-base text-gray-700 sm:text-lg shadow-lg rounded-lg p-4"
+        class="py-4 text-base text-gray-700 sm:text-lg shadow-xl rounded-lg p-4"
         data-aos="zoom-in"
       >
         <div v-for="(skillGroup, groupName) in softSkills" :key="groupName">
@@ -248,7 +267,7 @@ const softSkills = ref({
       <!-- Languages Section -->
       <hr class="h-[2px] my-2 bg-black" />
       <section
-        class="py-4 text-base text-gray-700 sm:text-lg shadow-lg rounded-lg p-4"
+        class="py-4 text-base text-gray-700 sm:text-lg shadow-xl rounded-lg p-4"
         data-aos="flip-left"
         data-aos-easing="ease-out-cubic"
         data-aos-duration="500"
@@ -264,13 +283,13 @@ const softSkills = ref({
       <!-- Jobs Section -->
       <hr class="h-[2px] my-2 bg-black" />
       <section
-        class="text-base text-gray-700 sm:text-lg shadow-lg rounded-lg p-4"
+        class="text-base text-gray-700 sm:text-lg shadow-xl rounded-lg p-4"
       >
         <h2 class="font-bold text-2xl">Jobs / Experience</h2>
         <div
           v-for="job in jobs"
           :key="job.id"
-          class="bg-white my-2 rounded shadow relative"
+          class="bg-white my-2 rounded shadow-2xl relative"
           data-aos="fade-down"
           data-aos-easing="linear"
           data-aos-duration="500"
@@ -288,11 +307,14 @@ const softSkills = ref({
       </section>
 
       <!-- Certificates Section -->
-      <section class="py-4 text-base text-gray-700 sm:text-lg">
+      <section
+        class="p-4 text-base rounded-lg shadow-2xl text-gray-700 sm:text-lg"
+      >
         <h2 class="font-bold text-2xl">Certificates</h2>
         <ul>
-          <li v-for="certificate in certificates" :key="certificate">
-            {{ certificate }}
+          <li v-for="certificate in certificates" :key="certificate.id">
+            <h3 class="text-xl font-semibold">{{ certificate.name }}</h3>
+            <p class="text-gray-500">{{ certificate.date }}</p>
           </li>
         </ul>
       </section>
