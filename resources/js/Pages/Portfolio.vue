@@ -191,6 +191,14 @@ const certificates = ref([
             Hobbies: Coding, Reading, Traveling
           </p>
         </div>
+        <section class="text-base leading-6 font-bold sm:text-lg">
+          <p>
+            Contact me at
+            <a href="mailto:pejoal.official@gmail.com" class="text-blue-500"
+              >pejoal.official@gmail.com</a
+            >
+          </p>
+        </section>
       </section>
 
       <section class="border-t my-2 text-gray-700">
@@ -227,15 +235,6 @@ const certificates = ref([
               Live
             </a>
           </div>
-        </section>
-
-        <section class="text-base leading-6 font-bold sm:text-lg">
-          <p>
-            Contact me at
-            <a href="mailto:pejoal.official@gmail.com" class="text-blue-500"
-              >pejoal.official@gmail.com</a
-            >
-          </p>
         </section>
       </section>
 
@@ -295,7 +294,11 @@ const certificates = ref([
       >
         <h2 class="font-bold text-2xl">Languages</h2>
         <ul>
-          <li class="relative" v-for="language in languages" :key="language.language">
+          <li
+            class="relative"
+            v-for="language in languages"
+            :key="language.language"
+          >
             <div
               class="absolute h-full border-2 w-[1px] border-red-500 left-0"
             ></div>
