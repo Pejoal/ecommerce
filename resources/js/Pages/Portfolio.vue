@@ -85,7 +85,7 @@ const projects = ref([
     description:
       "This is an E-commerce project that I developed using Vue.js and Laravel. It features a user-friendly interface with a responsive design that works well on both desktop and mobile devices. The application includes features such as user authentication, product listing, shopping cart functionality, and secure payment processing. It also has an admin panel for managing products, orders, and users.",
     link: "https://github.com/Pejoal/ecommerce",
-    liveLink: "https://pejoal.live",
+    liveLink: "https://pejoal.live/home",
     image: "logo.jpg",
   },
   {
