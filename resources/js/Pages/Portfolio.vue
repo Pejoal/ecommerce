@@ -101,7 +101,35 @@ const languages = ref([
   { language: "German", proficiency: "Conversational" },
 ]);
 
-const jobs = ref(["Job 1", "Job 2", "Job 3"]);
+const jobs = ref([
+  {
+    id: 1,
+    title: "Software Developer",
+    company: "Company A",
+    startDate: "January 2020",
+    endDate: "December 2020",
+    description:
+      "Developed and maintained web applications using Vue.js and Node.js. Collaborated with a team of developers to deliver high-quality software solutions.",
+  },
+  {
+    id: 2,
+    title: "Frontend Developer",
+    company: "Company B",
+    startDate: "January 2019",
+    endDate: "December 2019",
+    description:
+      "Worked on the frontend of a large-scale web application using React.js. Implemented responsive designs and optimized the application for performance.",
+  },
+  {
+    id: 3,
+    title: "Junior Developer",
+    company: "Company C",
+    startDate: "January 2018",
+    endDate: "December 2018",
+    description:
+      "Assisted in the development of a web application using HTML, CSS, and JavaScript. Gained experience in software development methodologies and best practices.",
+  },
+]);
 const certificates = ref(["Certificate 1", "Certificate 2", "Certificate 3"]);
 
 const softSkills = ref({
@@ -239,9 +267,24 @@ const softSkills = ref({
         class="text-base text-gray-700 sm:text-lg shadow-lg rounded-lg p-4"
       >
         <h2 class="font-bold text-2xl">Jobs / Experience</h2>
-        <ul>
-          <li v-for="job in jobs" :key="job">{{ job }}</li>
-        </ul>
+        <div
+          v-for="job in jobs"
+          :key="job.id"
+          class="bg-white my-2 rounded shadow relative"
+          data-aos="fade-down"
+          data-aos-easing="linear"
+          data-aos-duration="500"
+        >
+          <div
+            class="absolute h-full border-2 w-[1px] border-blue-500 left-0"
+          ></div>
+          <h3 class="text-xl font-semibold pl-4">{{ job.title }}</h3>
+          <p class="text-blue-500 pl-4">{{ job.company }}</p>
+          <p class="text-gray-500 pl-4">
+            {{ job.startDate }} - {{ job.endDate || "Present" }}
+          </p>
+          <p class="pl-4">{{ job.description }}</p>
+        </div>
       </section>
 
       <!-- Certificates Section -->
