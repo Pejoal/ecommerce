@@ -18,6 +18,7 @@ import {
   faGit,
   faDocker,
   faLinux,
+  faAngular,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Head } from "@inertiajs/vue3";
@@ -36,20 +37,23 @@ library.add(
   faLaravel,
   faGit,
   faDocker,
-  faLinux
+  faLinux,
+  faAngular
 );
-
 const skills = ref({
   Frontend: [
     { name: "HTML 5", icon: faHtml5 },
     { name: "CSS 3", icon: faCss3Alt },
     { name: "Sass", icon: faSass },
     { name: "Bootstrap 5", icon: faBootstrap },
+    { name: "Tailwind CSS" },
     { name: "JavaScript", icon: faJs },
     { name: "React.js", icon: faReact },
     { name: "Vue 3", icon: faVuejs },
     { name: "Inertia.js" },
     { name: "Cypress" },
+    { name: "Angular", icon: faAngular },
+    { name: "TypeScript" },
   ],
   Backend: [
     { name: "PHP 8", icon: faPhp },
@@ -57,12 +61,15 @@ const skills = ref({
     { name: "Laravel 11", icon: faLaravel },
     { name: "MySQL - MariaDB" },
     { name: "MongoDB" },
+    { name: "PostgreSQL" },
   ],
   Other: [
     { name: "Git", icon: faGit },
     { name: "GitHub", icon: faGithub },
     { name: "Docker", icon: faDocker },
     { name: "Linux", icon: faLinux },
+    { name: "AWS" },
+    { name: "Google Cloud" },
   ],
 });
 
@@ -308,13 +315,14 @@ const certificates = ref([
 
       <!-- Certificates Section -->
       <section
-        class="p-4 text-base rounded-lg shadow-2xl text-gray-700 sm:text-lg"
+        class="p-4 text-base rounded-lg shadow-2xl text-gray-700 sm:text-lg mb-10"
+        data-aos="fade-down"
       >
         <h2 class="font-bold text-2xl">Certificates</h2>
         <ul>
           <li v-for="certificate in certificates" :key="certificate.id">
-            <h3 class="text-xl font-semibold">{{ certificate.name }}</h3>
-            <p class="text-gray-500">{{ certificate.date }}</p>
+            <h3 class="text-xl font-semibold text-blue-500">{{ certificate.name }}</h3>
+            <p class="text-gray-500 indent-4">{{ certificate.date }}</p>
           </li>
         </ul>
       </section>
