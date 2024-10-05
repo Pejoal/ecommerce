@@ -2,6 +2,11 @@
 import { ref } from "vue";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faGithub);
 
 AOS.init();
 
@@ -69,9 +74,10 @@ const skills = ref({
           >
             <p class="text-blue-500">{{ project.title }}</p>
             <p>{{ project.description }}</p>
-            <a :href="project.link" class="text-green-500"
-              >View Project on GitHub</a
-            >
+            <a :href="project.link">
+              <FontAwesomeIcon :icon="faGithub" class="mr-1" />
+              GitHub
+            </a>
           </section>
         </section>
 
