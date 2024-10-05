@@ -144,8 +144,8 @@ const jobs = ref([
 const certificates = ref([
   {
     id: 1,
-    name: "Certificate A",
-    date: "January 2020",
+    name: "Germany Language B1",
+    date: "April 2022",
   },
   {
     id: 2,
@@ -236,15 +236,15 @@ const certificates = ref([
       <!-- Skills Section -->
       <hr class="h-[2px] my-2 bg-black" />
 
-      <section
-        class="py-4 text-base text-gray-700 sm:text-lg"
-        data-aos="zoom-out"
-      >
+      <section class="py-4 text-base text-gray-700 sm:text-lg">
         <h2 class="font-bold text-2xl">Skills</h2>
         <div
           v-for="(skillGroup, groupName) in skills"
           :key="groupName"
           class="rounded-lg shadow-2xl p-2"
+          data-aos="zoom-out"
+          data-aos-duration="500"
+          data-aos-easing="linear"
         >
           <h3 class="text-blue-500 font-semibold text-lg">
             {{ groupName }}
