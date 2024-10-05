@@ -9,10 +9,61 @@ import {
   faCss3Alt,
   faJs,
   faNodeJs,
+  faSass,
+  faBootstrap,
+  faVuejs,
+  faReact,
+  faPhp,
+  faLaravel,
+  faGit,
+  faDocker,
+  faLinux,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faGithub, faHtml5, faCss3Alt, faJs, faNodeJs);
+library.add(
+  faGithub,
+  faHtml5,
+  faCss3Alt,
+  faJs,
+  faNodeJs,
+  faSass,
+  faBootstrap,
+  faVuejs,
+  faReact,
+  faPhp,
+  faLaravel,
+  faGit,
+  faDocker,
+  faLinux
+);
+
+const skills = ref({
+  Frontend: [
+    { name: "HTML 5", icon: faHtml5 },
+    { name: "CSS 3", icon: faCss3Alt },
+    { name: "Sass", icon: faSass },
+    { name: "Bootstrap 5", icon: faBootstrap },
+    { name: "JavaScript", icon: faJs },
+    { name: "React.js", icon: faReact },
+    { name: "Vue 3", icon: faVuejs },
+    { name: "Inertia.js" },
+    { name: "Cypress" },
+  ],
+  Backend: [
+    { name: "PHP 8", icon: faPhp },
+    { name: "Node.js", icon: faNodeJs },
+    { name: "Laravel 11", icon: faLaravel },
+    { name: "MySQL - MariaDB" },
+    { name: "MongoDB" },
+  ],
+  Other: [
+    { name: "Git", icon: faGit },
+    { name: "GitHub", icon: faGithub },
+    { name: "Docker", icon: faDocker },
+    { name: "Linux", icon: faLinux },
+  ],
+});
 
 AOS.init();
 
@@ -49,16 +100,7 @@ const languages = ref([
 const jobs = ref(["Job 1", "Job 2", "Job 3"]);
 const certificates = ref(["Certificate 1", "Certificate 2", "Certificate 3"]);
 
-const techSkills = ref({
-  Frontend: [
-    { name: "HTML", icon: faHtml5 },
-    { name: "CSS", icon: faCss3Alt },
-    { name: "JavaScript", icon: faJs },
-  ],
-  Backend: [{ name: "Node.js", icon: faNodeJs }],
-});
-
-const skills = ref({
+const softSkills = ref({
   "Other Technical Skills": ["Git", "Docker", "AWS"],
   "Soft Skills": ["Communication", "Teamwork", "Problem-solving"],
 });
@@ -124,31 +166,35 @@ const skills = ref({
       </section>
 
       <section class="border-t">
-        <!-- Tech Skills Section -->
+        <!-- Skills Section -->
         <section
           class="py-4 text-base text-gray-700 sm:text-lg"
           data-aos="zoom-out"
         >
           <h2 class="font-bold text-2xl">Skills</h2>
-          <div v-for="(skillGroup, groupName) in techSkills" :key="groupName">
+          <div v-for="(skillGroup, groupName) in skills" :key="groupName">
             <h3 class="text-blue-500 font-semibold text-lg">
               {{ groupName }}
             </h3>
             <ul class="list-disc list-inside">
               <li v-for="skill in skillGroup" :key="skill" class="indent-2">
-                <FontAwesomeIcon :icon="skill.icon" class="mr-1" />
+                <FontAwesomeIcon
+                  v-if="skill.icon"
+                  :icon="skill.icon"
+                  class="mr-1"
+                />
                 {{ skill.name }}
               </li>
             </ul>
           </div>
         </section>
 
-        <!-- Skills Section -->
+        <!-- Soft Skills Section -->
         <section
           class="py-4 text-base text-gray-700 sm:text-lg"
           data-aos="zoom-in"
         >
-          <div v-for="(skillGroup, groupName) in skills" :key="groupName">
+          <div v-for="(skillGroup, groupName) in softSkills" :key="groupName">
             <h3 class="text-blue-500 font-semibold text-lg">
               {{ groupName }}
             </h3>
