@@ -175,7 +175,15 @@ const certificates = ref([
             Full Stack Developer
           </p>
           <p class="text-sm text-gray-500 font-normal mb-2">Rees, Germany</p>
-          <p class="text-sm text-gray-500 font-normal">Full Stack Developer</p>
+          <p class="text-sm text-gray-500 font-normal mb-2">
+            Languages: English, German, Arabic
+          </p>
+          <p class="text-sm text-gray-500 font-normal mb-2">
+            Education: Bachelor's Degree in Computer Science
+          </p>
+          <p class="text-sm text-gray-500 font-normal mb-2">
+            Hobbies: Coding, Reading, Traveling
+          </p>
         </div>
       </section>
 
@@ -321,7 +329,9 @@ const certificates = ref([
         <h2 class="font-bold text-2xl">Certificates</h2>
         <ul>
           <li v-for="certificate in certificates" :key="certificate.id">
-            <h3 class="text-xl font-semibold text-blue-500">{{ certificate.name }}</h3>
+            <h3 class="text-xl font-semibold text-blue-500">
+              {{ certificate.name }}
+            </h3>
             <p class="text-gray-500 indent-4">{{ certificate.date }}</p>
           </li>
         </ul>
