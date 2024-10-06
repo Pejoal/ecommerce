@@ -11,8 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="theme-color" content="#6777ef" />
-  <link rel="apple-touch-icon" href="{{ asset('logo.jpg') }}">
-  <link rel="icon" href="{{ asset('logo.jpg') }}">
+  <link rel="apple-touch-icon" href="{{ asset('images/logo.jpg') }}">
+  <link rel="icon" href="{{ asset('images/logo.jpg') }}">
 
   <title inertia>{{ config('app.name', 'Laravel') }}</title>
 

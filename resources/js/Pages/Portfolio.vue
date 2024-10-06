@@ -83,7 +83,7 @@ const projects = ref([
       "This is an E-commerce project that I developed using Vue.js and Laravel. It features a user-friendly interface with a responsive design that works well on both desktop and mobile devices. The application includes features such as user authentication, product listing, shopping cart functionality, and secure payment processing. It also has an admin panel for managing products, orders, and users.",
     link: "https://github.com/Pejoal/ecommerce",
     liveLink: "https://pejoal.live/home",
-    image: "logo.jpg",
+    image: "docs/images/Screenshot2.png",
   },
   {
     title: "Appointments App",
@@ -91,7 +91,7 @@ const projects = ref([
       "This app was designed to streamline appointment scheduling and coordination for a driving school. It aimed to enhance efficiency and provide a seamless experience for both instructors and students",
     link: "https://github.com/Pejoal/Termin",
     liveLink: "https://pejoal.live",
-    image: "logo.jpg",
+    image: "images/appointments.png",
   },
   {
     title: "Cards Game",
@@ -99,7 +99,7 @@ const projects = ref([
       "A multiplayer card game with features such as card deck management (shuffling, dealing, etc.), animations for card movements, responsive design for different devices, and real-time playing. Developed using Laravel, Inertia, Vue 3, TailwindCSS, Docker, and MySQL.",
     link: "https://github.com/Pejoal/Game",
     liveLink: "https://pejoal.live",
-    image: "logo.jpg",
+    image: "images/game1.png",
   },
 ]);
 
