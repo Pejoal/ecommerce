@@ -18,7 +18,6 @@ import {
   faGit,
   faDocker,
   faLinux,
-  faAngular,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { Head } from "@inertiajs/vue3";
@@ -37,8 +36,7 @@ library.add(
   faLaravel,
   faGit,
   faDocker,
-  faLinux,
-  faAngular
+  faLinux
 );
 const skills = ref({
   Frontend: [
@@ -52,7 +50,6 @@ const skills = ref({
     { name: "Vue 3", icon: faVuejs },
     { name: "Inertia.js" },
     { name: "Cypress" },
-    { name: "Angular", icon: faAngular },
     { name: "TypeScript" },
   ],
   Backend: [
