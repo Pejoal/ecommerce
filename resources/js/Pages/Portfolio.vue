@@ -365,6 +365,13 @@ const certificates = ref([
           </li>
         </ul>
       </section>
+      <div>
+        <iframe
+          src="Pejoal CV.pdf"
+          class="h-[400px] w-full"
+          frameborder="1"
+        ></iframe>
+      </div>
     </div>
   </section>
 </template>
