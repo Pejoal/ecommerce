@@ -78,7 +78,7 @@ AOS.init();
 
 const projects = ref([
   {
-    title: "E-commerce",
+    title: "E-Commerce",
     description:
       "This is an E-commerce project that I developed using Vue.js and Laravel. It features a user-friendly interface with a responsive design that works well on both desktop and mobile devices. The application includes features such as user authentication, product listing, shopping cart functionality, and secure payment processing. It also has an admin panel for managing products, orders, and users.",
     link: "https://github.com/Pejoal/ecommerce",
@@ -101,6 +101,14 @@ const projects = ref([
     liveLink: "https://pejoal.live",
     image: "images/game1.png",
   },
+  {
+    title: "Social Media App",
+    description:
+      "A social media application developed using Vue.js and Laravel. The app includes features like user authentication, real-time chat, post creation and management, likes, comments, and a friend system. It also includes a responsive design for both desktop and mobile devices.",
+    link: "https://github.com/Pejoal/Social-Media-Platform",
+    liveLink: "https://pejaol.live",
+    image: "images/social_media_logo.png",
+  },
 ]);
 
 const languages = ref([
@@ -112,32 +120,31 @@ const languages = ref([
 const jobs = ref([
   {
     id: 1,
-    title: "Software Developer",
-    company: "Company A",
-    startDate: "January 2020",
-    endDate: "December 2020",
+    title: "Full Stack Developer",
+    company: "SMEXPAND",
+    startDate: "March 2023",
+    endDate: "December 2023",
     description:
-      "Developed and maintained web applications using Vue.js and Node.js. Collaborated with a team of developers to deliver high-quality software solutions.",
+      "Developed an Enterprise Resource Planning (ERP) and Customer Relationship Management (CRM) system. The ERP module streamlined business processes and operations, including sales, HR, and inventory management. The CRM module improved customer service, marketing, and communication strategies. Technologies used include Vue.js for the frontend, Laravel for the backend, and MySQL for the database.",
   },
   {
     id: 2,
-    title: "Frontend Developer",
-    company: "Company B",
+    title: "Full Stack Developer",
+    company: "Freelancer.com",
     startDate: "January 2019",
-    endDate: "December 2019",
     description:
-      "Worked on the frontend of a large-scale web application using React.js. Implemented responsive designs and optimized the application for performance.",
+      "Worked on various projects across different domains, primarily focusing on web development and design.",
   },
   {
     id: 3,
     title: "Junior Developer",
-    company: "Company C",
-    startDate: "January 2018",
-    endDate: "December 2018",
+    company: "Upwork",
+    startDate: "January 2020",
     description:
-      "Assisted in the development of a web application using HTML, CSS, and JavaScript. Gained experience in software development methodologies and best practices.",
+      "Assisted in the development of several small to medium scale projects, gaining experience in multiple technologies.",
   },
 ]);
+
 const certificates = ref([
   {
     id: 1,
@@ -363,6 +370,13 @@ const certificates = ref([
         </ul>
       </section>
       <div>
+        <a
+          href="Pejoal CV.pdf"
+          download
+          class="mt-2 inline-block px-6 py-2 text-xs font-medium leading-6 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
+        >
+          Download CV
+        </a>
         <iframe
           src="Pejoal CV.pdf"
           class="h-[400px] w-full"
