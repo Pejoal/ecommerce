@@ -211,7 +211,7 @@ const certificates = ref([
           <p class="text-blue-500 text-xl font-bold mt-4">
             {{ project.title }}
           </p>
-          <p class="mt-2">{{ project.description }}</p>
+          <p class="p-2">{{ project.description }}</p>
           <div class="mt-4">
             <a
               :href="project.link"
@@ -324,7 +324,7 @@ const certificates = ref([
             <p class="text-gray-500">
               {{ job.startDate }} - {{ job.endDate || "Present" }}
             </p>
-            <p>{{ job.description }}</p>
+            <p class="p-2">{{ job.description }}</p>
           </section>
         </div>
       </section>
