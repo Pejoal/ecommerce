@@ -139,7 +139,7 @@ const jobs = ref([
     id: 3,
     title: "Junior Developer",
     company: "Upwork",
-    startDate: "January 2020",
+    startDate: "January 2021",
     description:
       "Assisted in the development of several small to medium scale projects, gaining experience in multiple technologies.",
   },
