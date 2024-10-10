@@ -152,18 +152,6 @@ const certificates = ref([
     place: "Cairo",
     date: "April 2022",
   },
-  {
-    id: 2,
-    name: "Certificate B",
-    place: "Muenchen",
-    date: "February 2021",
-  },
-  {
-    id: 3,
-    name: "Certificate C",
-    place: "Bielfield",
-    date: "March 2020",
-  },
 ]);
 </script>
 
