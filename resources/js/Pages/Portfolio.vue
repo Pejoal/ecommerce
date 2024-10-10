@@ -137,11 +137,20 @@ const jobs = ref([
   },
   {
     id: 3,
-    title: "Junior Developer",
+    title: "Full Stack Developer",
     company: "Upwork",
     startDate: "January 2021",
     description:
       "Assisted in the development of several small to medium scale projects, gaining experience in multiple technologies.",
+  },
+  {
+    id: 4,
+    title: "Full Stack Developer",
+    company: "Improov",
+    startDate: "Sep 2022",
+    endDate: "Feb 2023",
+    description:
+      "As a Full Stack Developer at E-State, I was responsible for developing and maintaining web applications using a variety of technologies including Vue.js, Laravel, and MariaDB. I worked closely with the product team to design and implement new features, and with the QA team to identify and fix bugs. I also played a key role in migrating legacy systems to modern architectures, improving performance and scalability. During my tenure, I contributed to several major projects, including the development of a property management system and an online booking platform.",
   },
 ]);
 
