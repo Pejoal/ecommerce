@@ -131,7 +131,7 @@ const jobs = ref([
     id: 2,
     title: "Full Stack Developer",
     company: "Freelancer.com",
-    startDate: "January 2019",
+    startDate: "January 2020",
     description:
       "Worked on various projects across different domains, primarily focusing on web development and design.",
   },
