@@ -132,3 +132,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::fallback(function () {
   return redirect('/');
 });
+
+Route::get('zana', function () {
+  return Inertia::render('Zana/Index', []);
+});
