@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserAddressController;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -138,10 +139,10 @@ Route::get('zana', function () {
   return Inertia::render('Zana/Index', []);
 });
 
-Route::get('/pdf', function () {
-  $data = ['title' => 'Welcome to Laravel PDF'];
+Route::get('/generate-pdf', function (Request $request) {
+  $data = $request->all();
+  // dd($data);
   $pdf = Pdf::loadView('pdf.document', $data);
 
   return $pdf->download('document.pdf');
-  // return Inertia::render('Zana/Index', []);
-});
+})->name('generate.pdf');

@@ -4,26 +4,25 @@ import { watch } from "vue";
 
 const form = useForm({
   title: "",
-  "Rechnung Nr": "",
-  "Kunden Nr": "",
+  "RechnungNr": "",
+  "KundenNr": "",
   Datum: null,
   Monat: "",
-  "Dienstleistung / Datum": "",
+  "DienstleistungDatum": "",
   Stunden: 0,
   Stundenlohn: 0,
   Summe: 0,
-  "Zzgl. MwSt": 19,
+  "ZzglMwSt": 19,
   Gesamtbetrag: 0,
   Verwendungszweck: "",
 });
 
 const store = () => {
-  alert("Soon...");
-  // form.post(route(""), {
-  //   onSuccess: () => {
-  //     form.reset();
-  //   },
-  // });
+  form.get(route("generate.pdf"), {
+    onSuccess: () => {
+      form.reset();
+    },
+  });
 };
 
 // Watch changes in Stunden and Stundenlohn and update Summe
@@ -34,9 +33,9 @@ watch(
   }
 );
 
-// Watch changes in Summe and Zzgl. MwSt and update Gesamtbetrag
+// Watch changes in Summe and ZzglMwSt and update Gesamtbetrag
 watch(
-  () => [form.Summe, form["Zzgl. MwSt"]],
+  () => [form.Summe, form["ZzglMwSt"]],
   ([newSumme, newMwst]) => {
     const summeValue = parseFloat(newSumme) || 0;
     const mwstValue = parseFloat(newMwst) || 0;
@@ -79,13 +78,13 @@ watch(
 
       <section>
         <label for="rechnung-nr" class="block text-sm font-medium text-gray-700"
-          >Rechnung Nr</label
+          >RechnungNr</label
         >
         <input
           id="rechnung-nr"
-          v-model="form['Rechnung Nr']"
+          v-model="form['RechnungNr']"
           type="text"
-          placeholder="Enter Rechnung Nr"
+          placeholder="Enter RechnungNr"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <Transition
@@ -93,21 +92,21 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors['Rechnung Nr']" class="text-red-600 text-sm">
-            {{ form.errors["Rechnung Nr"] }}
+          <p v-if="form.errors['RechnungNr']" class="text-red-600 text-sm">
+            {{ form.errors["RechnungNr"] }}
           </p>
         </Transition>
       </section>
 
       <section>
         <label for="kunden-nr" class="block text-sm font-medium text-gray-700"
-          >Kunden Nr</label
+          >KundenNr</label
         >
         <input
           id="kunden-nr"
-          v-model="form['Kunden Nr']"
+          v-model="form['KundenNr']"
           type="text"
-          placeholder="Enter Kunden Nr"
+          placeholder="Enter KundenNr"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <Transition
@@ -115,8 +114,8 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors['Kunden Nr']" class="text-red-600 text-sm">
-            {{ form.errors["Kunden Nr"] }}
+          <p v-if="form.errors['KundenNr']" class="text-red-600 text-sm">
+            {{ form.errors["KundenNr"] }}
           </p>
         </Transition>
       </section>
@@ -168,13 +167,13 @@ watch(
         <label
           for="dienstleistung-datum"
           class="block text-sm font-medium text-gray-700"
-          >Dienstleistung / Datum</label
+          >DienstleistungDatum</label
         >
         <input
           id="dienstleistung-datum"
-          v-model="form['Dienstleistung / Datum']"
+          v-model="form['DienstleistungDatum']"
           type="text"
-          placeholder="Enter Dienstleistung / Datum"
+          placeholder="Enter DienstleistungDatum"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <Transition
@@ -183,10 +182,10 @@ watch(
           class="transition ease-in-out"
         >
           <p
-            v-if="form.errors['Dienstleistung / Datum']"
+            v-if="form.errors['DienstleistungDatum']"
             class="text-red-600 text-sm"
           >
-            {{ form.errors["Dienstleistung / Datum"] }}
+            {{ form.errors["DienstleistungDatum"] }}
           </p>
         </Transition>
       </section>
@@ -259,14 +258,14 @@ watch(
 
       <section>
         <label for="zzgl-mwst" class="block text-sm font-medium text-gray-700"
-          >Zzgl. MwSt</label
+          >ZzglMwSt</label
         >
         <div class="flex items-center">
           <input
             id="zzgl-mwst"
-            v-model="form['Zzgl. MwSt']"
+            v-model="form['ZzglMwSt']"
             type="number"
-            placeholder="Enter Zzgl. MwSt"
+            placeholder="Enter ZzglMwSt"
             class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           <span class="ml-2">%</span>
@@ -276,8 +275,8 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors['Zzgl. MwSt']" class="text-red-600 text-sm">
-            {{ form.errors["Zzgl. MwSt"] }}
+          <p v-if="form.errors['ZzglMwSt']" class="text-red-600 text-sm">
+            {{ form.errors["ZzglMwSt"] }}
           </p>
         </Transition>
       </section>
@@ -305,7 +304,7 @@ watch(
         >
         <input
           id="verwendungszweck"
-          v-model="form['Rechnung Nr']"
+          v-model="form['RechnungNr']"
           type="text"
           placeholder="Enter Verwendungszweck"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
