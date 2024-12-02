@@ -11,11 +11,6 @@
       margin: 40px;
     }
 
-    .header,
-    .footer {
-      text-align: center;
-    }
-
     .header p,
     .footer p {
       margin: 2px;
