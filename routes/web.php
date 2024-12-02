@@ -136,3 +136,8 @@ Route::fallback(function () {
 Route::get('zana', function () {
   return Inertia::render('Zana/Index', []);
 });
+
+Route::get('/pdf', function () {
+  dd("pdf");
+  // return Inertia::render('Zana/Index', []);
+});
