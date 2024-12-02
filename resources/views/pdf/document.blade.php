@@ -95,7 +95,7 @@
 
   <section class="flex-container">
     <div class="recipient">
-      {{ $title }}
+      <p>{!! nl2br(e($title)) !!}</p>
     </div>
 
     <div class="invoice-details" style="float: right">
