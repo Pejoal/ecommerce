@@ -134,7 +134,7 @@ Route::get('zana', function () {
   return Inertia::render('Zana/Index', []);
 })->name('zana');
 
-Route::post('/generate-pdf', [PdfController::class, 'generatePdf'])->name('generate.pdf');
+Route::post('/generate-pdf/{id?}', [PdfController::class, 'generatePdf'])->name('generate.pdf');
 Route::get('/pdf-data', [PdfController::class, 'index'])->name('pdf.data.index');
 
 Route::fallback(function () {

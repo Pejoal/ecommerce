@@ -7,26 +7,29 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PdfController extends Controller {
-  public function generatePdf(Request $request) {
-    $data = $request->only([
-      'title',
-      'rechnungNr',
-      'kundenNr',
-      'datum',
-      'monat',
-      'dienstleistungDatum',
-      'stunden',
-      'stundenlohn',
-      'summe',
-      'zzglMwst',
-      'gesamtbetrag',
-      'verwendungszweck',
-    ]);
+  public function generatePdf(Request $request, $id = null) {
+    if ($id) {
+      $pdfData = PdfData::findOrFail($id);
+      $data = $pdfData->toArray();
+    } else {
+      $data = $request->only([
+        'title',
+        'rechnungNr',
+        'kundenNr',
+        'datum',
+        'monat',
+        'dienstleistungDatum',
+        'stunden',
+        'stundenlohn',
+        'summe',
+        'zzglMwst',
+        'gesamtbetrag',
+        'verwendungszweck',
+      ]);
 
-    // Save data to the database
-    $pdfData = PdfData::create($data);
+      $pdfData = PdfData::create($data);
+    }
 
-    // Generate PDF
     $pdf = Pdf::loadView('pdf.document', $data);
     return $pdf->download('document.pdf');
   }

@@ -76,6 +76,11 @@ defineProps({
             >
               Verwendungszweck
             </th>
+            <th
+              class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -95,6 +100,13 @@ defineProps({
             <td class="px-4 py-2 whitespace-nowrap">{{ data.gesamtbetrag }}</td>
             <td class="px-4 py-2 whitespace-nowrap">
               {{ data.verwendungszweck }}
+            </td>
+            <td class="px-4 py-2 whitespace-nowrap">
+              <Link
+                :href="route('generate.pdf', { id: data.id })"
+                class="text-blue-600 hover:underline"
+                >Download PDF</Link
+              >
             </td>
           </tr>
         </tbody>
