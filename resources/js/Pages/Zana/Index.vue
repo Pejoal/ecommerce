@@ -1,6 +1,6 @@
 <script setup>
 import { Head, useForm } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { watch } from "vue";
 
 const form = useForm({
   title: "",
@@ -9,11 +9,11 @@ const form = useForm({
   Datum: null,
   Monat: "",
   "Dienstleistung / Datum": "",
-  Stunden: "",
-  Stundenlohn: "",
-  Summe: "",
-  "Zzgl. MwSt": "19",
-  Gesamtbetrag: "",
+  Stunden: 0,
+  Stundenlohn: 0,
+  Summe: 0,
+  "Zzgl. MwSt": 19,
+  Gesamtbetrag: 0,
   Verwendungszweck: "",
 });
 
@@ -26,11 +26,25 @@ const store = () => {
   // });
 };
 
-const gesamtbetrag = computed(() => {
-  const summe = parseFloat(form.Summe) || 0;
-  const mwst = parseFloat(form["Zzgl. MwSt"]) || 0;
-  return (summe + (summe * mwst) / 100).toFixed(2);
-});
+// Watch changes in Stunden and Stundenlohn and update Summe
+watch(
+  () => [form.Stunden, form.Stundenlohn],
+  ([newStunden, newStundenlohn]) => {
+    form.Summe = (newStunden * newStundenlohn).toFixed(2);
+  }
+);
+
+// Watch changes in Summe and Zzgl. MwSt and update Gesamtbetrag
+watch(
+  () => [form.Summe, form["Zzgl. MwSt"]],
+  ([newSumme, newMwst]) => {
+    const summeValue = parseFloat(newSumme) || 0;
+    const mwstValue = parseFloat(newMwst) || 0;
+    form.Gesamtbetrag = (summeValue + (summeValue * mwstValue) / 100).toFixed(
+      2
+    );
+  }
+);
 </script>
 
 <template>
@@ -276,7 +290,7 @@ const gesamtbetrag = computed(() => {
         >
         <input
           id="gesamtbetrag"
-          v-model="gesamtbetrag"
+          v-model="form.Gesamtbetrag"
           type="text"
           readonly
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -291,7 +305,7 @@ const gesamtbetrag = computed(() => {
         >
         <input
           id="verwendungszweck"
-          v-model="form.Verwendungszweck"
+          v-model="form.title"
           type="text"
           placeholder="Enter Verwendungszweck"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
