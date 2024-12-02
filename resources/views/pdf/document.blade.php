@@ -100,15 +100,14 @@
       <p>Contrescarpe 120, 28195 Bremen</p>
     </div>
 
-
     <div class="invoice-details" style="float: right">
-      <p>Rechnung Nr.: <span class="highlight">{{ $RechnungNr }}</span></p>
-      <p>Kunden Nr.: <span class="highlight">{{ $KundenNr }}</span></p>
-      <p>Datum: <span class="highlight">{{ $Datum }}</span></p>
+      <p>Rechnung Nr.: <span class="highlight">{{ $rechnungNr }}</span></p>
+      <p>Kunden Nr.: <span class="highlight">{{ $kundenNr }}</span></p>
+      <p>Datum: <span class="highlight">{{ $datum }}</span></p>
     </div>
   </section>
 
-  <p>Rechnung: <span class="highlight">{{ $Monat }}</span></p>
+  <p>Rechnung: <span class="highlight">{{ $monat }}</span></p>
 
   <p>Vielen Dank für Ihren Auftrag. Vereinbarungsgemäß berechnen wir Ihnen hiermit folgende Leistungen:</p>
 
@@ -122,17 +121,17 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{ $DienstleistungDatum }}</td>
-        <td>{{ $Stunden }}</td>
-        <td>{{ $Stundenlohn }}</td>
+        <td>{{ $dienstleistungDatum }}</td>
+        <td>{{ $stunden }}</td>
+        <td>{{ $stundenlohn }}</td>
       </tr>
     </tbody>
   </table>
 
   <p class="total">
-    Summe: <span class="highlight">{{ $Summe }} €</span><br>
-    Zzgl. MwSt. {{ $ZzglMwSt }}%: <span class="highlight">{{ ($Summe / 100) * $ZzglMwSt }} €</span><br>
-    Gesamtbetrag: <span class="highlight">{{ $Gesamtbetrag }} €</span>
+    Summe: <span class="highlight">{{ $summe }} €</span><br>
+    Zzgl. MwSt. {{ $zzglMwst }}%: <span class="highlight">{{ ($summe / 100) * $zzglMwst }} €</span><br>
+    Gesamtbetrag: <span class="highlight">{{ $gesamtbetrag }} €</span>
   </p>
 
   <div class="bank-details">
@@ -140,7 +139,7 @@
     <p><strong>Mohammad Haji</strong></p>
     <p>IBAN: <span class="highlight">DE25 2905 0101 0083 8416 35</span></p>
     <p>BIC: <span class="highlight">SBREDE22XXX</span></p>
-    <p>Verwendungszweck: <span class="highlight">{{ $RechnungNr }}</span></p>
+    <p>Verwendungszweck: <span class="highlight">{{ $rechnungNr }}</span></p>
   </div>
 
   <div class="footer">

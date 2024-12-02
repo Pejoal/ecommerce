@@ -5,17 +5,17 @@ import { watch } from "vue";
 
 const form = useForm({
   title: "",
-  RechnungNr: "",
-  KundenNr: "",
-  Datum: null,
-  Monat: "",
-  DienstleistungDatum: "",
-  Stunden: 0,
-  Stundenlohn: 0,
-  Summe: 0,
-  ZzglMwSt: 19,
-  Gesamtbetrag: 0,
-  Verwendungszweck: "",
+  rechnungNr: "",
+  kundenNr: "",
+  datum: null,
+  monat: "",
+  dienstleistungDatum: "",
+  stunden: 0,
+  stundenlohn: 0,
+  summe: 0,
+  zzglMwst: 19,
+  gesamtbetrag: 0,
+  verwendungszweck: "",
 });
 
 const store = async () => {
@@ -35,29 +35,29 @@ const store = async () => {
   }
 };
 
-// Watch changes in Stunden and Stundenlohn and update Summe
+// Watch changes in rechnungNr and update verwendungszweck
 watch(
-  () => [form.RechnungNr],
+  () => [form.rechnungNr],
   ([newRechnungNr]) => {
-    form.Verwendungszweck = newRechnungNr;
+    form.verwendungszweck = newRechnungNr;
   }
 );
 
-// Watch changes in Stunden and Stundenlohn and update Summe
+// Watch changes in stunden and stundenlohn and update summe
 watch(
-  () => [form.Stunden, form.Stundenlohn],
+  () => [form.stunden, form.stundenlohn],
   ([newStunden, newStundenlohn]) => {
-    form.Summe = (newStunden * newStundenlohn).toFixed(2);
+    form.summe = (newStunden * newStundenlohn).toFixed(2);
   }
 );
 
-// Watch changes in Summe and ZzglMwSt and update Gesamtbetrag
+// Watch changes in summe and zzglMwst and update gesamtbetrag
 watch(
-  () => [form.Summe, form["ZzglMwSt"]],
+  () => [form.summe, form.zzglMwst],
   ([newSumme, newMwst]) => {
     const summeValue = parseFloat(newSumme) || 0;
     const mwstValue = parseFloat(newMwst) || 0;
-    form.Gesamtbetrag = (summeValue + (summeValue * mwstValue) / 100).toFixed(
+    form.gesamtbetrag = (summeValue + (summeValue * mwstValue) / 100).toFixed(
       2
     );
   }
@@ -96,13 +96,13 @@ watch(
 
       <section>
         <label for="rechnung-nr" class="block text-sm font-medium text-gray-700"
-          >RechnungNr</label
+          >Rechnung Nr</label
         >
         <input
           id="rechnung-nr"
-          v-model="form['RechnungNr']"
+          v-model="form.rechnungNr"
           type="text"
-          placeholder="Enter RechnungNr"
+          placeholder="Enter Rechnung Nr"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <Transition
@@ -110,21 +110,21 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors['RechnungNr']" class="text-red-600 text-sm">
-            {{ form.errors["RechnungNr"] }}
+          <p v-if="form.errors.rechnungNr" class="text-red-600 text-sm">
+            {{ form.errors.rechnungNr }}
           </p>
         </Transition>
       </section>
 
       <section>
         <label for="kunden-nr" class="block text-sm font-medium text-gray-700"
-          >KundenNr</label
+          >Kunden Nr</label
         >
         <input
           id="kunden-nr"
-          v-model="form['KundenNr']"
+          v-model="form.kundenNr"
           type="text"
-          placeholder="Enter KundenNr"
+          placeholder="Enter Kunden Nr"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <Transition
@@ -132,8 +132,8 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors['KundenNr']" class="text-red-600 text-sm">
-            {{ form.errors["KundenNr"] }}
+          <p v-if="form.errors.kundenNr" class="text-red-600 text-sm">
+            {{ form.errors.kundenNr }}
           </p>
         </Transition>
       </section>
@@ -144,7 +144,7 @@ watch(
         >
         <input
           id="datum"
-          v-model="form.Datum"
+          v-model="form.datum"
           type="date"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -153,8 +153,8 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors.Datum" class="text-red-600 text-sm">
-            {{ form.errors.Datum }}
+          <p v-if="form.errors.datum" class="text-red-600 text-sm">
+            {{ form.errors.datum }}
           </p>
         </Transition>
       </section>
@@ -165,7 +165,7 @@ watch(
         >
         <input
           id="monat"
-          v-model="form.Monat"
+          v-model="form.monat"
           type="text"
           placeholder="Enter Monat"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -175,8 +175,8 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors.Monat" class="text-red-600 text-sm">
-            {{ form.errors.Monat }}
+          <p v-if="form.errors.monat" class="text-red-600 text-sm">
+            {{ form.errors.monat }}
           </p>
         </Transition>
       </section>
@@ -185,13 +185,13 @@ watch(
         <label
           for="dienstleistung-datum"
           class="block text-sm font-medium text-gray-700"
-          >DienstleistungDatum</label
+          >Dienstleistung Datum</label
         >
         <input
           id="dienstleistung-datum"
-          v-model="form['DienstleistungDatum']"
+          v-model="form.dienstleistungDatum"
           type="text"
-          placeholder="Enter DienstleistungDatum"
+          placeholder="Enter Dienstleistung Datum"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
         <Transition
@@ -200,10 +200,10 @@ watch(
           class="transition ease-in-out"
         >
           <p
-            v-if="form.errors['DienstleistungDatum']"
+            v-if="form.errors.dienstleistungDatum"
             class="text-red-600 text-sm"
           >
-            {{ form.errors["DienstleistungDatum"] }}
+            {{ form.errors.dienstleistungDatum }}
           </p>
         </Transition>
       </section>
@@ -214,7 +214,7 @@ watch(
         >
         <input
           id="stunden"
-          v-model="form.Stunden"
+          v-model="form.stunden"
           type="number"
           placeholder="Enter Stunden"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -224,8 +224,8 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors.Stunden" class="text-red-600 text-sm">
-            {{ form.errors.Stunden }}
+          <p v-if="form.errors.stunden" class="text-red-600 text-sm">
+            {{ form.errors.stunden }}
           </p>
         </Transition>
       </section>
@@ -236,7 +236,7 @@ watch(
         >
         <input
           id="stundenlohn"
-          v-model="form.Stundenlohn"
+          v-model="form.stundenlohn"
           type="number"
           placeholder="Enter Stundenlohn"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -246,8 +246,8 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors.Stundenlohn" class="text-red-600 text-sm">
-            {{ form.errors.Stundenlohn }}
+          <p v-if="form.errors.stundenlohn" class="text-red-600 text-sm">
+            {{ form.errors.stundenlohn }}
           </p>
         </Transition>
       </section>
@@ -258,7 +258,7 @@ watch(
         >
         <input
           id="summe"
-          v-model="form.Summe"
+          v-model="form.summe"
           type="number"
           placeholder="Enter Summe"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -268,22 +268,22 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors.Summe" class="text-red-600 text-sm">
-            {{ form.errors.Summe }}
+          <p v-if="form.errors.summe" class="text-red-600 text-sm">
+            {{ form.errors.summe }}
           </p>
         </Transition>
       </section>
 
       <section>
         <label for="zzgl-mwst" class="block text-sm font-medium text-gray-700"
-          >ZzglMwSt</label
+          >Zzgl. MwSt</label
         >
         <div class="flex items-center">
           <input
             id="zzgl-mwst"
-            v-model="form['ZzglMwSt']"
+            v-model="form.zzglMwst"
             type="number"
-            placeholder="Enter ZzglMwSt"
+            placeholder="Enter Zzgl. MwSt"
             class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           <span class="ml-2">%</span>
@@ -293,8 +293,8 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors['ZzglMwSt']" class="text-red-600 text-sm">
-            {{ form.errors["ZzglMwSt"] }}
+          <p v-if="form.errors.zzglMwst" class="text-red-600 text-sm">
+            {{ form.errors.zzglMwst }}
           </p>
         </Transition>
       </section>
@@ -307,8 +307,8 @@ watch(
         >
         <input
           id="gesamtbetrag"
-          v-model="form.Gesamtbetrag"
-          type="text"
+          v-model="form.gesamtbetrag"
+          type="number"
           readonly
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
         />
@@ -322,7 +322,7 @@ watch(
         >
         <input
           id="verwendungszweck"
-          v-model="form['Verwendungszweck']"
+          v-model="form.verwendungszweck"
           type="text"
           placeholder="Enter Verwendungszweck"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -332,8 +332,8 @@ watch(
           leave-to-class="opacity-0"
           class="transition ease-in-out"
         >
-          <p v-if="form.errors.Verwendungszweck" class="text-red-600 text-sm">
-            {{ form.errors.Verwendungszweck }}
+          <p v-if="form.errors.verwendungszweck" class="text-red-600 text-sm">
+            {{ form.errors.verwendungszweck }}
           </p>
         </Transition>
       </section>
