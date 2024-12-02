@@ -99,7 +99,7 @@
 
   <p class="total">
     Summe: <span class="highlight">{{ $Summe }} €</span><br>
-    Zzgl. MwSt. {{ $ZzglMwSt }}%: <span class="highlight">{{ $ZzglMwSt }} €</span><br>
+    Zzgl. MwSt. {{ $ZzglMwSt }}%: <span class="highlight">{{ ($Summe / 100) * $ZzglMwSt }} €</span><br>
     Gesamtbetrag: <span class="highlight">{{ $Gesamtbetrag }} €</span>
   </p>
 
