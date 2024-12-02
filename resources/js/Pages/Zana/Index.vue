@@ -1,28 +1,38 @@
 <script setup>
 import { Head, useForm } from "@inertiajs/vue3";
+import axios from "axios";
 import { watch } from "vue";
 
 const form = useForm({
   title: "",
-  "RechnungNr": "",
-  "KundenNr": "",
+  RechnungNr: "",
+  KundenNr: "",
   Datum: null,
   Monat: "",
-  "DienstleistungDatum": "",
+  DienstleistungDatum: "",
   Stunden: 0,
   Stundenlohn: 0,
   Summe: 0,
-  "ZzglMwSt": 19,
+  ZzglMwSt: 19,
   Gesamtbetrag: 0,
   Verwendungszweck: "",
 });
 
-const store = () => {
-  form.get(route("generate.pdf"), {
-    onSuccess: () => {
-      form.reset();
-    },
-  });
+const store = async () => {
+  try {
+    const response = await axios.post(route("generate.pdf"), form, {
+      responseType: "blob",
+    });
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "document.pdf");
+    document.body.appendChild(link);
+    link.click();
+    form.reset();
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+  }
 };
 
 // Watch changes in Stunden and Stundenlohn and update Summe

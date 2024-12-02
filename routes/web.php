@@ -139,7 +139,7 @@ Route::get('zana', function () {
   return Inertia::render('Zana/Index', []);
 });
 
-Route::get('/generate-pdf', function (Request $request) {
+Route::post('/generate-pdf', function (Request $request) {
   $data = $request->all();
   // dd($data);
   $pdf = Pdf::loadView('pdf.document', $data);
