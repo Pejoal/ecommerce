@@ -59,11 +59,23 @@
       text-align: center;
       margin-bottom: 20px;
       float: left;
-      margin-top: -50px
+      margin-top: -50px;
+      margin-left: -50px;
     }
 
     .logo img {
-      max-width: 200px;
+      max-width: 400px;
+    }
+
+    .flex-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .flex-container .recipient,
+    .flex-container .invoice-details {
+      width: 48%;
     }
   </style>
 </head>
@@ -72,26 +84,29 @@
   <div class="logo">
     <img src="{{ public_path('images/Rechnung.jpg') }}" alt="Logo">
   </div>
-  <div style="clear: both"></div>
 
-  <div class="header">
+  <div class="header" style="float: right">
     <p>Royal Gebäudereinigung GbR</p>
     <p>Helsingborger Str. 4</p>
     <p>28719 Bremen</p>
   </div>
+  <div style="clear: both"></div>
 
-  <div class="recipient">
-    <p><strong>Praxis für Ergotherapie</strong></p>
-    <p>Am Wall GbR</p>
-    <p>Jana Böhling & Lisa Lingenberg</p>
-    <p>Contrescarpe 120, 28195 Bremen</p>
-  </div>
+  <section class="flex-container">
+    <div class="recipient">
+      <p><strong>Praxis für Ergotherapie</strong></p>
+      <p>Am Wall GbR</p>
+      <p>Jana Böhling & Lisa Lingenberg</p>
+      <p>Contrescarpe 120, 28195 Bremen</p>
+    </div>
 
-  <div class="invoice-details" style="float: right">
-    <p>Rechnung Nr.: <span class="highlight">{{ $RechnungNr }}</span></p>
-    <p>Kunden Nr.: <span class="highlight">{{ $KundenNr }}</span></p>
-    <p>Datum: <span class="highlight">{{ $Datum }}</span></p>
-  </div>
+
+    <div class="invoice-details" style="float: right">
+      <p>Rechnung Nr.: <span class="highlight">{{ $RechnungNr }}</span></p>
+      <p>Kunden Nr.: <span class="highlight">{{ $KundenNr }}</span></p>
+      <p>Datum: <span class="highlight">{{ $Datum }}</span></p>
+    </div>
+  </section>
 
   <p>Rechnung: <span class="highlight">{{ $Monat }}</span></p>
 
