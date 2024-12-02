@@ -95,10 +95,7 @@
 
   <section class="flex-container">
     <div class="recipient">
-      <p><strong>Praxis für Ergotherapie</strong></p>
-      <p>Am Wall GbR</p>
-      <p>Jana Böhling & Lisa Lingenberg</p>
-      <p>Contrescarpe 120, 28195 Bremen</p>
+      {{ $title }}
     </div>
 
     <div class="invoice-details" style="float: right">
