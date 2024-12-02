@@ -11,6 +11,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserAddressController;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -138,6 +139,9 @@ Route::get('zana', function () {
 });
 
 Route::get('/pdf', function () {
-  dd("pdf");
+  $data = ['title' => 'Welcome to Laravel PDF'];
+  $pdf = Pdf::loadView('pdf.document', $data);
+
+  return $pdf->download('document.pdf');
   // return Inertia::render('Zana/Index', []);
 });
