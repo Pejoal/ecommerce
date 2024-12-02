@@ -186,13 +186,12 @@ watch(
           class="block text-sm font-medium text-gray-700"
           >Dienstleistung Datum</label
         >
-        <input
+        <textarea
           id="dienstleistung-datum"
           v-model="form.dienstleistungDatum"
-          type="text"
-          placeholder="Enter Dienstleistung Datum"
+          placeholder="Enter Dienstleistung / Datum"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
+        ></textarea>
         <Transition
           enter-from-class="opacity-0"
           leave-to-class="opacity-0"

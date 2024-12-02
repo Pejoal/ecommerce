@@ -119,7 +119,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{ $dienstleistungDatum }}</td>
+        <td>{!! nl2br(e($dienstleistungDatum)) !!}</td>
         <td>Gesamtstunden = {{ $stunden }} Stunden</td>
         <td>{{ $stundenlohn }} € Netto</td>
       </tr>
