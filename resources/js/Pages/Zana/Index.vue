@@ -1,5 +1,5 @@
 <script setup>
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import axios from "axios";
 import { watch } from "vue";
 
@@ -345,5 +345,11 @@ watch(
         Generate PDF
       </button>
     </form>
+    <Link
+      :href="route('pdf.data.index')"
+      class="underline float-right rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+    >
+      All Data
+    </Link>
   </main>
 </template>

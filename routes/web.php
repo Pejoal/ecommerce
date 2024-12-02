@@ -8,11 +8,10 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserAddressController;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -131,18 +130,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
+Route::get('zana', function () {
+  return Inertia::render('Zana/Index', []);
+})->name('zana');
+
+Route::post('/generate-pdf', [PdfController::class, 'generatePdf'])->name('generate.pdf');
+Route::get('/pdf-data', [PdfController::class, 'index'])->name('pdf.data.index');
+
 Route::fallback(function () {
   return redirect('/');
 });
-
-Route::get('zana', function () {
-  return Inertia::render('Zana/Index', []);
-});
-
-Route::post('/generate-pdf', function (Request $request) {
-  $data = $request->all();
-  // dd($data);
-  $pdf = Pdf::loadView('pdf.document', $data);
-
-  return $pdf->download('document.pdf');
-})->name('generate.pdf');
