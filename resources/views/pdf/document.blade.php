@@ -54,10 +54,26 @@
     .bank-details {
       margin-top: 20px;
     }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+      float: left;
+      margin-top: -50px
+    }
+
+    .logo img {
+      max-width: 200px;
+    }
   </style>
 </head>
 
 <body>
+  <div class="logo">
+    <img src="{{ public_path('images/Rechnung.jpg') }}" alt="Logo">
+  </div>
+  <div style="clear: both"></div>
+
   <div class="header">
     <p>Royal Gebäudereinigung GbR</p>
     <p>Helsingborger Str. 4</p>
@@ -71,12 +87,13 @@
     <p>Contrescarpe 120, 28195 Bremen</p>
   </div>
 
-  <div class="invoice-details">
+  <div class="invoice-details" style="float: right">
     <p>Rechnung Nr.: <span class="highlight">{{ $RechnungNr }}</span></p>
     <p>Kunden Nr.: <span class="highlight">{{ $KundenNr }}</span></p>
     <p>Datum: <span class="highlight">{{ $Datum }}</span></p>
-    <p>Rechnung: <span class="highlight">{{ $Monat }}</span></p>
   </div>
+
+  <p>Rechnung: <span class="highlight">{{ $Monat }}</span></p>
 
   <p>Vielen Dank für Ihren Auftrag. Vereinbarungsgemäß berechnen wir Ihnen hiermit folgende Leistungen:</p>
 
