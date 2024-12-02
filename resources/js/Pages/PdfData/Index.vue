@@ -1,9 +1,31 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
+import axios from "axios";
 
 defineProps({
   pdfData: Array,
 });
+
+const store = async (id) => {
+  try {
+    const response = await axios.post(
+      route("generate.pdf", id),
+      {},
+      {
+        responseType: "blob",
+      }
+    );
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "Rechnung.pdf");
+    document.body.appendChild(link);
+    link.click();
+    form.reset();
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+  }
+};
 </script>
 
 <template>
@@ -102,11 +124,13 @@ defineProps({
               {{ data.verwendungszweck }}
             </td>
             <td class="px-4 py-2 whitespace-nowrap">
-              <Link
-                :href="route('generate.pdf', { id: data.id })"
+              <button
+                @click="store(data.id)"
+                type="button"
                 class="text-blue-600 hover:underline"
-                >Download PDF</Link
               >
+                Download PDF
+              </button>
             </td>
           </tr>
         </tbody>
