@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/PdfController.php
 namespace App\Http\Controllers;
 
 use App\Models\PdfData;
