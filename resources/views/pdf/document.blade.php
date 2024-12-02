@@ -120,8 +120,8 @@
     <tbody>
       <tr>
         <td>{{ $dienstleistungDatum }}</td>
-        <td>Gesamtstunden = {{ $stunden }}</td>
-        <td>{{ $stundenlohn }} Netto</td>
+        <td>Gesamtstunden = {{ $stunden }} Stunden</td>
+        <td>{{ $stundenlohn }} € Netto</td>
       </tr>
     </tbody>
   </table>
