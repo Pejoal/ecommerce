@@ -37,6 +37,14 @@ const store = async () => {
 
 // Watch changes in Stunden and Stundenlohn and update Summe
 watch(
+  () => [form.RechnungNr],
+  ([newRechnungNr]) => {
+    form.Verwendungszweck = newRechnungNr;
+  }
+);
+
+// Watch changes in Stunden and Stundenlohn and update Summe
+watch(
   () => [form.Stunden, form.Stundenlohn],
   ([newStunden, newStundenlohn]) => {
     form.Summe = (newStunden * newStundenlohn).toFixed(2);
@@ -314,7 +322,7 @@ watch(
         >
         <input
           id="verwendungszweck"
-          v-model="form['RechnungNr']"
+          v-model="form['Verwendungszweck']"
           type="text"
           placeholder="Enter Verwendungszweck"
           class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
