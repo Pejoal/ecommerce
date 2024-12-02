@@ -11,6 +11,12 @@
       margin: 40px;
     }
 
+    .header,
+    .footer {
+      line-height: 1.1;
+
+    }
+
     .header p,
     .footer p {
       margin: 2px;
@@ -52,9 +58,8 @@
 
     .logo {
       text-align: center;
-      margin-bottom: 20px;
       float: left;
-      margin-top: -50px;
+      margin-top: -75px;
       margin-left: -50px;
     }
 
@@ -66,6 +71,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 20px;
+      line-height: 1.1;
     }
 
     .flex-container .recipient,
