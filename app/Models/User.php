@@ -3,31 +3,31 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail {
-  use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+class User extends Authenticatable implements MustVerifyEmail
+{
+  use HasApiTokens;
+
+  /** @use HasFactory<\Database\Factories\UserFactory> */
+  use HasFactory;
+  use HasProfilePhoto;
+  use HasTeams;
+  use Notifiable;
+  use TwoFactorAuthenticatable;
 
   /**
    * The attributes that are mass assignable.
    *
    * @var array<int, string>
    */
-  protected $fillable = [
-    'firstname',
-    'lastname',
-    'username',
-    'type',
-    'email_verified_at',
-    'gender',
-    'email',
-    'password',
-  ];
+  protected $fillable = ['name', 'email', 'password'];
 
   /**
    * The attributes that should be hidden for serialization.
@@ -37,68 +37,27 @@ class User extends Authenticatable implements MustVerifyEmail {
   protected $hidden = [
     'password',
     'remember_token',
+    'two_factor_recovery_codes',
+    'two_factor_secret',
   ];
 
   /**
-   * The attributes that should be cast.
+   * The accessors to append to the model's array form.
    *
-   * @var array<string, string>
+   * @var array<int, string>
    */
-  protected $casts = [
-    'email_verified_at' => 'datetime',
-  ];
-
-  function products() {
-    return $this->hasMany(Product::class, 'created_by');
-  }
-
-  function orders() {
-    return $this->hasMany(Order::class, 'created_by');
-
-  }
-  function brands() {
-    return $this->hasMany(Brand::class);
-  }
-  function categories() {
-    return $this->hasMany(Category::class);
-  }
-
-  function currencies() {
-    return $this->hasMany(Currency::class);
-  }
-
-  function addresses() {
-    return $this->hasMany(UserAddress::class);
-  }
-
-  public function cartItems() {
-    return $this->hasMany(CartItem::class);
-  }
+  protected $appends = ['profile_photo_url'];
 
   /**
-   * Get the user's full name.
+   * Get the attributes that should be cast.
    *
-   * @return string
+   * @return array<string, string>
    */
-  public function getFullNameAttribute() {
-    return "{$this->firstname} {$this->lastname}";
-  }
-
-  protected function firstname(): Attribute {
-    return Attribute::make(
-      get: fn($value) => ucfirst($value),
-    );
-  }
-
-  protected function lastname(): Attribute {
-    return Attribute::make(
-      get: fn($value) => ucfirst($value),
-    );
-  }
-
-  protected function username(): Attribute {
-    return Attribute::make(
-      get: fn($value) => strtolower($value),
-    );
+  protected function casts(): array
+  {
+    return [
+      'email_verified_at' => 'datetime',
+      'password' => 'hashed',
+    ];
   }
 }

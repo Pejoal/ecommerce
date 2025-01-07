@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
-use Tightenco\Ziggy\Ziggy;
+use Tighten\Ziggy\Ziggy;
 
-class HandleInertiaRequests extends Middleware {
+class HandleInertiaRequests extends Middleware
+{
   /**
    * The root template that is loaded on the first page visit.
    *
@@ -17,7 +18,8 @@ class HandleInertiaRequests extends Middleware {
   /**
    * Determine the current asset version.
    */
-  public function version(Request $request): string | null {
+  public function version(Request $request): ?string
+  {
     return parent::version($request);
   }
 
@@ -26,20 +28,14 @@ class HandleInertiaRequests extends Middleware {
    *
    * @return array<string, mixed>
    */
-  public function share(Request $request): array {
-    return array_merge(parent::share($request), [
-      'auth' => [
-        'user' => $request->user(),
+  public function share(Request $request): array
+  {
+    return [
+      ...parent::share($request),
+      'ziggy' => fn() => [
+        ...(new Ziggy())->toArray(),
+        'location' => $request->url(),
       ],
-      'ziggy' => function () use ($request) {
-        return array_merge((new Ziggy)->toArray(), [
-          'location' => $request->url(),
-        ]);
-      },
-      'success' => session('success'),
-      'error' => session('error'),
-      'clientSecret' => session('clientSecret'),
-      'message' => session('message'),
-    ]);
+    ];
   }
 }

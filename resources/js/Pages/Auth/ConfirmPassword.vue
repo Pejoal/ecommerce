@@ -1,37 +1,52 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import { Head, useForm } from "@inertiajs/vue3";
+import { ref } from 'vue';
+import { Head, useForm } from '@inertiajs/vue3';
+import AuthenticationCard from '@/Components/AuthenticationCard.vue';
+import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
-  password: "",
+  password: '',
 });
 
+const passwordInput = ref(null);
+
 const submit = () => {
-  form.post(route("password.confirm"), {
-    onFinish: () => form.reset(),
+  form.post(route('password.confirm'), {
+    onFinish: () => {
+      form.reset();
+
+      passwordInput.value.focus();
+    },
   });
 };
 </script>
 
 <template>
-  <GuestLayout>
-    <Head title="Confirm Password" />
+  <Head title="Secure Area" />
 
-    <div class="mb-4 text-sm">
-      {{ trans('words.this_is_a_secure_area_of_the_application_please_confirm_your_password_before_continuing') }}
+  <AuthenticationCard>
+    <template #logo>
+      <AuthenticationCardLogo />
+    </template>
+
+    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+      This is a secure area of the application. Please confirm your password
+      before continuing.
     </div>
 
     <form @submit.prevent="submit">
       <div>
-        <InputLabel for="password" :value="trans('words.password')" />
+        <InputLabel for="password" value="Password" />
         <TextInput
           id="password"
+          ref="passwordInput"
+          v-model="form.password"
           type="password"
           class="mt-1 block w-full"
-          v-model="form.password"
           required
           autocomplete="current-password"
           autofocus
@@ -40,14 +55,14 @@ const submit = () => {
       </div>
 
       <div class="flex justify-end mt-4">
-        <button
-          class="ml-4 btn btn-success"
+        <PrimaryButton
+          class="ms-4"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
-          {{ trans('words.confirm') }}
-        </button>
+          Confirm
+        </PrimaryButton>
       </div>
     </form>
-  </GuestLayout>
+  </AuthenticationCard>
 </template>

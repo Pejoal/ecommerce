@@ -1,220 +1,154 @@
 <script setup>
-import GuestLayout from "@/Layouts/GuestLayout.vue";
-import InputError from "@/Components/InputError.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from '@inertiajs/vue3';
+import AuthenticationCard from '@/Components/AuthenticationCard.vue';
+import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
+import Checkbox from '@/Components/Checkbox.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
-  firstname: "",
-  lastname: "",
-  username: "",
-  gender: "",
-  email: "",
-  password: "",
-  password_confirmation: "",
-  profile_photo: null,
-  // terms: false,
+  name: '',
+  email: '',
+  username: '',
+  password: '',
+  password_confirmation: '',
+  terms: false,
 });
 
 const submit = () => {
-  form.post(route("register"), {
-    preserveScroll: true,
-    onFinish: () => form.reset("password", "password_confirmation"),
+  form.post(route('register'), {
+    onFinish: () => form.reset('password', 'password_confirmation'),
   });
 };
 </script>
 
 <template>
-  <GuestLayout>
-    <Head title="Register" />
-    <main class="grid place-items-center">
-      <form
-        @submit.prevent="submit"
-        class="bg-zinc-300 w-full mt-2 mb-4 rounded-lg md:container px-8 py-4 flex flex-col gap-2"
+  <Head title="Register" />
+
+  <AuthenticationCard>
+    <template #logo>
+      <AuthenticationCardLogo />
+    </template>
+
+    <form @submit.prevent="submit">
+      <div>
+        <InputLabel for="name" value="Name" />
+        <TextInput
+          id="name"
+          v-model="form.name"
+          type="text"
+          class="mt-1 block w-full"
+          required
+          autofocus
+          autocomplete="name"
+        />
+        <InputError class="mt-2" :message="form.errors.name" />
+      </div>
+
+      <div class="mt-4">
+        <InputLabel for="email" value="Email" />
+        <TextInput
+          id="email"
+          v-model="form.email"
+          type="email"
+          class="mt-1 block w-full"
+          required
+          autocomplete="email"
+        />
+        <InputError class="mt-2" :message="form.errors.email" />
+      </div>
+
+      <div class="mt-4">
+        <InputLabel for="username" value="User Name" />
+        <TextInput
+          id="username"
+          v-model="form.username"
+          type="text"
+          class="mt-1 block w-full"
+          required
+          autocomplete="username"
+        />
+        <InputError class="mt-2" :message="form.errors.username" />
+      </div>
+
+      <div class="mt-4">
+        <InputLabel for="password" value="Password" />
+        <TextInput
+          id="password"
+          v-model="form.password"
+          type="password"
+          class="mt-1 block w-full"
+          required
+          autocomplete="new-password"
+        />
+        <InputError class="mt-2" :message="form.errors.password" />
+      </div>
+
+      <div class="mt-4">
+        <InputLabel for="password_confirmation" value="Confirm Password" />
+        <TextInput
+          id="password_confirmation"
+          v-model="form.password_confirmation"
+          type="password"
+          class="mt-1 block w-full"
+          required
+          autocomplete="new-password"
+        />
+        <InputError class="mt-2" :message="form.errors.password_confirmation" />
+      </div>
+
+      <div
+        v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature"
+        class="mt-4"
       >
-        <div>
-          <InputLabel for="firstname" :value="trans('words.firstname')" />
-
-          <TextInput
-            id="firstname"
-            type="text"
-            class="mt-1 block w-full"
-            v-model="form.firstname"
-            :placeholder="trans('words.firstname')"
-            required
-            autocomplete="firstname"
-            autofocus
-          />
-
-          <InputError class="mt-2" :message="form.errors.firstname" />
-        </div>
-
-        <div>
-          <InputLabel for="lastname" :value="trans('words.lastname')" />
-
-          <TextInput
-            id="lastname"
-            type="text"
-            class="mt-1 block w-full"
-            v-model="form.lastname"
-            :placeholder="trans('words.lastname')"
-            autocomplete="lasstname"
-            required
-          />
-
-          <InputError class="mt-2" :message="form.errors.lastname" />
-        </div>
-        <div>
-          <InputLabel for="username" :value="trans('words.username')" />
-
-          <TextInput
-            id="username"
-            type="text"
-            class="mt-1 block w-full"
-            v-model="form.username"
-            :placeholder="trans('words.username')"
-            autocomplete="username"
-            required
-          />
-
-          <InputError class="mt-2" :message="form.errors.username" />
-        </div>
-        <div>
-          <InputLabel :value="trans('words.gender')" />
-          <div class="flex justify-center gap-12">
-            <section>
-              <input
-                type="radio"
-                id="male"
-                value="male"
-                v-model="form.gender"
-                autocomplete="gender"
-              />
-              <label class="ml-2" for="male">{{ trans("words.male") }}</label>
-            </section>
-            <section>
-              <input
-                type="radio"
-                id="female"
-                value="female"
-                v-model="form.gender"
-                autocomplete="gender"
-              />
-              <label class="ml-2" for="female">
-                {{ trans("words.female") }}
-              </label>
-            </section>
-          </div>
-          <InputError class="mt-2" :message="form.errors.gender" />
-        </div>
-
-        <div class="mt-4">
-          <InputLabel for="email" :value="trans('words.email')" />
-
-          <TextInput
-            id="email"
-            type="email"
-            class="mt-1 block w-full"
-            v-model="form.email"
-            :placeholder="trans('words.email')"
-            autocomplete="email"
-            required
-          />
-
-          <InputError class="mt-2" :message="form.errors.email" />
-        </div>
-
-        <div class="mt-4">
-          <InputLabel for="password" :value="trans('words.password')" />
-
-          <TextInput
-            id="password"
-            type="password"
-            class="mt-1 block w-full"
-            v-model="form.password"
-            :placeholder="trans('words.password')"
-            required
-            autocomplete="new-password"
-          />
-
-          <InputError class="mt-2" :message="form.errors.password" />
-        </div>
-
-        <div class="mt-4">
-          <InputLabel
-            for="password_confirmation"
-            :value="trans('words.confirm_password')"
-          />
-
-          <TextInput
-            id="password_confirmation"
-            type="password"
-            class="mt-1 block w-full"
-            v-model="form.password_confirmation"
-            :placeholder="trans('words.confirm_password')"
-            required
-            autocomplete="new-password"
-          />
-
-          <InputError
-            class="mt-2"
-            :message="form.errors.password_confirmation"
-          />
-        </div>
-
-        <section class="flex justify-between flex-col sm:flex-row">
-          <div class="my-2">
-            <label class="pr-2" for="profile_photo">
-              {{ trans("words.profile_photo") }}
-            </label>
-            <input
-              id="profile_photo"
-              type="file"
-              @input="form.profile_photo = $event.target.files[0]"
+        <InputLabel for="terms">
+          <div class="flex items-center">
+            <Checkbox
+              id="terms"
+              v-model:checked="form.terms"
+              name="terms"
+              required
             />
+
+            <div class="ms-2">
+              I agree to the
+              <a
+                target="_blank"
+                :href="route('terms.show')"
+                class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                >Terms of Service</a
+              >
+              and
+              <a
+                target="_blank"
+                :href="route('policy.show')"
+                class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                >Privacy Policy</a
+              >
+            </div>
           </div>
-        </section>
-        <p
-          v-if="form.errors.profile_photo"
-          class="text-sm bg-red-600 rounded-md my-1 px-2 py-1"
-        >
-          {{ form.errors.profile_photo }}
-        </p>
-        <progress
-          v-if="form.progress"
-          :value="form.progress.percentage"
-          max="100"
-        >
-          {{ form.progress.percentage }}%
-        </progress>
-        <Transition
-          enter-from-class="opacity-0"
-          leave-to-class="opacity-0"
-          class="transition ease-in-out"
-        >
-          <p v-if="form.recentlySuccessful" class="text-sm">
-            {{ trans("words.uploaded") }}
-          </p>
-        </Transition>
+          <InputError class="mt-2" :message="form.errors.terms" />
+        </InputLabel>
+      </div>
 
-        <div class="flex items-center justify-between mt-2">
-          <Link
-            :href="route('login')"
-            class="underline text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            {{ trans("words.already_registered") }}
-          </Link>
+      <div class="flex items-center justify-end mt-4">
+        <Link
+          :href="route('login')"
+          class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+        >
+          Already registered?
+        </Link>
 
-          <button
-            class="ml-4 btn btn-primary"
-            :class="{ 'opacity-25': form.processing }"
-            :disabled="form.processing"
-          >
-            {{ trans("words.login") }}
-          </button>
-        </div>
-      </form>
-    </main>
-  </GuestLayout>
+        <PrimaryButton
+          class="ms-4"
+          :class="{ 'opacity-25': form.processing }"
+          :disabled="form.processing"
+        >
+          Register
+        </PrimaryButton>
+      </div>
+    </form>
+  </AuthenticationCard>
 </template>

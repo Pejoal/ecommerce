@@ -1,7 +1,6 @@
 <?php
 
 return [
-
   // Uncomment the languages that your site supports - or add new ones.
   // These are sorted by the native name, which is the order you might show them in a language selector.
   // Regional languages are sorted by their base language, so "British English" sorts as "English, British"
@@ -35,25 +34,49 @@ return [
     //'cy'          => ['name' => 'Welsh',                  'script' => 'Latn', 'native' => 'Cymraeg', 'regional' => 'cy_GB'],
     //'da'          => ['name' => 'Danish',                 'script' => 'Latn', 'native' => 'dansk', 'regional' => 'da_DK'],
     //'se'          => ['name' => 'Northern Sami',          'script' => 'Latn', 'native' => 'davvisámegiella', 'regional' => 'se_NO'],
-    'de' => ['name' => 'German', 'script' => 'Latn', 'native' => 'Deutsch', 'regional' => 'de_DE', 'emoji' => '🇩🇪'],
+    'de' => [
+      'name' => 'German',
+      'script' => 'Latn',
+      'native' => 'Deutsch',
+      'regional' => 'de_DE',
+      'emoji' => '🇩🇪',
+    ],
     //'luo'         => ['name' => 'Luo',                    'script' => 'Latn', 'native' => 'Dholuo', 'regional' => ''],
     //'nv'          => ['name' => 'Navajo',                 'script' => 'Latn', 'native' => 'Diné bizaad', 'regional' => ''],
     //'dua'         => ['name' => 'Duala',                  'script' => 'Latn', 'native' => 'duálá', 'regional' => ''],
     //'et'          => ['name' => 'Estonian',               'script' => 'Latn', 'native' => 'eesti', 'regional' => 'et_EE'],
     //'na'          => ['name' => 'Nauru',                  'script' => 'Latn', 'native' => 'Ekakairũ Naoero', 'regional' => ''],
     //'guz'         => ['name' => 'Ekegusii',               'script' => 'Latn', 'native' => 'Ekegusii', 'regional' => ''],
-    'en' => ['name' => 'English', 'script' => 'Latn', 'native' => 'English', 'regional' => 'en_GB', 'emoji' => '🇺🇸'],
+    'en' => [
+      'name' => 'English',
+      'script' => 'Latn',
+      'native' => 'English',
+      'regional' => 'en_GB',
+      'emoji' => '🇺🇸',
+    ],
     //'en-AU'       => ['name' => 'Australian English',     'script' => 'Latn', 'native' => 'Australian English', 'regional' => 'en_AU'],
     //'en-GB'       => ['name' => 'British English',        'script' => 'Latn', 'native' => 'British English', 'regional' => 'en_GB'],
     //'en-CA'       => ['name' => 'Canadian English',       'script' => 'Latn', 'native' => 'Canadian English', 'regional' => 'en_CA'],
     //'en-US'       => ['name' => 'U.S. English',           'script' => 'Latn', 'native' => 'U.S. English', 'regional' => 'en_US'],
-    'es' => ['name' => 'Spanish', 'script' => 'Latn', 'native' => 'español', 'regional' => 'es_ES', 'emoji' => '🇪🇸'],
+    'es' => [
+      'name' => 'Spanish',
+      'script' => 'Latn',
+      'native' => 'español',
+      'regional' => 'es_ES',
+      'emoji' => '🇪🇸',
+    ],
     //'eo'          => ['name' => 'Esperanto',              'script' => 'Latn', 'native' => 'esperanto', 'regional' => ''],
     //'eu'          => ['name' => 'Basque',                 'script' => 'Latn', 'native' => 'euskara', 'regional' => 'eu_ES'],
     //'ewo'         => ['name' => 'Ewondo',                 'script' => 'Latn', 'native' => 'ewondo', 'regional' => ''],
     //'ee'          => ['name' => 'Ewe',                    'script' => 'Latn', 'native' => 'eʋegbe', 'regional' => ''],
     //'fil'         => ['name' => 'Filipino',               'script' => 'Latn', 'native' => 'Filipino', 'regional' => 'fil_PH'],
-    'fr' => ['name' => 'French', 'script' => 'Latn', 'native' => 'français', 'regional' => 'fr_FR', 'emoji' => '🇫🇷'],
+    'fr' => [
+      'name' => 'French',
+      'script' => 'Latn',
+      'native' => 'français',
+      'regional' => 'fr_FR',
+      'emoji' => '🇫🇷',
+    ],
     //'fr-CA'       => ['name' => 'Canadian French',        'script' => 'Latn', 'native' => 'français canadien', 'regional' => 'fr_CA'],
     //'fy'          => ['name' => 'Western Frisian',        'script' => 'Latn', 'native' => 'frysk', 'regional' => 'fy_DE'],
     //'fur'         => ['name' => 'Friulian',               'script' => 'Latn', 'native' => 'furlan', 'regional' => 'fur_IT'],
@@ -80,7 +103,13 @@ return [
     //'nr'          => ['name' => 'South Ndebele',          'script' => 'Latn', 'native' => 'isiNdebele', 'regional' => 'nr_ZA'],
     //'xh'          => ['name' => 'Xhosa',                  'script' => 'Latn', 'native' => 'isiXhosa', 'regional' => 'xh_ZA'],
     //'zu'          => ['name' => 'Zulu',                   'script' => 'Latn', 'native' => 'isiZulu', 'regional' => 'zu_ZA'],
-    'it' => ['name' => 'Italian', 'script' => 'Latn', 'native' => 'italiano', 'regional' => 'it_IT', 'emoji' => '🇮🇹'],
+    'it' => [
+      'name' => 'Italian',
+      'script' => 'Latn',
+      'native' => 'italiano',
+      'regional' => 'it_IT',
+      'emoji' => '🇮🇹',
+    ],
     //'ik'          => ['name' => 'Inupiaq',                'script' => 'Latn', 'native' => 'Iñupiaq', 'regional' => 'ik_CA'],
     //'dyo'         => ['name' => 'Jola-Fonyi',             'script' => 'Latn', 'native' => 'joola', 'regional' => ''],
     //'kea'         => ['name' => 'Kabuverdianu',           'script' => 'Latn', 'native' => 'kabuverdianu', 'regional' => ''],
@@ -143,7 +172,13 @@ return [
     //'hz'          => ['name' => 'Herero',                 'script' => 'Latn', 'native' => 'Otjiherero', 'regional' => ''],
     //'uz-Latn'     => ['name' => 'Uzbek (Latin)',          'script' => 'Latn', 'native' => 'oʼzbekcha', 'regional' => 'uz_UZ'],
     //'nds'         => ['name' => 'Low German',             'script' => 'Latn', 'native' => 'Plattdüütsch', 'regional' => 'nds_DE'],
-    'pl'          => ['name' => 'Polish',                 'script' => 'Latn', 'native' => 'polski', 'regional' => 'pl_PL', 'emoji' => '🇵🇱'],
+    'pl' => [
+      'name' => 'Polish',
+      'script' => 'Latn',
+      'native' => 'polski',
+      'regional' => 'pl_PL',
+      'emoji' => '🇵🇱',
+    ],
     //'pt'          => ['name' => 'Portuguese',             'script' => 'Latn', 'native' => 'português', 'regional' => 'pt_PT'],
     //'pt-BR'       => ['name' => 'Brazilian Portuguese',   'script' => 'Latn', 'native' => 'português do Brasil', 'regional' => 'pt_BR'],
     //'ff'          => ['name' => 'Fulah',                  'script' => 'Latn', 'native' => 'Pulaar', 'regional' => 'ff_SN'],
@@ -151,7 +186,13 @@ return [
     //'aa'          => ['name' => 'Afar',                   'script' => 'Latn', 'native' => 'Qafar', 'regional' => 'aa_ER'],
     //'ty'          => ['name' => 'Tahitian',               'script' => 'Latn', 'native' => 'Reo Māohi', 'regional' => ''],
     //'ksf'         => ['name' => 'Bafia',                  'script' => 'Latn', 'native' => 'rikpa', 'regional' => ''],
-    'ro'          => ['name' => 'Romanian',               'script' => 'Latn', 'native' => 'română', 'regional' => 'ro_RO', 'emoji' => '🇷🇴'],
+    'ro' => [
+      'name' => 'Romanian',
+      'script' => 'Latn',
+      'native' => 'română',
+      'regional' => 'ro_RO',
+      'emoji' => '🇷🇴',
+    ],
     //'cgg'         => ['name' => 'Chiga',                  'script' => 'Latn', 'native' => 'Rukiga', 'regional' => ''],
     //'rm'          => ['name' => 'Romansh',                'script' => 'Latn', 'native' => 'rumantsch', 'regional' => ''],
     //'qu'          => ['name' => 'Quechua',                'script' => 'Latn', 'native' => 'Runa Simi', 'regional' => ''],
@@ -187,7 +228,13 @@ return [
     //'lu'          => ['name' => 'Luba-Katanga',           'script' => 'Latn', 'native' => 'Tshiluba', 'regional' => 've_ZA'],
     //'ve'          => ['name' => 'Venda',                  'script' => 'Latn', 'native' => 'Tshivenḓa', 'regional' => ''],
     //'tw'          => ['name' => 'Twi',                    'script' => 'Latn', 'native' => 'Twi', 'regional' => ''],
-    'tr'          => ['name' => 'Turkish',                'script' => 'Latn', 'native' => 'Türkçe', 'regional' => 'tr_TR', 'emoji' => '🇹🇷'],
+    'tr' => [
+      'name' => 'Turkish',
+      'script' => 'Latn',
+      'native' => 'Türkçe',
+      'regional' => 'tr_TR',
+      'emoji' => '🇹🇷',
+    ],
     //'ale'         => ['name' => 'Aleut',                  'script' => 'Latn', 'native' => 'Unangax tunuu', 'regional' => ''],
     //'ca-valencia' => ['name' => 'Valencian',              'script' => 'Latn', 'native' => 'valencià', 'regional' => ''],
     //'vai-Latn'    => ['name' => 'Vai (Latin)',            'script' => 'Latn', 'native' => 'Viyamíĩ', 'regional' => ''],
@@ -222,7 +269,13 @@ return [
     //'mk'          => ['name' => 'Macedonian',             'script' => 'Cyrl', 'native' => 'македонски', 'regional' => 'mk_MK'],
     //'mn'          => ['name' => 'Mongolian (Cyrillic)',   'script' => 'Cyrl', 'native' => 'монгол', 'regional' => 'mn_MN'],
     //'ce'          => ['name' => 'Chechen',                'script' => 'Cyrl', 'native' => 'нохчийн мотт', 'regional' => 'ce_RU'],
-    'ru' => ['name' => 'Russian', 'script' => 'Cyrl', 'native' => 'русский', 'regional' => 'ru_RU', 'emoji' => '🇷🇺'],
+    'ru' => [
+      'name' => 'Russian',
+      'script' => 'Cyrl',
+      'native' => 'русский',
+      'regional' => 'ru_RU',
+      'emoji' => '🇷🇺',
+    ],
     //'sah'         => ['name' => 'Yakut',                  'script' => 'Cyrl', 'native' => 'саха тыла', 'regional' => ''],
     //'tt'          => ['name' => 'Tatar',                  'script' => 'Cyrl', 'native' => 'татар теле', 'regional' => 'tt_RU'],
     //'tg'          => ['name' => 'Tajik (Cyrillic)',       'script' => 'Cyrl', 'native' => 'тоҷикӣ', 'regional' => 'tg_TJ'],
@@ -236,7 +289,13 @@ return [
     //'he'          => ['name' => 'Hebrew',                 'script' => 'Hebr', 'native' => 'עברית', 'regional' => 'he_IL'],
     //'ug'          => ['name' => 'Uyghur',                 'script' => 'Arab', 'native' => 'ئۇيغۇرچە', 'regional' => 'ug_CN'],
     //'ur'          => ['name' => 'Urdu',                   'script' => 'Arab', 'native' => 'اردو', 'regional' => 'ur_PK'],
-    'ar' => ['name' => 'Arabic', 'script' => 'Arab', 'native' => 'العربية', 'regional' => 'ar_AE', 'emoji' => '🇪🇬'],
+    'ar' => [
+      'name' => 'Arabic',
+      'script' => 'Arab',
+      'native' => 'العربية',
+      'regional' => 'ar_AE',
+      'emoji' => '🇪🇬',
+    ],
     //'uz-Arab'     => ['name' => 'Uzbek (Arabic)',         'script' => 'Arab', 'native' => 'اۉزبېک', 'regional' => ''],
     //'tg-Arab'     => ['name' => 'Tajik (Arabic)',         'script' => 'Arab', 'native' => 'تاجیکی', 'regional' => 'tg_TJ'],
     //'sd'          => ['name' => 'Sindhi',                 'script' => 'Arab', 'native' => 'سنڌي', 'regional' => 'sd_IN'],
@@ -257,7 +316,13 @@ return [
     //'mai'         => ['name' => 'Maithili',               'script' => 'Tirh', 'native' => 'मैथिली', 'regional' => 'mai_IN'],
     //'raj'         => ['name' => 'Rajasthani',             'script' => 'Deva', 'native' => 'राजस्थानी', 'regional' => ''],
     //'sa'          => ['name' => 'Sanskrit',               'script' => 'Deva', 'native' => 'संस्कृतम्', 'regional' => 'sa_IN'],
-    'hi' => ['name' => 'Hindi', 'script' => 'Deva', 'native' => 'हिन्दी', 'regional' => 'hi_IN', 'emoji' => '🇮🇳'],
+    'hi' => [
+      'name' => 'Hindi',
+      'script' => 'Deva',
+      'native' => 'हिन्दी',
+      'regional' => 'hi_IN',
+      'emoji' => '🇮🇳',
+    ],
     //'as'          => ['name' => 'Assamese',               'script' => 'Beng', 'native' => 'অসমীয়া', 'regional' => 'as_IN'],
     //'bn'          => ['name' => 'Bengali',                'script' => 'Beng', 'native' => 'বাংলা', 'regional' => 'bn_BD'],
     //'mni'         => ['name' => 'Manipuri',               'script' => 'Beng', 'native' => 'মৈতৈ', 'regional' => 'mni_IN'],
@@ -289,8 +354,20 @@ return [
     //'shi-Tfng'    => ['name' => 'Tachelhit (Tifinagh)',   'script' => 'Tfng', 'native' => 'ⵜⴰⵎⴰⵣⵉⵖⵜ', 'regional' => ''],
     //'tzm'         => ['name' => 'Central Atlas Tamazight (Tifinagh)','script' => 'Tfng', 'native' => 'ⵜⴰⵎⴰⵣⵉⵖⵜ', 'regional' => ''],
     //'yue'         => ['name' => 'Yue',                    'script' => 'Hant', 'native' => '廣州話', 'regional' => 'yue_HK'],
-    'ja' => ['name' => 'Japanese', 'script' => 'Jpan', 'native' => '日本語', 'regional' => 'ja_JP', 'emoji' => '🇯🇵'],
-    'zh' => ['name' => 'Chinese (Simplified)', 'script' => 'Hans', 'native' => '简体中文', 'regional' => 'zh_CN', 'emoji' => '🇨🇳'],
+    'ja' => [
+      'name' => 'Japanese',
+      'script' => 'Jpan',
+      'native' => '日本語',
+      'regional' => 'ja_JP',
+      'emoji' => '🇯🇵',
+    ],
+    'zh' => [
+      'name' => 'Chinese (Simplified)',
+      'script' => 'Hans',
+      'native' => '简体中文',
+      'regional' => 'zh_CN',
+      'emoji' => '🇨🇳',
+    ],
     //'zh-Hant'     => ['name' => 'Chinese (Traditional)',  'script' => 'Hant', 'native' => '繁體中文', 'regional' => 'zh_CN'],
     //'ii'          => ['name' => 'Sichuan Yi',             'script' => 'Yiii', 'native' => 'ꆈꌠꉙ', 'regional' => ''],
     //'vai'         => ['name' => 'Vai (Vai)',              'script' => 'Vaii', 'native' => 'ꕙꔤ', 'regional' => ''],
@@ -309,7 +386,7 @@ return [
   // again if the session expires.
   //
   // If false, system will take app.php locale attribute
-  'useAcceptLanguageHeader' => false,
+  'useAcceptLanguageHeader' => true,
 
   // If `hideDefaultLocaleInURL` is true, then a url without locale
   // is identical with the same url with default locale.
@@ -333,7 +410,7 @@ return [
   //Example: 'localesOrder' => ['es','en'],
   'localesOrder' => [],
 
-  //  If you want to use custom lang url segments like 'at' instead of 'de-AT', you can use the mapping to tallow the LanguageNegotiator to assign the descired locales based on HTTP Accept Language Header. For example you want ot use 'at', so map HTTP Accept Language Header 'de-AT' to 'at' (['de-AT' => 'at']).
+  // If you want to use custom lang url segments like 'at' instead of 'de-AT', you can use the mapping to tallow the LanguageNegotiator to assign the descired locales based on HTTP Accept Language Header. For example you want ot use 'at', so map HTTP Accept Language Header 'de-AT' to 'at' (['de-AT' => 'at']).
   'localesMapping' => [],
 
   // Locale suffix for LC_TIME and LC_MONETARY
